@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SharedService } from '../shared.service';
 
 @Component({
   selector: 'app-header',
@@ -7,7 +8,9 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
   isCollapsed = true;
+  constructor(private sharedService: SharedService) {}
   collapse() {
-    this.isCollapsed = !this.isCollapsed;
+    this.sharedService.collapse();
+    this.isCollapsed = this.sharedService.isCollapsed;
   }
 }

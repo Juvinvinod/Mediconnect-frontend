@@ -1,1 +1,25 @@
-<p>login works!</p>
+<body>
+    <app-header></app-header>
+
+    <div class="container d-flex justify-content-center align-items-center viewHeight">
+        <mat-card class="matCard opacity-75 ">
+
+            <mat-card-header class="loginText mx-auto">LOGIN</mat-card-header>
+            <mat-card-content>
+                <mat-form-field class="fullWidth">
+                    <input matInput placeholder="Email" formControlName="email" class="fullWidth">
+                </mat-form-field>
+
+                <mat-form-field class="fullWidth">
+                    <input matInput placeholder="Password" formControlName="password" class="fullWidth">
+                </mat-form-field>
+                <button mat-raised-button color="primary">LOGIN</button>
+            </mat-card-content>
+            <div class="d-flex signUp mx-auto">
+                <div class=" ">Don't have an account?</div>
+                <div><a href="" class="text-decoration-none px-1"> Sign up</a></div>
+            </div>
+        </mat-card>
+    </div>
+
+</body>

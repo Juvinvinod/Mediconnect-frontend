@@ -1,0 +1,27 @@
+body {
+    background-image: url('../../../assets/blur-hospital.jpg');
+    /* background-repeat: no-repeat; */
+    background-size: 100% 100%;
+  }
+
+/* adjust viewport height */
+.viewHeight{
+    height: 80%;
+}
+
+/* make login input stretch across card */
+.fullWidth{
+    width: 100%;
+}
+
+/* login text on card */
+.loginText{
+    font-size: 25px;
+    padding-bottom: 25px;
+    padding-top: 50px;
+}
+
+.signUp {
+    margin-top:5%;
+    padding-bottom: 5%;
+}
