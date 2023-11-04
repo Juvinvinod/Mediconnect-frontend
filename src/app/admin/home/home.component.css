@@ -1,0 +1,21 @@
+.example-container {
+  height: 300px;
+  background-color:white;
+  height: 100%;
+  width: 100%;
+}
+
+
+.example-sidenav {
+  padding: 20px;
+  background-color: aqua;
+  height: 100%;
+}
+
+.topNav{
+  background-color:white;
+}
+
+.fullPage{
+  position: fixed;
+}
