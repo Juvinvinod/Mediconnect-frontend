@@ -5,18 +5,25 @@
         <mat-card class="matCard ">
 
             <mat-card-header class="loginText mx-auto">LOGIN</mat-card-header>
-            <form>
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                 <mat-card-content>
                     <mat-form-field class="fullWidth">
                         <input matInput placeholder="Email" formControlName="email" class="fullWidth">
+                        <mat-error *ngIf="loginForm.get('email')?.hasError('required')">
+                            Email is <strong>required</strong>
+                        </mat-error>
                     </mat-form-field>
 
                     <mat-form-field class="fullWidth">
-                        <input matInput placeholder="Password" formControlName="password" class="fullWidth">
+                        <input matInput placeholder="Password" formControlName="password" class="fullWidth"
+                            [type]="hide ? 'password' : 'text'">
                         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                             [attr.aria-pressed]="hide">
                             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                         </button>
+                        <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+                            Password is <strong>required</strong>
+                        </mat-error>
                     </mat-form-field>
                     <button mat-raised-button color="primary">LOGIN</button>
                 </mat-card-content>
