@@ -10,9 +10,13 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
+  //user registration in db
   proceedRegister(inputData: User) {
-    console.log(inputData);
-
     return this.http.post(this.apiURL + '/' + 'signup', inputData);
+  }
+
+  //user verification on login
+  userLogin(inputData: { email: string; password: string }) {
+    return this.http.post(this.apiURL + '/' + 'login', inputData);
   }
 }

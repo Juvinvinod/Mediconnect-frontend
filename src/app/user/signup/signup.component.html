@@ -2,7 +2,7 @@
     <app-header></app-header>
 
     <div class="container d-flex justify-content-center align-items-center viewHeight cardPosition">
-        <mat-card class="matCard col-md-6  col-sm-6 col-lg-6">
+        <mat-card class="matCard col-md-6  col-sm-6 col-lg-4">
 
             <mat-card-header class="loginText mx-auto">SIGN UP</mat-card-header>
             <mat-card-content>
@@ -26,12 +26,21 @@
                         <mat-error *ngIf="signUpForm.get('email')?.hasError('required')">
                             Email is <strong>required</strong>
                         </mat-error>
+                        <mat-error *ngIf="signUpForm.get('email')?.hasError('email')">
+                            This Email does not <strong>exist</strong>
+                        </mat-error>
                     </mat-form-field>
 
                     <mat-form-field class="fullWidth inputHeight">
                         <input matInput placeholder="Mobile Number" formControlName="mobile" class="fullWidth">
                         <mat-error *ngIf="signUpForm.get('mobile')?.hasError('required')">
                             Number is <strong>required</strong>
+                        </mat-error>
+                        <mat-error *ngIf="signUpForm.get('mobile')?.hasError('minlength')">
+                            Number should only contain <strong>10</strong> digits
+                        </mat-error>
+                        <mat-error *ngIf="signUpForm.get('mobile')?.hasError('maxlength')">
+                            Number should only contain <strong>10</strong> digits
                         </mat-error>
                     </mat-form-field>
 
@@ -42,11 +51,22 @@
                             [attr.aria-pressed]="hide">
                             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                         </button>
+                        <mat-hint *ngIf="signUpForm.get('password')?.value === ''">*Password should contain both numbers
+                            and
+                            letters</mat-hint>
                         <mat-error *ngIf="signUpForm.get('password')?.hasError('required')">
                             Password is <strong>required</strong>
                         </mat-error>
+                        <mat-error *ngIf="signUpForm.get('password')?.hasError('minlength')">
+                            Password should contain minimum of <strong>4</strong> characters
+                        </mat-error>
+                        <mat-error *ngIf="signUpForm.get('password')?.hasError('maxlength')">
+                            Password should contain maximum of <strong>10</strong> characters
+                        </mat-error>
                     </mat-form-field>
-                    <button mat-raised-button color="primary">CREATE</button>
+                    <div class="py-1">
+                        <button class mat-raised-button color="primary">CREATE</button>
+                    </div>
                 </form>
             </mat-card-content>
             <div class="d-flex signUp mx-auto px-1">

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-signup',
@@ -14,7 +15,8 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {}
 
   // initializing reactive form when the component loads
@@ -23,20 +25,36 @@ export class SignupComponent implements OnInit {
       first_name: new FormControl('', Validators.required),
       last_name: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
-      mobile: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required)
+      mobile: new FormControl('', [
+        Validators.required,
+        Validators.minLength(10),
+        Validators.maxLength(10)
+      ]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(4),
+        Validators.maxLength(10)
+      ])
     });
   }
 
   //check for errors and save the user in the database
   onSubmit() {
-    this.userService.proceedRegister(this.signUpForm.value).subscribe({
-      next: () => {
-        this.router.navigate(['login']);
-      },
-      error: (error) => {
-        console.log(error);
-      }
-    });
+    if (this.signUpForm.valid) {
+      this.userService.proceedRegister(this.signUpForm.value).subscribe({
+        next: () => {
+          this.router.navigate(['login']);
+        },
+        error: (error) => {
+          this.snackBar.open(error.error.errors[0].message, 'Dismiss', {
+            duration: 2000
+          });
+        }
+      });
+    } else {
+      console.log(this.signUpForm);
+
+      this.snackBar.open('Invalid Data', 'Dismiss', { duration: 2000 });
+    }
   }
 }
