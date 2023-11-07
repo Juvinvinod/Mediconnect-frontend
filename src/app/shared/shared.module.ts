@@ -5,16 +5,26 @@ import { MaterialModule } from '../material/material.module';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './login/login.component';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { TableComponent } from './table/table.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [HeaderComponent, LoginComponent],
-  imports: [CommonModule, MaterialModule, NgbCollapseModule, NgbDropdownModule],
+  declarations: [HeaderComponent, LoginComponent, TableComponent],
+  imports: [
+    CommonModule,
+    MaterialModule,
+    NgbCollapseModule,
+    NgbDropdownModule,
+    FormsModule,
+    ReactiveFormsModule
+  ],
   exports: [
     HeaderComponent,
     CommonModule,
     MaterialModule,
     NgbCollapseModule,
-    NgbDropdownModule
+    NgbDropdownModule,
+    LoginComponent
   ]
 })
 export class SharedModule {}

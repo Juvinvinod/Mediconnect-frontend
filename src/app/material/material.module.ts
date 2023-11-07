@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTableModule } from '@angular/material/table';
 
 //All the angular material modules required are written here
 const Material = [
@@ -19,7 +20,8 @@ const Material = [
   MatInputModule,
   MatSidenavModule,
   MatListModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatTableModule
 ];
 
 @NgModule({

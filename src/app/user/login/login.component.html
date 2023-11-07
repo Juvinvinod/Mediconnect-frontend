@@ -2,7 +2,7 @@
     <app-header></app-header>
 
     <div class="container d-flex justify-content-center align-items-center viewHeight">
-        <mat-card class="matCard ">
+        <mat-card class="matCard col-sm-6">
 
             <mat-card-header class="loginText mx-auto">LOGIN</mat-card-header>
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
@@ -30,7 +30,7 @@
             </form>
             <div class="d-flex signUp mx-auto">
                 <div class=" ">Don't have an account?</div>
-                <div><a href="" class="text-decoration-none px-1"> Sign up</a></div>
+                <div><a class="text-decoration-none px-1" [routerLink]="['/signup']"> Sign up</a></div>
             </div>
         </mat-card>
     </div>
