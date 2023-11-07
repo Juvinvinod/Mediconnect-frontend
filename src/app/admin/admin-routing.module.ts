@@ -6,8 +6,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { UsersComponent } from './users/users.component';
 import { DoctorsComponent } from './doctors/doctors.component';
 import { StaffsComponent } from './staffs/staffs.component';
+import { AdminLoginComponent } from './admin-login/admin-login.component';
 
 const routes: Routes = [
+  { path: 'admin/login', component: AdminLoginComponent },
   {
     path: 'admin',
     component: HomeComponent,

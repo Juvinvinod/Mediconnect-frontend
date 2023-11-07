@@ -44,6 +44,9 @@ export class SignupComponent implements OnInit {
       this.userService.proceedRegister(this.signUpForm.value).subscribe({
         next: () => {
           this.router.navigate(['login']);
+          this.snackBar.open('Successfully registered', 'Dismiss', {
+            duration: 5000
+          });
         },
         error: (error) => {
           this.snackBar.open(error.error.errors[0].message, 'Dismiss', {

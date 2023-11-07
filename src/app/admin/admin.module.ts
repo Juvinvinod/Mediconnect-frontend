@@ -8,6 +8,8 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { DoctorsComponent } from './doctors/doctors.component';
 import { StaffsComponent } from './staffs/staffs.component';
 import { UsersComponent } from './users/users.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AdminLoginComponent } from './admin-login/admin-login.component';
 
 @NgModule({
   declarations: [
@@ -15,8 +17,15 @@ import { UsersComponent } from './users/users.component';
     DashboardComponent,
     DoctorsComponent,
     StaffsComponent,
-    UsersComponent
+    UsersComponent,
+    AdminLoginComponent
   ],
-  imports: [SharedModule, RouterModule, AdminRoutingModule]
+  imports: [
+    SharedModule,
+    RouterModule,
+    AdminRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
+  ]
 })
 export class AdminModule {}

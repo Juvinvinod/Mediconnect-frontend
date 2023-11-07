@@ -29,8 +29,10 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     if (this.loginForm.valid) {
       this.userService.userLogin(this.loginForm.value).subscribe({
-        next: () => {
+        next: (res) => {
           console.log('loggedIn');
+          localStorage.setItem('user', JSON.stringify(res));
+          this.router.navigate(['']);
         },
         error: (error) => {
           this.snackBar.open(error.error.errors[0].message, 'Dismiss', {
