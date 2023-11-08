@@ -1,0 +1,30 @@
+  .headerColor{
+    background-color: aqua; 
+  }
+
+
+  .mat-table-header{
+    background-color: #007bff;
+
+  }
+  
+
+
+  .table-container {
+    overflow-x: auto; /* Enable horizontal scrolling if the content overflows */
+    max-width: 100%; /* Set the maximum width as needed */
+  }
+  
+  .mat-table {
+    width: 100%; /* Set the table width to 100% of the container */
+    table-layout: auto; /* Allow the table to adjust column widths automatically */
+  }
+
+  .editButton{
+    background-color: rgb(221, 221, 97);
+    width:15px
+  }
+
+  .deleteButton{
+    width:15px
+  }
