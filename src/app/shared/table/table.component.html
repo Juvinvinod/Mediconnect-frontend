@@ -1,3 +1,29 @@
-<!-- <table mat-table [dataSource]="myDataArray">
+<div class="table-container">
+    <table mat-table [dataSource]="data" class="mat-elevation-z8">
+        <ng-container matColumnDef="rowIndex">
+            <mat-header-cell *matHeaderCellDef> Index </mat-header-cell>
+            <mat-cell *matCellDef="let element;index as i;"> {{ i }} </mat-cell>
+        </ng-container>
+        <ng-container *ngFor="let column of columnsConfig" [matColumnDef]="column.name">
+            <th mat-header-cell *matHeaderCellDef> {{ column.header }} </th>
 
-</table>> -->
+            <td mat-cell *matCellDef="let element">
+                <ng-container *ngIf="column.name === 'actions'">
+
+                    <button mat-raised-button (click)="onEdit(element)" class="editButton ">Edit</button>
+                    <button mat-raised-button color="warn" (click)="onDelete(element)"
+                        class="deleteButton mx-lg-3">Delete</button>
+                    <!-- Add more buttons as needed -->
+                </ng-container>
+
+                <ng-container *ngIf="column.name !=='actions'">
+                    {{ element[column.name] }}
+                </ng-container>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef=" displayedColumns" class="headerColor"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    </table>
+</div>

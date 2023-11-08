@@ -24,7 +24,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MaterialModule,
     NgbCollapseModule,
     NgbDropdownModule,
-    LoginComponent
+    LoginComponent,
+    TableComponent
   ]
 })
 export class SharedModule {}

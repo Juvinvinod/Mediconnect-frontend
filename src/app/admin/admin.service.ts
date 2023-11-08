@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable, map } from 'rxjs';
+import { User } from '../user/interfaces/user';
 
 @Injectable({
   providedIn: 'root'
@@ -22,5 +24,14 @@ export class AdminService {
       }
     }
     return false;
+  }
+
+  // get all the users from database
+  getUsers(): Observable<Array<User>> {
+    return this.http.get<Array<User>>(this.apiURL + '/' + 'users').pipe(
+      map((data: User[]) => {
+        return data.map((user, index) => ({ ...user, index: index + 1 }));
+      })
+    );
   }
 }
