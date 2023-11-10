@@ -34,4 +34,30 @@ export class AdminService {
       })
     );
   }
+
+  // update userDetails
+  updateUser(id: string, data: User): Observable<any> {
+    return this.http.put<Observable<any>>(
+      this.apiURL + '/' + 'editUsers' + '/' + id,
+      data
+    );
+  }
+
+  //blockUser
+  blockUser(id: string): Observable<any> {
+    const requestBody = { id: id };
+    return this.http.patch<Observable<any>>(
+      this.apiURL + '/' + 'blockUser',
+      requestBody
+    );
+  }
+
+  //unblockUser
+  unBlockUser(id: string): Observable<any> {
+    const requestBody = { id: id };
+    return this.http.patch<Observable<any>>(
+      this.apiURL + '/' + 'unblockUser',
+      requestBody
+    );
+  }
 }

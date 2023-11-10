@@ -1,4 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { EditUserPopupComponent } from 'src/app/admin/edit-user-popup/edit-user-popup.component';
 import { User } from 'src/app/user/interfaces/user';
 
 @Component({
@@ -7,6 +9,9 @@ import { User } from 'src/app/user/interfaces/user';
   styleUrls: ['./table.component.css']
 })
 export class TableComponent {
+  @Output() userDetails = new EventEmitter<any>();
+  @Output() blockUser = new EventEmitter<any>();
+  @Output() unBlockUser = new EventEmitter<any>();
   @Input() data: User[] = [];
   @Input() columnsConfig: {
     name: string;
@@ -15,6 +20,8 @@ export class TableComponent {
   }[] = [];
   @Output() buttonClick = new EventEmitter<{ action: string; data: User }>();
 
+  constructor(private dialog: MatDialog) {}
+
   // Extract column names from the columnsConfig
   get displayedColumns(): string[] {
     return this.columnsConfig.map((column) => column.name);
@@ -22,12 +29,24 @@ export class TableComponent {
 
   // Method to handle button clicks
   onEdit(element: User) {
-    // Handle the edit button click for the specified element
-    console.log('Edit clicked for user:', element);
+    this.userDetails.emit(element);
   }
 
-  onDelete(element: User) {
-    // Handle the delete button click for the specified element
-    console.log('Delete clicked for user:', element);
+  onBlock(element: User) {
+    this.blockUser.emit(element);
+  }
+
+  onUnBlock(element: User) {
+    this.unBlockUser.emit(element);
+  }
+
+  openPopup() {
+    this.dialog.open(EditUserPopupComponent, {
+      width: '60%',
+      height: '400px',
+      data: {
+        title: 'User edit'
+      }
+    });
   }
 }

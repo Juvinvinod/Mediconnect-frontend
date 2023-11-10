@@ -22,9 +22,14 @@
 
   .editButton{
     background-color: rgb(221, 221, 97);
-    width:15px
+    width:100px
   }
 
-  .deleteButton{
-    width:15px
+  .unblockButton{
+    background-color: rgb(97, 163, 32);
+    width:100px
+  }
+
+  .blockButton{
+    width:100px
   }

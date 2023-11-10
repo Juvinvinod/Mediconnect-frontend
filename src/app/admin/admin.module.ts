@@ -10,6 +10,7 @@ import { StaffsComponent } from './staffs/staffs.component';
 import { UsersComponent } from './users/users.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
+import { EditUserPopupComponent } from './edit-user-popup/edit-user-popup.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { AdminLoginComponent } from './admin-login/admin-login.component';
     DoctorsComponent,
     StaffsComponent,
     UsersComponent,
-    AdminLoginComponent
+    AdminLoginComponent,
+    EditUserPopupComponent
   ],
   imports: [
     SharedModule,

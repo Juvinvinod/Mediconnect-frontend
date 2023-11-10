@@ -9,10 +9,15 @@
 
             <td mat-cell *matCellDef="let element">
                 <ng-container *ngIf="column.name === 'actions'">
-
-                    <button mat-raised-button (click)="onEdit(element)" class="editButton ">Edit</button>
-                    <button mat-raised-button color="warn" (click)="onDelete(element)"
-                        class="deleteButton mx-lg-3">Delete</button>
+                    <button mat-raised-button (click)="onEdit(element)" class="editButton">Edit</button>
+                    <ng-container *ngIf="element.is_blocked; else unblockButton">
+                        <button mat-raised-button (click)="onUnBlock(element)"
+                            class="unblockButton mx-lg-3 ">Unblock</button>
+                    </ng-container>
+                    <ng-template #unblockButton>
+                        <button mat-raised-button color="warn" (click)="onBlock(element)"
+                            class="blockButton mx-lg-3">Block</button>
+                    </ng-template>
                     <!-- Add more buttons as needed -->
                 </ng-container>
 
