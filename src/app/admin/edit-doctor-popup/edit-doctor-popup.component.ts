@@ -1,23 +1,23 @@
-import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
+import { Component, Output, Inject, EventEmitter, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { AdminService } from '../admin.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { User } from 'src/app/user/interfaces/user';
+import { AdminDoctorService } from '../admin-doctor.service';
+import { Doctor } from 'src/app/shared/interfaces/doctor';
 
 @Component({
-  selector: 'app-edit-user-popup',
-  templateUrl: './edit-user-popup.component.html',
-  styleUrls: ['./edit-user-popup.component.css']
+  selector: 'app-edit-doctor-popup',
+  templateUrl: './edit-doctor-popup.component.html',
+  styleUrls: ['./edit-doctor-popup.component.css']
 })
-export class EditUserPopupComponent implements OnInit {
+export class EditDoctorPopupComponent implements OnInit {
   editForm!: FormGroup;
-  inputData: User | null = null;
+  inputData: Doctor | null = null;
   @Output() userUpdated: EventEmitter<void> = new EventEmitter<void>();
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: User,
-    private ref: MatDialogRef<EditUserPopupComponent>,
-    private adminService: AdminService,
+    @Inject(MAT_DIALOG_DATA) public data: Doctor,
+    private ref: MatDialogRef<EditDoctorPopupComponent>,
+    private adminService: AdminDoctorService,
     private snackBar: MatSnackBar
   ) {}
 
@@ -27,7 +27,7 @@ export class EditUserPopupComponent implements OnInit {
 
     this.editForm = new FormGroup({
       first_name: new FormControl(
-        this.inputData?.first_name,
+        this.inputData.first_name,
         Validators.required
       ),
       last_name: new FormControl(this.inputData.last_name, Validators.required),
@@ -46,7 +46,7 @@ export class EditUserPopupComponent implements OnInit {
   onSubmit() {
     if (this.editForm.valid && this.inputData && this.inputData._id) {
       this.adminService
-        .updateUser(this.inputData._id, this.editForm.value)
+        .updateDoctor(this.inputData._id, this.editForm.value)
         .subscribe({
           next: () => {
             this.snackBar.open('Successfully updated', 'Dismiss', {

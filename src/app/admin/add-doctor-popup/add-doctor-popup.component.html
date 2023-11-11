@@ -1,0 +1,93 @@
+<h1 mat-dialog-title>Add new doctor</h1>
+<div mat-dialog-content>
+
+
+    <form [formGroup]=" doctorForm" (ngSubmit)="onSubmit()">
+        <mat-form-field class="col-sm-6 col-lg-6 pe-sm-3 pe-md-0 fullWidth inputHeight">
+            <mat-label>First Name</mat-label>
+            <input matInput placeholder="First Name" formControlName="first_name" class="fullWidth">
+            <mat-error *ngIf="doctorForm.get('first_name')?.hasError('required')">
+                First Name is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="col-sm-6 ps-s-3 col-lg-6 ps-md-0 fullWidth inputHeight">
+            <mat-label>Last Name</mat-label>
+            <input matInput placeholder="Last Name" formControlName="last_name" class="fullWidth">
+            <mat-error *ngIf="doctorForm.get('last_name')?.hasError('required')">
+                Last Name is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="col-sm-6 ps-s-3 col-lg-6 ps-md-0 fullWidth inputHeight">
+            <mat-label>Department</mat-label>
+            <input matInput placeholder="Department" formControlName="department" class="fullWidth">
+            <mat-error *ngIf="doctorForm.get('department')?.hasError('required')">
+                department is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="col-sm-6 ps-s-3 col-lg-6 ps-md-0 fullWidth inputHeight">
+            <mat-label>Doctor fees</mat-label>
+            <input matInput placeholder="Doctor fees" formControlName="doctor_fees" class="fullWidth">
+            <mat-error *ngIf="doctorForm.get('doctor_fees')?.hasError('required')">
+                Doctor fees is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="fullWidth inputHeight">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Email" formControlName="email" class="fullWidth">
+            <mat-error *ngIf="doctorForm.get('email')?.hasError('required')">
+                Email is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="doctorForm.get('email')?.hasError('email')">
+                This Email does not <strong>exist</strong>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="fullWidth inputHeight">
+            <mat-label>Mobile Number</mat-label>
+            <input matInput placeholder="Mobile Number" formControlName="mobile" class="fullWidth">
+            <mat-error *ngIf="doctorForm.get('mobile')?.hasError('required')">
+                Number is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="doctorForm.get('mobile')?.hasError('minlength')">
+                Number should only contain <strong>10</strong> digits
+            </mat-error>
+            <mat-error *ngIf="doctorForm.get('mobile')?.hasError('maxlength')">
+                Number should only contain <strong>10</strong> digits
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="fullWidth inputHeight ">
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="Password" formControlName="password" class="fullWidth"
+                [type]="hide ? 'password' : 'text'">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-hint *ngIf="doctorForm.get('password')?.value === ''">*Password should contain both numbers
+                and
+                letters</mat-hint>
+            <mat-error *ngIf="doctorForm.get('password')?.hasError('required')">
+                Password is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="doctorForm.get('password')?.hasError('minlength')">
+                Password should contain minimum of <strong>4</strong> characters
+            </mat-error>
+            <mat-error *ngIf="doctorForm.get('password')?.hasError('maxlength')">
+                Password should contain maximum of <strong>10</strong> characters
+            </mat-error>
+        </mat-form-field>
+
+        <div mat-dialog-actions>
+            <div class="py-1">
+                <button mat-raised-button color="primary">Submit</button>
+                <button mat-raised-button mat-dialog-close color="accent">Cancel</button>
+            </div>
+        </div>
+    </form>
+
+</div>

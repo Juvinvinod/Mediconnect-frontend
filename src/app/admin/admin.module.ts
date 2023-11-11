@@ -11,6 +11,8 @@ import { UsersComponent } from './users/users.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { EditUserPopupComponent } from './edit-user-popup/edit-user-popup.component';
+import { EditDoctorPopupComponent } from './edit-doctor-popup/edit-doctor-popup.component';
+import { AddDoctorPopupComponent } from './add-doctor-popup/add-doctor-popup.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { EditUserPopupComponent } from './edit-user-popup/edit-user-popup.compon
     StaffsComponent,
     UsersComponent,
     AdminLoginComponent,
-    EditUserPopupComponent
+    EditUserPopupComponent,
+    EditDoctorPopupComponent,
+    AddDoctorPopupComponent
   ],
   imports: [
     SharedModule,

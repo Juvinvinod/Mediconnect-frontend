@@ -1,1 +1,5 @@
-<p>doctors works!</p>
+<div class="d-flex justify-content-end py-3 pe-3">
+    <button mat-raised-button color="primary" (click)="addDoctor()">Add Doctor</button>
+</div>
+<app-table [columnsConfig]="tableColumns" [data]="tableData" (userDetails)="editDoctor($event)"
+    (blockUser)=" blockUser($event)" (unBlockUser)="unBlockUser($event)"></app-table>

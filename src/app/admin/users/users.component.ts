@@ -43,31 +43,35 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  editUser(event: any) {
+  editUser(event: User) {
     this.userData = event;
     this.openPopup();
   }
 
-  blockUser(event: any) {
-    this.adminService.blockUser(event._id).subscribe({
-      next: () => {
-        this.loadData();
-        this.snackBar.open('Successfully blocked', 'Dismiss', {
-          duration: 5000
-        });
-      }
-    });
+  blockUser(event: User) {
+    if (event._id) {
+      this.adminService.blockUser(event._id).subscribe({
+        next: (res) => {
+          this.loadData();
+          this.snackBar.open(res.success, 'Dismiss', {
+            duration: 5000
+          });
+        }
+      });
+    }
   }
 
-  unBlockUser(event: any) {
-    this.adminService.unBlockUser(event._id).subscribe({
-      next: () => {
-        this.loadData();
-        this.snackBar.open('Successfully blocked', 'Dismiss', {
-          duration: 5000
-        });
-      }
-    });
+  unBlockUser(event: User) {
+    if (event._id) {
+      this.adminService.unBlockUser(event._id).subscribe({
+        next: (res) => {
+          this.loadData();
+          this.snackBar.open(res.success, 'Dismiss', {
+            duration: 5000
+          });
+        }
+      });
+    }
   }
 
   openPopup() {
@@ -75,7 +79,7 @@ export class UsersComponent implements OnInit {
       width: '60%',
       height: '400px',
       data: {
-        id: this.userData._id,
+        _id: this.userData._id,
         first_name: this.userData.first_name,
         last_name: this.userData.last_name,
         mobile: this.userData.mobile,

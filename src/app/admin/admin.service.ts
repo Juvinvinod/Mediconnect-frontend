@@ -36,26 +36,26 @@ export class AdminService {
   }
 
   // update userDetails
-  updateUser(id: string, data: User): Observable<any> {
-    return this.http.put<Observable<any>>(
+  updateUser(id: string, data: User): Observable<User> {
+    return this.http.put<User>(
       this.apiURL + '/' + 'editUsers' + '/' + id,
       data
     );
   }
 
   //blockUser
-  blockUser(id: string): Observable<any> {
+  blockUser(id: string): Observable<{ success: string }> {
     const requestBody = { id: id };
-    return this.http.patch<Observable<any>>(
+    return this.http.patch<{ success: string }>(
       this.apiURL + '/' + 'blockUser',
       requestBody
     );
   }
 
   //unblockUser
-  unBlockUser(id: string): Observable<any> {
+  unBlockUser(id: string): Observable<{ success: string }> {
     const requestBody = { id: id };
-    return this.http.patch<Observable<any>>(
+    return this.http.patch<{ success: string }>(
       this.apiURL + '/' + 'unblockUser',
       requestBody
     );
