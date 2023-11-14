@@ -19,4 +19,15 @@ export class UserService {
   userLogin(inputData: { email: string; password: string }) {
     return this.http.post(this.apiURL + '/' + 'login', inputData);
   }
+
+  userLoggedIn() {
+    const userDoc = localStorage.getItem('user');
+    if (userDoc) {
+      const userObject = JSON.parse(userDoc);
+      if (userObject.token && userObject.role === 'user') {
+        return true;
+      }
+    }
+    return false;
+  }
 }

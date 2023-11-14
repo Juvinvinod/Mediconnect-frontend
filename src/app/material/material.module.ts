@@ -10,6 +10,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 //All the angular material modules required are written here
 const Material = [
@@ -23,7 +25,9 @@ const Material = [
   MatListModule,
   MatSnackBarModule,
   MatTableModule,
-  MatDialogModule
+  MatDialogModule,
+  MatPaginatorModule,
+  MatSortModule
 ];
 
 @NgModule({

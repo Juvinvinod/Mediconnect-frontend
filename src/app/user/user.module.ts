@@ -5,9 +5,16 @@ import { HomeComponent } from './home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { RouterModule } from '@angular/router';
+import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [SignupComponent, HomeComponent, LoginComponent],
-  imports: [SharedModule, FormsModule, ReactiveFormsModule, RouterModule]
+  imports: [
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule,
+    NgbCarouselModule
+  ]
 })
 export class UserModule {}

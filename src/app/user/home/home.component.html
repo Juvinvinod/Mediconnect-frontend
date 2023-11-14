@@ -1,2 +1,87 @@
 <app-header></app-header>
-<p>home works!</p>
+<ngb-carousel #carousel [interval]="5000" [pauseOnHover]="pauseOnHover" [pauseOnFocus]=true class="carousal">
+    <ng-template ngbSlide *ngFor="let img of images; index as i">
+        <a target="_blank" rel="nofollow noopener noreferrer">
+            <div class="picsum-img-wrapper">
+                <img [src]="img" alt="My image {{i + 1}} description" class="image" />
+            </div>
+        </a>
+    </ng-template>
+</ngb-carousel>
+<div class="text-center pt-5 heading">OUR DEPARTMENTS</div>
+<div class="container d-flex">
+    <mat-card>
+        basic card
+    </mat-card>
+    <mat-card>
+        basic card
+    </mat-card>
+    <mat-card>
+        basic card
+    </mat-card>
+</div>
+<div class="text-center pt-5 heading">OUR DOCTORS</div>
+<div class="container d-flex">
+    <mat-card>
+        basic card
+    </mat-card>
+    <mat-card>
+        basic card
+    </mat-card>
+    <mat-card>
+        basic card
+    </mat-card>
+</div>
+<footer class="bg-dark text-white pt-5 pb-4">
+    <div class="container text-center text-md-left">
+        <div class="row text center text-md-left">
+            <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                <h5 class="text-uppercase mb-4 font-weight-bold text-warning">Company name</h5>
+                <p>sdufsudfbdsfbdusbfusd</p>
+            </div>
+
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+                <h5 class="text-uppercase mb-4 font-weight-bold text-warning">Products</h5>
+                <p>
+                    <a href="#">The Providers</a>
+                </p>
+                <p>
+                    <a href="#">The Providers</a>
+                </p>
+                <p>
+                    <a href="#">The Providers</a>
+                </p>
+                <p>
+                    <a href="#">The Providers</a>
+                </p>
+            </div>
+
+            <div class="col-md-3 col-lg-2 col-xl-2 mx auto mt-3">
+                <h5 class="text-uppercase mb-4 font-weight-bold text-warning">Useful links</h5>
+                <p>
+                    <a href="#">The Providers</a>
+                </p>
+                <p>
+                    <a href="#">The Providers</a>
+                </p>
+                <p>
+                    <a href="#">The Providers</a>
+                </p>
+            </div>
+
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+                <h5 class="text-uppercase mb-4 font-weight-bold text-warning">Contact</h5>
+
+                <p>
+                    <a href="#">The Providers</a>
+                </p>
+                <p>
+                    <a href="#">The Providers</a>
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>

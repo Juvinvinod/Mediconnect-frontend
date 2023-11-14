@@ -1,0 +1,39 @@
+.userCard{
+    /* width:50%;
+    left: 25%; */
+}
+
+/* adjust viewport height */
+.viewHeight{
+    height: 80%;
+}
+
+/* make login input stretch across card */
+.fullWidth{
+    width: 100%;
+}
+
+/* login text on card */
+.loginText{
+    @media only screen and (min-width: 768px){
+    font-size: 25px;
+    padding-bottom: 10px;
+    }
+}
+
+.cardPosition{
+   min-height: 650px;
+   @media (max-width: 768px) {
+    margin-top: 15%;
+    min-height: 200px;
+   }
+}
+.signUp {
+    padding-bottom: 5%;
+}
+
+.inputHeight{
+    @media (max-width: 576px) {
+        height: 60px;
+       }
+}

@@ -1,0 +1,59 @@
+<mat-card class=" col-6 mx-auto userCard">
+    <mat-card-header class="">
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>Juvin</mat-card-title>
+        <mat-card-subtitle>User Profile</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+
+
+        <form [formGroup]=" signUpForm" (ngSubmit)="onSubmit()">
+            <mat-form-field class="col-sm-6 col-lg-6 pe-sm-3 pe-md-0 fullWidth inputHeight">
+                <input matInput placeholder="First Name" formControlName="first_name" class="fullWidth">
+                <mat-error *ngIf="signUpForm.get('first_name')?.hasError('required')">
+                    First Name is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="col-sm-6 ps-s-3 col-lg-6 ps-md-0 fullWidth inputHeight">
+                <input matInput placeholder="Last Name" formControlName="last_name" class="fullWidth">
+                <mat-error *ngIf="signUpForm.get('last_name')?.hasError('required')">
+                    Last Name is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="fullWidth inputHeight">
+                <input matInput placeholder="Email" formControlName="email" class="fullWidth">
+                <mat-error *ngIf="signUpForm.get('email')?.hasError('required')">
+                    Email is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="signUpForm.get('email')?.hasError('email')">
+                    This Email does not <strong>exist</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="fullWidth inputHeight">
+                <input matInput placeholder="Mobile Number" formControlName="mobile" class="fullWidth">
+                <mat-error *ngIf="signUpForm.get('mobile')?.hasError('required')">
+                    Number is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="signUpForm.get('mobile')?.hasError('minlength')">
+                    Number should only contain <strong>10</strong> digits
+                </mat-error>
+                <mat-error *ngIf="signUpForm.get('mobile')?.hasError('maxlength')">
+                    Number should only contain <strong>10</strong> digits
+                </mat-error>
+            </mat-form-field>
+            <div class="d-flex">
+                <div class="py-1">
+                    <button class mat-raised-button color="primary">UPDATE</button>
+                </div>
+
+            </div>
+        </form>
+        <div>
+            <button class mat-raised-button color="accent" (click)="changePass()">CHANGE PASSWORD</button>
+        </div>
+
+
+    </mat-card-content>
+</mat-card>

@@ -13,6 +13,8 @@ import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { EditUserPopupComponent } from './edit-user-popup/edit-user-popup.component';
 import { EditDoctorPopupComponent } from './edit-doctor-popup/edit-doctor-popup.component';
 import { AddDoctorPopupComponent } from './add-doctor-popup/add-doctor-popup.component';
+import { AddStaffPopupComponent } from './add-staff-popup/add-staff-popup.component';
+import { EditStaffPopupComponent } from './edit-staff-popup/edit-staff-popup.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { AddDoctorPopupComponent } from './add-doctor-popup/add-doctor-popup.com
     AdminLoginComponent,
     EditUserPopupComponent,
     EditDoctorPopupComponent,
-    AddDoctorPopupComponent
+    AddDoctorPopupComponent,
+    AddStaffPopupComponent,
+    EditStaffPopupComponent
   ],
   imports: [
     SharedModule,

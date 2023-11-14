@@ -15,11 +15,11 @@ export class AdminService {
     return this.http.post(this.apiURL + '/' + 'login', inputData);
   }
 
-  loggedIn() {
+  adminLoggedIn() {
     const userDoc = localStorage.getItem('user');
     if (userDoc) {
       const userObject = JSON.parse(userDoc);
-      if (userObject.token) {
+      if (userObject.token && userObject.role === 'admin') {
         return true;
       }
     }

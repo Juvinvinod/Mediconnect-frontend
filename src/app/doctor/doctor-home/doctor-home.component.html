@@ -1,0 +1,55 @@
+<div class=" vh-100 w-100 fullPage">
+    <mat-toolbar class="topNav d-flex justify-content-between px-3">
+
+        <div>
+            <button mat-icon-button (click)="drawer.toggle()">
+                <mat-icon>menu</mat-icon>
+            </button>
+        </div>
+
+        <div class="input-group w-50">
+            <input type="text" class="form-control" placeholder="Patient name" aria-label="Recipient's username"
+                aria-describedby="basic-addon2">
+            <span class="input-group-text" id="basic-addon2">Search</span>
+        </div>
+
+        <div>
+            <button mat-icon-button (click)="logOut()">
+                <mat-icon>logout</mat-icon>
+            </button>
+
+        </div>
+
+    </mat-toolbar>
+    <mat-drawer-container class="example-container" autosize>
+        <mat-drawer #drawer class="example-sidenav" mode="side">
+            <mat-list class="w-100">
+                <mat-list-item><button mat-button [routerLink]="['/doctor']">
+                        <mat-icon>dashboard</mat-icon>
+                        Appointments
+                    </button>
+                </mat-list-item>
+                <mat-list-item><button mat-button [routerLink]="['users']">
+                        <mat-icon>face</mat-icon>
+                        Patients
+                    </button>
+                </mat-list-item>
+                <mat-list-item><button mat-button [routerLink]="['profile']">
+                        <mat-icon>person</mat-icon>
+                        My Profile
+                    </button>
+                </mat-list-item>
+                <mat-list-item><button mat-button [routerLink]="['calendar']">
+                        <mat-icon>engineering</mat-icon>
+                        Calender
+                    </button>
+                </mat-list-item>
+            </mat-list>
+        </mat-drawer>
+
+        <div class="example-sidenav-content">
+            <router-outlet></router-outlet>
+        </div>
+
+    </mat-drawer-container>
+</div>

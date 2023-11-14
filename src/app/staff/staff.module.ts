@@ -1,10 +1,17 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { LoginComponent } from './login/login.component';
-import { HomeComponent } from './home/home.component';
+import { StaffLoginComponent } from './staff-login/staff-login.component';
+import { SharedModule } from '../shared/shared.module';
+import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { StaffHomeComponent } from './staff-home/staff-home.component';
+import { StaffPatientsComponent } from './staff-patients/staff-patients.component';
 
 @NgModule({
-  declarations: [LoginComponent, HomeComponent],
-  imports: [CommonModule]
+  declarations: [
+    StaffLoginComponent,
+    StaffHomeComponent,
+    StaffPatientsComponent
+  ],
+  imports: [SharedModule, RouterModule, FormsModule, ReactiveFormsModule]
 })
 export class StaffModule {}
