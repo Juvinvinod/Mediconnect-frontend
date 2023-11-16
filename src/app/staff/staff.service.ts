@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Staff } from '../shared/interfaces/staff';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -22,5 +24,17 @@ export class StaffService {
       }
     }
     return false;
+  }
+
+  getStaffProfile(): Observable<Staff> {
+    return this.http.get<Staff>(this.apiURL + '/' + 'profile');
+  }
+
+  //update password of doctor
+  updatePassword(data: Staff): Observable<{ success: string }> {
+    return this.http.put<{ success: string }>(
+      this.apiURL + '/' + 'password',
+      data
+    );
   }
 }

@@ -5,12 +5,16 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StaffHomeComponent } from './staff-home/staff-home.component';
 import { StaffPatientsComponent } from './staff-patients/staff-patients.component';
+import { StaffProfileComponent } from './staff-profile/staff-profile.component';
+import { StaffPasswordComponent } from './staff-password/staff-password.component';
 
 @NgModule({
   declarations: [
     StaffLoginComponent,
     StaffHomeComponent,
-    StaffPatientsComponent
+    StaffPatientsComponent,
+    StaffProfileComponent,
+    StaffPasswordComponent
   ],
   imports: [SharedModule, RouterModule, FormsModule, ReactiveFormsModule]
 })

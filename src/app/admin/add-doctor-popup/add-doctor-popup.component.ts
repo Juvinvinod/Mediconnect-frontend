@@ -10,6 +10,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./add-doctor-popup.component.css']
 })
 export class AddDoctorPopupComponent implements OnInit {
+  departments: string[] = [
+    'General surgery',
+    'Cardiology',
+    'Internal medicine'
+  ];
   hide = true;
   doctorForm!: FormGroup;
   @Output() userUpdated: EventEmitter<void> = new EventEmitter<void>();

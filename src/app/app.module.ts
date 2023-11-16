@@ -17,6 +17,7 @@ import { DoctorModule } from './doctor/doctor.module';
 import { StaffModule } from './staff/staff.module';
 import { StaffRoutingModule } from './staff/staff-routing.module';
 import { TokenInterceptor } from './interceptor/token.interceptor';
+import { UserRoutingModule } from './user/user-routing.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,6 +29,7 @@ import { TokenInterceptor } from './interceptor/token.interceptor';
     SharedModule,
     NgbModule,
     UserModule,
+    UserRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
     AdminModule,

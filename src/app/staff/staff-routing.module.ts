@@ -5,15 +5,26 @@ import { StaffLoginComponent } from './staff-login/staff-login.component';
 import { StaffHomeComponent } from './staff-home/staff-home.component';
 import { staffCheckGuard } from '../guards/staff-check.guard';
 import { StaffPatientsComponent } from './staff-patients/staff-patients.component';
+import { StaffProfileComponent } from './staff-profile/staff-profile.component';
+import { StaffPasswordComponent } from './staff-password/staff-password.component';
+import { statusCheckerGuard } from '../guards/status-checker.guard';
 
 const routes: Routes = [
-  { path: 'staff/login', component: StaffLoginComponent },
+  {
+    path: 'staff/login',
+    canActivate: [statusCheckerGuard],
+    component: StaffLoginComponent
+  },
   {
     path: 'staff',
     component: StaffHomeComponent,
     canActivate: [staffCheckGuard],
     canActivateChild: [staffCheckGuard],
-    children: [{ path: '', component: StaffPatientsComponent }]
+    children: [
+      { path: 'password', component: StaffPasswordComponent },
+      { path: 'profile', component: StaffProfileComponent },
+      { path: '', component: StaffPatientsComponent }
+    ]
   }
 ];
 

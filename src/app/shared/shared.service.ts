@@ -11,4 +11,12 @@ export class SharedService {
   collapse() {
     this.isCollapsed = !this.isCollapsed;
   }
+
+  tokenChecker() {
+    const userDoc = localStorage.getItem('user');
+    if (userDoc) {
+      return false;
+    }
+    return true;
+  }
 }

@@ -1,23 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Doctor } from 'src/app/shared/interfaces/doctor';
-import { DoctorService } from '../doctor.service';
+import { User } from '../interfaces/user';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { UserService } from '../user.service';
 
 @Component({
-  selector: 'app-doctor-password',
-  templateUrl: './doctor-password.component.html',
-  styleUrls: ['./doctor-password.component.css']
+  selector: 'app-user-password',
+  templateUrl: './user-password.component.html',
+  styleUrls: ['./user-password.component.css']
 })
-export class DoctorPasswordComponent implements OnInit {
+export class UserPasswordComponent implements OnInit {
   hide = true;
   hideConfirm = true;
   passwordForm!: FormGroup;
-  doctorData: Doctor | undefined = undefined;
+  userData: User | undefined = undefined;
 
   constructor(
-    private doctorService: DoctorService,
+    private userService: UserService,
     private router: Router,
     private snackBar: MatSnackBar
   ) {}
@@ -45,7 +45,7 @@ export class DoctorPasswordComponent implements OnInit {
   //check for errors and update doctor password in the database
   onSubmit() {
     if (this.passwordForm.valid) {
-      this.doctorService.updatePassword(this.passwordForm.value).subscribe({
+      this.userService.updatePassword(this.passwordForm.value).subscribe({
         next: () => {
           this.router.navigate(['doctor']);
           this.snackBar.open('Successfully updated', 'Dismiss', {

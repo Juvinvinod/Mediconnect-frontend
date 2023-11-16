@@ -1,23 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Doctor } from 'src/app/shared/interfaces/doctor';
-import { DoctorService } from '../doctor.service';
+import { Staff } from 'src/app/shared/interfaces/staff';
+import { StaffService } from '../staff.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-doctor-password',
-  templateUrl: './doctor-password.component.html',
-  styleUrls: ['./doctor-password.component.css']
+  selector: 'app-staff-password',
+  templateUrl: './staff-password.component.html',
+  styleUrls: ['./staff-password.component.css']
 })
-export class DoctorPasswordComponent implements OnInit {
+export class StaffPasswordComponent implements OnInit {
   hide = true;
   hideConfirm = true;
   passwordForm!: FormGroup;
-  doctorData: Doctor | undefined = undefined;
+  staffData: Staff | undefined = undefined;
 
   constructor(
-    private doctorService: DoctorService,
+    private staffService: StaffService,
     private router: Router,
     private snackBar: MatSnackBar
   ) {}
@@ -45,9 +45,9 @@ export class DoctorPasswordComponent implements OnInit {
   //check for errors and update doctor password in the database
   onSubmit() {
     if (this.passwordForm.valid) {
-      this.doctorService.updatePassword(this.passwordForm.value).subscribe({
+      this.staffService.updatePassword(this.passwordForm.value).subscribe({
         next: () => {
-          this.router.navigate(['doctor']);
+          this.router.navigate(['staff']);
           this.snackBar.open('Successfully updated', 'Dismiss', {
             duration: 5000
           });

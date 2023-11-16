@@ -21,9 +21,13 @@
 
         <mat-form-field class="col-sm-6 ps-s-3 col-lg-6 ps-md-0 fullWidth inputHeight">
             <mat-label>Department</mat-label>
-            <input matInput placeholder="Department" formControlName="department" class="fullWidth">
+            <mat-select placeholder="Select Department" formControlName="department" class="fullWidth">
+                <mat-option *ngFor="let department of departments" [value]="department">
+                    {{ department }}
+                </mat-option>
+            </mat-select>
             <mat-error *ngIf="doctorForm.get('department')?.hasError('required')">
-                department is <strong>required</strong>
+                Department is <strong>required</strong>
             </mat-error>
         </mat-form-field>
 

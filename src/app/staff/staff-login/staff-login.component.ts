@@ -26,7 +26,7 @@ export class StaffLoginComponent {
         next: (res) => {
           console.log('loggedIn');
           localStorage.setItem('user', JSON.stringify(res));
-          this.router.navigate(['/admin']);
+          this.router.navigate(['/staff']);
         },
         error: (error) => {
           this.snackBar.open(error.error.errors[0].message, 'Dismiss', {
