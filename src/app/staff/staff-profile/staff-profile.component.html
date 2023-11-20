@@ -1,4 +1,4 @@
-<mat-card class=" col-6 mx-auto userCard">
+<mat-card class=" col-6 mx-auto userCard mt-5">
     <mat-card-header class="">
         <div mat-card-avatar class="example-header-image"></div>
         <mat-card-title>Juvin</mat-card-title>
@@ -43,16 +43,16 @@
                     Number should only contain <strong>10</strong> digits
                 </mat-error>
             </mat-form-field>
-            <div class="d-flex">
-                <div class="py-1">
-                    <button class mat-raised-button color="primary">UPDATE</button>
+            <div class="d-flex py-1">
+                <div class="px-1">
+                    <button mat-raised-button color="primary">UPDATE</button>
                 </div>
 
+                <div class="px-1">
+                    <button mat-raised-button color="accent" (click)="changePass()">CHANGE PASSWORD</button>
+                </div>
             </div>
         </form>
-        <div>
-            <button class mat-raised-button color="accent" (click)="changePass()">CHANGE PASSWORD</button>
-        </div>
 
 
     </mat-card-content>

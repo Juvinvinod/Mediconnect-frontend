@@ -8,6 +8,7 @@ import { DoctorsComponent } from './doctors/doctors.component';
 import { StaffsComponent } from './staffs/staffs.component';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { adminCheckGuard } from '../guards/admin-check.guard';
+import { DepartmentsComponent } from './departments/departments.component';
 
 const routes: Routes = [
   { path: 'admin/login', component: AdminLoginComponent },
@@ -20,7 +21,8 @@ const routes: Routes = [
       { path: '', component: DashboardComponent },
       { path: 'users', component: UsersComponent },
       { path: 'doctors', component: DoctorsComponent },
-      { path: 'staffs', component: StaffsComponent }
+      { path: 'staffs', component: StaffsComponent },
+      { path: 'department', component: DepartmentsComponent }
     ]
   }
 ];

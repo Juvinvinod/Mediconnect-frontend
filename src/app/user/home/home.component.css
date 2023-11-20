@@ -7,6 +7,9 @@
 .image{
     max-height:450px;
     width: 100%;
+    @media (max-width: 576px) {
+        height: 250px;
+       }
 }
 
 .heading{
@@ -15,3 +18,46 @@
     font-size: 35px;
     color: rgb(87, 153, 131);
 }
+
+.doctor-card {
+    max-width: 400px;
+    box-shadow: none;
+  }
+
+  .department-image{
+    max-width: 500px;
+    height: 350px;
+    object-fit: cover;
+    @media (max-width: 576px) {
+        max-width: 360px;
+        height: 350px;
+       }
+  }
+
+  .department-text{
+    font-size: large;
+    font-weight: 500px;
+    color: rgb(83, 83, 81);
+  }
+
+  .doctor-image{
+    border-radius: 50%;
+    object-fit: cover;
+    max-width: 200px;
+    height: 200px;
+  }
+
+  .book-button{
+    font-size: small;
+    @media (max-width: 576px) {
+        font-size: 10px;
+       }
+  }
+
+  .doctor-heading{
+    margin-left: 8%;
+    @media (max-width: 576px) {
+      font-size: 30px;
+     }
+  }
+  

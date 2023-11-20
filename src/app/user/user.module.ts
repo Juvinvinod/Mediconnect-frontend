@@ -10,6 +10,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserOutletComponent } from './user-outlet/user-outlet.component';
 import { UserFooterComponent } from './user-footer/user-footer.component';
 import { UserPasswordComponent } from './user-password/user-password.component';
+import { DoctorListingComponent } from './doctor-listing/doctor-listing.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { UserPasswordComponent } from './user-password/user-password.component';
     UserProfileComponent,
     UserOutletComponent,
     UserFooterComponent,
-    UserPasswordComponent
+    UserPasswordComponent,
+    DoctorListingComponent
   ],
   imports: [
     SharedModule,

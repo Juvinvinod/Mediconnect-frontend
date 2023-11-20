@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { User } from '../user/interfaces/user';
+import { Dept } from '../shared/interfaces/department';
 
 @Injectable({
   providedIn: 'root'
@@ -58,6 +59,23 @@ export class AdminService {
     return this.http.patch<{ success: string }>(
       this.apiURL + '/' + 'unblockUser',
       requestBody
+    );
+  }
+
+  //get departments
+  getDepartments(): Observable<Dept[]> {
+    return this.http.get<Dept[]>(this.apiURL + '/' + 'getDept').pipe(
+      map((data: Dept[]) => {
+        return data.map((dept, index) => ({ ...dept, index: index + 1 }));
+      })
+    );
+  }
+
+  //add department
+  addDepartment(data: Dept): Observable<{ success: string }> {
+    return this.http.post<{ success: string }>(
+      this.apiURL + '/' + 'addDept',
+      data
     );
   }
 }

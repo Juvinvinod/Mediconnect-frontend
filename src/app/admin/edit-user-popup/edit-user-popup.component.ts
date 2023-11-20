@@ -41,6 +41,7 @@ export class EditUserPopupComponent implements OnInit {
         Validators.maxLength(10)
       ])
     });
+    this.editForm.controls['email'].disable();
   }
 
   onSubmit() {

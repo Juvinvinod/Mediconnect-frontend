@@ -14,7 +14,7 @@
         </div>
 
         <div>
-            <button mat-icon-button>
+            <button mat-icon-button (click)="logOut()">
                 <mat-icon>logout</mat-icon>
             </button>
 
@@ -24,12 +24,12 @@
     <mat-drawer-container class="example-container" autosize>
         <mat-drawer #drawer class="example-sidenav" mode="side">
             <mat-list class="w-100">
-                <mat-list-item><button mat-button [routerLink]="['/doctor']">
+                <mat-list-item><button mat-button [routerLink]="['/staff ']">
                         <mat-icon>dashboard</mat-icon>
                         Appointments
                     </button>
                 </mat-list-item>
-                <mat-list-item><button mat-button [routerLink]="['users']">
+                <mat-list-item><button mat-button [routerLink]="['/staff']">
                         <mat-icon>face</mat-icon>
                         Patients
                     </button>

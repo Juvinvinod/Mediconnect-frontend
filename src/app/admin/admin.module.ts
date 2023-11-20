@@ -15,6 +15,8 @@ import { EditDoctorPopupComponent } from './edit-doctor-popup/edit-doctor-popup.
 import { AddDoctorPopupComponent } from './add-doctor-popup/add-doctor-popup.component';
 import { AddStaffPopupComponent } from './add-staff-popup/add-staff-popup.component';
 import { EditStaffPopupComponent } from './edit-staff-popup/edit-staff-popup.component';
+import { DepartmentsComponent } from './departments/departments.component';
+import { AddDeptPopupComponent } from './add-dept-popup/add-dept-popup.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { EditStaffPopupComponent } from './edit-staff-popup/edit-staff-popup.com
     EditDoctorPopupComponent,
     AddDoctorPopupComponent,
     AddStaffPopupComponent,
-    EditStaffPopupComponent
+    EditStaffPopupComponent,
+    DepartmentsComponent,
+    AddDeptPopupComponent
   ],
   imports: [
     SharedModule,

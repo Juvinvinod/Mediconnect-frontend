@@ -14,7 +14,7 @@
         </div>
 
         <div>
-            <button mat-icon-button>
+            <button mat-icon-button (click)="logOut()">
                 <mat-icon>logout</mat-icon>
             </button>
 
@@ -42,6 +42,11 @@
                 <mat-list-item><button mat-button [routerLink]="['staffs']">
                         <mat-icon>engineering</mat-icon>
                         Staffs
+                    </button>
+                </mat-list-item>
+                <mat-list-item><button mat-button [routerLink]="['department']">
+                        <mat-icon>location_city</mat-icon>
+                        Departments
                     </button>
                 </mat-list-item>
             </mat-list>

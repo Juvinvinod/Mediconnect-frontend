@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>Add new doctor</h1>
+<div mat-dialog-content>
+
+
+    <form [formGroup]=" deptForm" (ngSubmit)="onSubmit()">
+        <mat-form-field class="col-sm-6 col-lg-6 pe-sm-3 pe-md-0 fullWidth inputHeight">
+            <mat-label>Department Name</mat-label>
+            <input matInput placeholder="Department Name" formControlName="dept_name" class="fullWidth">
+            <mat-error *ngIf="deptForm.get('dept_name')?.hasError('required')">
+                Department Name is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+
+        <div mat-dialog-actions>
+            <div class="py-1">
+                <button mat-raised-button color="primary">Submit</button>
+                <button mat-raised-button mat-dialog-close color="accent">Cancel</button>
+            </div>
+        </div>
+    </form>
+
+</div>

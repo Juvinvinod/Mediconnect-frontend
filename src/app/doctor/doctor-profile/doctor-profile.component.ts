@@ -53,6 +53,7 @@ export class DoctorProfileComponent implements OnInit {
         Validators.maxLength(10)
       ])
     });
+    this.signUpForm.controls['email'].disable();
   }
 
   //check for errors and update doctor in the database

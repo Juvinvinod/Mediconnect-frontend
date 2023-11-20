@@ -1,2 +1,4 @@
-<app-table [columnsConfig]="tableColumns" [data]="tableData" (userDetails)="editUser($event)"
-    (blockUser)=" blockUser($event)" (unBlockUser)="unBlockUser($event)"></app-table>
+<mat-card class=" col-8 mx-auto mt-3">
+    <app-table [columnsConfig]="tableColumns" [data]="tableData" (userDetails)="editUser($event)"
+        (blockUser)=" blockUser($event)" (unBlockUser)="unBlockUser($event)"></app-table>
+</mat-card>

@@ -1,0 +1,14 @@
+.table {
+   
+    overflow-x: auto; /* Enable horizontal scrolling if the content overflows */
+   
+  }
+  
+  .mat-mdc-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  td, th {
+    width: 25%;
+  }

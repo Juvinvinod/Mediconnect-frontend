@@ -18,6 +18,7 @@ import { StaffModule } from './staff/staff.module';
 import { StaffRoutingModule } from './staff/staff-routing.module';
 import { TokenInterceptor } from './interceptor/token.interceptor';
 import { UserRoutingModule } from './user/user-routing.module';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [AppComponent],
@@ -37,7 +38,8 @@ import { UserRoutingModule } from './user/user-routing.module';
     DoctorModule,
     DoctorRoutingModule,
     StaffModule,
-    StaffRoutingModule
+    StaffRoutingModule,
+    MatNativeDateModule
   ],
   providers: [
     {

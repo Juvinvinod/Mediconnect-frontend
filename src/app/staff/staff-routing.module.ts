@@ -7,12 +7,10 @@ import { staffCheckGuard } from '../guards/staff-check.guard';
 import { StaffPatientsComponent } from './staff-patients/staff-patients.component';
 import { StaffProfileComponent } from './staff-profile/staff-profile.component';
 import { StaffPasswordComponent } from './staff-password/staff-password.component';
-import { statusCheckerGuard } from '../guards/status-checker.guard';
 
 const routes: Routes = [
   {
     path: 'staff/login',
-    canActivate: [statusCheckerGuard],
     component: StaffLoginComponent
   },
   {

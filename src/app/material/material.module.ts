@@ -13,6 +13,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 //All the angular material modules required are written here
 const Material = [
@@ -29,7 +30,8 @@ const Material = [
   MatDialogModule,
   MatPaginatorModule,
   MatSortModule,
-  MatSelectModule
+  MatSelectModule,
+  MatDatepickerModule
 ];
 
 @NgModule({

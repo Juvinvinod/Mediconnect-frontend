@@ -8,26 +8,71 @@
     </ng-template>
 </ngb-carousel>
 <div class="text-center pt-5 heading">OUR DEPARTMENTS</div>
-<div class="container d-flex">
-    <mat-card>
-        basic card
+<div class="container d-flex flex-wrap mt-3 ">
+    <mat-card class="doctor-card mx-3">
+        <img class="department-image" mat-card-image src="../../../assets/cardiology.jpg" alt="Photo of department">
+        <mat-card-content class="text-center pt-3 department-text">
+            CARDIOLOGY
+        </mat-card-content>
     </mat-card>
-    <mat-card>
-        basic card
+    <mat-card class="doctor-card mx-3">
+        <img class="department-image" mat-card-image src="../../../assets/general-surgery.jpg"
+            alt="Photo of department">
+        <mat-card-content class="text-center pt-3 department-text">
+            GENERAL SURGERY
+        </mat-card-content>
     </mat-card>
-    <mat-card>
-        basic card
+    <mat-card class="doctor-card mx-3">
+        <img class="department-image" mat-card-image src="../../../assets/internal-medicine.jpg"
+            alt="Photo of department">
+        <mat-card-content class="text-center pt-3 department-text">
+            INTERNAL MEDICINE
+        </mat-card-content>
     </mat-card>
 </div>
-<div class="text-center pt-5 heading">OUR DOCTORS</div>
-<div class="container d-flex">
-    <mat-card>
-        basic card
+<div class="d-flex justify-content-between pt-5 px-5">
+    <div class="text-center heading doctor-heading">OUR DOCTORS</div>
+    <button mat-raised-button>VIEW ALL</button>
+</div>
+<div class="container d-flex flex-nowrap overflow-auto my-3">
+    <mat-card class="doctor-card mx-3">
+        <img class="doctor-image" src="../../../assets/doctor.jpg" alt="Photo of doctor">
+        <mat-card-content>
+            <div class="text-center pt-3 doctor-name-text">Dr. George Abraham</div>
+            <div class="text-center pt-1 doctor-name-text">Cardiology</div>
+        </mat-card-content>
+        <mat-card-actions class="mx-auto">
+            <button mat-raised-button color="primary" class="book-button">BOOK AN APPOINTMENT</button>
+        </mat-card-actions>
     </mat-card>
-    <mat-card>
-        basic card
+    <mat-card class="doctor-card mx-3">
+        <img class="doctor-image" src="../../../assets/doctor.jpg" alt="Photo of doctor">
+        <mat-card-content>
+            <div class="text-center pt-3 doctor-name-text">Dr. George Abraham</div>
+            <div class="text-center pt-1 doctor-name-text">Cardiology</div>
+        </mat-card-content>
+        <mat-card-actions class="mx-auto">
+            <button mat-raised-button color="primary" class="book-button">BOOK AN APPOINTMENT</button>
+        </mat-card-actions>
     </mat-card>
-    <mat-card>
-        basic card
+    <mat-card class="doctor-card mx-3">
+        <img class="doctor-image" src="../../../assets/doctor.jpg" alt="Photo of doctor">
+        <mat-card-content>
+            <div class="text-center pt-3 doctor-name-text">Dr. George Abraham</div>
+            <div class="text-center pt-1 doctor-name-text">Cardiology</div>
+        </mat-card-content>
+        <mat-card-actions class="mx-auto">
+            <button mat-raised-button color="primary" class="book-button">BOOK AN APPOINTMENT</button>
+        </mat-card-actions>
+    </mat-card>
+    <mat-card class="doctor-card mx-3">
+        <img class="doctor-image" src="../../../assets/doctor.jpg" alt="Photo of doctor">
+        <mat-card-content>
+            <div class="text-center pt-3 doctor-name-text">Dr. George Abraham</div>
+            <div class="text-center pt-1 doctor-name-text">Cardiology</div>
+        </mat-card-content>
+        <mat-card-actions class="mx-auto">
+            <button mat-raised-button color="primary" class="book-button">BOOK AN APPOINTMENT</button>
+        </mat-card-actions>
     </mat-card>
 </div>

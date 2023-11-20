@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Doctor } from '../shared/interfaces/doctor';
 import { Observable } from 'rxjs';
+import { Slot } from '../shared/interfaces/slot';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +36,14 @@ export class DoctorService {
   updatePassword(data: Doctor): Observable<{ success: string }> {
     return this.http.put<{ success: string }>(
       this.apiURL + '/' + 'password',
+      data
+    );
+  }
+
+  //create a slot
+  createSlot(data: Slot): Observable<{ success: string }> {
+    return this.http.post<{ success: string }>(
+      this.apiURL + '/' + 'createSlot',
       data
     );
   }

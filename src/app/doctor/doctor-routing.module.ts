@@ -7,12 +7,12 @@ import { doctorCheckGuard } from '../guards/doctor-check.guard';
 import { DoctorProfileComponent } from './doctor-profile/doctor-profile.component';
 import { DoctorAppointmentsComponent } from './doctor-appointments/doctor-appointments.component';
 import { DoctorPasswordComponent } from './doctor-password/doctor-password.component';
-import { statusCheckerGuard } from '../guards/status-checker.guard';
+import { DoctorPatientsComponent } from './doctor-patients/doctor-patients.component';
+import { DoctorSlotComponent } from './doctor-slot/doctor-slot.component';
 
 const routes: Routes = [
   {
     path: 'doctor/login',
-    canActivate: [statusCheckerGuard],
     component: DoctorLoginComponent
   },
   {
@@ -23,6 +23,8 @@ const routes: Routes = [
     children: [
       { path: 'profile', component: DoctorProfileComponent },
       { path: 'password', component: DoctorPasswordComponent },
+      { path: 'patients', component: DoctorPatientsComponent },
+      { path: 'slot', component: DoctorSlotComponent },
       { path: '', component: DoctorAppointmentsComponent }
     ]
   }
