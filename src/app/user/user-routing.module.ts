@@ -6,6 +6,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserOutletComponent } from './user-outlet/user-outlet.component';
 import { HomeComponent } from './home/home.component';
 import { UserPasswordComponent } from './user-password/user-password.component';
+import { DoctorBookingComponent } from './doctor-booking/doctor-booking.component';
+import { DoctorListingComponent } from './doctor-listing/doctor-listing.component';
 
 const routes: Routes = [
   {
@@ -22,6 +24,8 @@ const routes: Routes = [
         canActivate: [userCheckGuard],
         component: UserPasswordComponent
       },
+      { path: 'booking/:id', component: DoctorBookingComponent },
+      { path: 'allDoctors', component: DoctorListingComponent },
       { path: '', pathMatch: 'full', component: HomeComponent }
     ]
   }

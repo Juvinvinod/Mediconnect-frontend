@@ -1,1 +1,15 @@
-<p>doctor-listing works!</p>
+<h1 class="text-center my-3">OUR DOCTORS</h1>
+<div class="container d-flex flex-wrap my-3">
+    <mat-card class="doctor-card mx-3" *ngFor="let doctor of doctorList">
+        <img class="doctor-image" src="../../../assets/doctor.jpg" alt="Photo of doctor">
+        <mat-card-content>
+            <div class="text-center pt-3 doctor-name-text">{{doctor.first_name}}</div>
+            <div class="text-center pt-1 doctor-name-text">{{doctor.department}}</div>
+            <div class="text-center pt-1 doctor-name-text">{{doctor.doctor_fees}}</div>
+        </mat-card-content>
+        <mat-card-actions class="mx-auto">
+            <button mat-raised-button color="primary" class="book-button" [routerLink]="['/booking', doctor._id]">BOOK
+                AN APPOINTMENT</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from './interfaces/user';
 import { Observable } from 'rxjs';
+import { Slot } from '../shared/interfaces/slot';
+import { Doctor } from '../shared/interfaces/doctor';
 
 @Injectable({
   providedIn: 'root'
@@ -50,5 +52,26 @@ export class UserService {
     const userObject = user ? JSON.parse(user) : null;
     const token = userObject?.token;
     return token;
+  }
+
+  getSlots(id: string): Observable<Slot[]> {
+    return this.http.get<Slot[]>(this.apiURL + '/' + 'getSlots' + '/' + id);
+  }
+
+  getDoctor(id: string): Observable<Doctor> {
+    return this.http.get<Doctor>(
+      this.apiURL + '/' + 'doctorProfile' + '/' + id
+    );
+  }
+
+  //book a slot
+  bookSlot(
+    data: { time: string; date: string },
+    id: string
+  ): Observable<{ success: string }> {
+    return this.http.put<{ success: string }>(
+      this.apiURL + '/' + 'bookSlot' + '/' + id,
+      data
+    );
   }
 }

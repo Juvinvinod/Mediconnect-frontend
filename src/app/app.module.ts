@@ -19,6 +19,7 @@ import { StaffRoutingModule } from './staff/staff-routing.module';
 import { TokenInterceptor } from './interceptor/token.interceptor';
 import { UserRoutingModule } from './user/user-routing.module';
 import { MatNativeDateModule } from '@angular/material/core';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent],
@@ -46,7 +47,8 @@ import { MatNativeDateModule } from '@angular/material/core';
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true
-    }
+    },
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

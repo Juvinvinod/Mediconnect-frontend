@@ -1,7 +1,7 @@
 <mat-card class="col-4 formStyle">
 
     <mat-card-content>
-        <form [formGroup]="slotForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="slotForm" (ngSubmit)="onSubmit(formDirective)" #formDirective="ngForm">
             <!-- Other form controls -->
             <mat-form-field class="fullWidth">
                 <input matInput [matDatepicker]="datepicker" placeholder="Select a date" formControlName="date">

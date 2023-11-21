@@ -11,6 +11,7 @@ import { UserOutletComponent } from './user-outlet/user-outlet.component';
 import { UserFooterComponent } from './user-footer/user-footer.component';
 import { UserPasswordComponent } from './user-password/user-password.component';
 import { DoctorListingComponent } from './doctor-listing/doctor-listing.component';
+import { DoctorBookingComponent } from './doctor-booking/doctor-booking.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { DoctorListingComponent } from './doctor-listing/doctor-listing.componen
     UserOutletComponent,
     UserFooterComponent,
     UserPasswordComponent,
-    DoctorListingComponent
+    DoctorListingComponent,
+    DoctorBookingComponent
   ],
   imports: [
     SharedModule,

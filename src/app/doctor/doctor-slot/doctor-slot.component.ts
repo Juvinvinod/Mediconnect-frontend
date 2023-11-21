@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  FormGroupDirective,
+  Validators
+} from '@angular/forms';
 import { DoctorService } from '../doctor.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -22,11 +27,12 @@ export class DoctorSlotComponent implements OnInit {
     });
   }
 
-  onSubmit() {
+  onSubmit(formDirective: FormGroupDirective) {
     if (this.slotForm.valid) {
-      this.slotForm.reset();
       this.doctorService.createSlot(this.slotForm.value).subscribe({
         next: (res) => {
+          this.slotForm.reset();
+          formDirective.resetForm();
           this.snackBar.open(res.success, 'Dismiss', {
             duration: 5000
           });
