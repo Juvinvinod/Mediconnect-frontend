@@ -8,8 +8,15 @@ import { HomeComponent } from './home/home.component';
 import { UserPasswordComponent } from './user-password/user-password.component';
 import { DoctorBookingComponent } from './doctor-booking/doctor-booking.component';
 import { DoctorListingComponent } from './doctor-listing/doctor-listing.component';
+import { UserAppointmentsComponent } from './user-appointments/user-appointments.component';
+import { UserLoginComponent } from './user-login/login.component';
+import { statusCheckerGuard } from '../guards/status-checker.guard';
 
 const routes: Routes = [
+  {
+    path: 'login',
+    component: UserLoginComponent
+  },
   {
     path: '',
     component: UserOutletComponent,
@@ -24,8 +31,21 @@ const routes: Routes = [
         canActivate: [userCheckGuard],
         component: UserPasswordComponent
       },
-      { path: 'booking/:id', component: DoctorBookingComponent },
-      { path: 'allDoctors', component: DoctorListingComponent },
+      {
+        path: 'booking/:id',
+        canActivate: [userCheckGuard],
+        component: DoctorBookingComponent
+      },
+      {
+        path: 'allDoctors',
+        canActivate: [userCheckGuard],
+        component: DoctorListingComponent
+      },
+      {
+        path: 'appointments',
+        canActivate: [userCheckGuard],
+        component: UserAppointmentsComponent
+      },
       { path: '', pathMatch: 'full', component: HomeComponent }
     ]
   }

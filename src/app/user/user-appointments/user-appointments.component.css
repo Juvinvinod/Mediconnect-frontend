@@ -1,0 +1,9 @@
+.appointment-card{
+    height:150px;
+    background-color: rgb(209, 222, 216);
+}
+
+.status-button{
+    background-color:rgb(192, 204, 255) ;
+    padding: 5%;
+}

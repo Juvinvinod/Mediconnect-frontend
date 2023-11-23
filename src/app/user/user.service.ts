@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from './interfaces/user';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { Slot } from '../shared/interfaces/slot';
 import { Doctor } from '../shared/interfaces/doctor';
 
@@ -65,13 +65,24 @@ export class UserService {
   }
 
   //book a slot
-  bookSlot(
-    data: { time: string; date: string },
-    id: string
-  ): Observable<{ success: string }> {
+  bookSlot(data: {
+    booking_id: string;
+    time: string;
+    date: string;
+    doctorId: string;
+  }): Observable<{ success: string }> {
     return this.http.put<{ success: string }>(
-      this.apiURL + '/' + 'bookSlot' + '/' + id,
+      this.apiURL + '/' + 'bookSlot',
       data
+    );
+  }
+
+  //get all user booking docs
+  getBookingDocs(): Observable<Slot[]> {
+    return this.http.get<Slot[]>(this.apiURL + '/' + 'getSlots').pipe(
+      map((data: Slot[]) => {
+        return data.map((user, index) => ({ ...user, index: index + 1 }));
+      })
     );
   }
 }

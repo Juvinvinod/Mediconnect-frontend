@@ -7,6 +7,9 @@ import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { DatePipe } from '@angular/common';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { User } from '../interfaces/user';
+
+declare let Razorpay: any;
 
 @Component({
   selector: 'app-doctor-booking',
@@ -18,9 +21,12 @@ export class DoctorBookingComponent implements OnInit {
   doctorId = '';
   doctorDetails: Doctor | null = null;
   slotDetails: Slot[] | null = null;
+  unfilteredData: Slot[] | null = null;
   selectedTime: string | null = '';
   timeSlots: any;
   timeForm!: FormGroup;
+  formData: any;
+  userDetails: User | null = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -39,21 +45,22 @@ export class DoctorBookingComponent implements OnInit {
     });
     this.userService.getSlots(this.doctorId).subscribe((res) => {
       this.slotDetails = res;
+      this.unfilteredData = res;
       console.log(this.slotDetails);
     });
     this.timeForm = new FormGroup({
       time: new FormControl('', Validators.required),
       date: new FormControl('')
     });
+    this.userService.getUserProfile().subscribe((res) => {
+      this.userDetails = res;
+    });
   }
 
   onDateChange(event: MatDatepickerInputEvent<Date>): void {
     this.selectedDate = event.value;
+    this.slotDetails = this.unfilteredData;
     this.slotDetails = this.getSlotsForSelectedDate();
-    this.timeForm.patchValue({ date: this.selectedDate });
-    console.log(this.slotDetails);
-
-    console.log(this.selectedDate);
   }
 
   getSlotsForSelectedDate(): any {
@@ -73,21 +80,91 @@ export class DoctorBookingComponent implements OnInit {
           formattedSelectedDate
       )
       .map((slot) => ({
+        booking_id: slot._id,
         start_time: this.datePipe.transform(slot.start_time, 'hh:mm a'),
         end_time: this.datePipe.transform(slot.end_time, 'hh:mm a')
       }));
   }
 
+  // onSubmit() {
+  //   // this.timeForm.patchValue({ date: this.selectedDate });
+  //   // if (this.timeForm.valid) {
+  //   //   this.payNow();
+  //   // }
+  //   if (this.timeForm.valid && this.selectedDate) {
+  //     const formattedDate = this.datePipe.transform(
+  //       this.selectedDate,
+  //       'yyyy-MM-ddTHH:mm:ss.SSSZ'
+  //     );
+  //     this.timeForm.patchValue({ date: formattedDate });
+  //     this.payNow();
+  //   }
+  // }
+
   onSubmit() {
     if (this.timeForm.valid) {
-      this.userService.bookSlot(this.timeForm.value, this.doctorId).subscribe({
+      const selectedSlot = this.slotDetails?.find(
+        (slot: Slot) => slot.start_time === this.timeForm.value.time
+      );
+
+      if (selectedSlot) {
+        this.formData = selectedSlot;
+        this.payNow();
+      } else {
+        console.error('Selected slot not found.');
+      }
+    }
+  }
+
+  payNow() {
+    const razorpayOptions = {
+      description: 'Sample razorpay',
+      currency: 'INR',
+      amount: Number(this.doctorDetails?.doctor_fees) * 100,
+      name: 'MEDICONNECT',
+      key: 'rzp_test_ceFacoW5d4WL7R',
+      prefill: {
+        name: this.userDetails?.first_name,
+        email: this.userDetails?.email,
+        phone: this.userDetails?.mobile
+      },
+      handler: function (response: any) {
+        if (response.error) {
+          failureCallback(response);
+        } else {
+          console.log(rzp1);
+          successCallback(response.razorpay_payment_id);
+        }
+      },
+      theme: {
+        color: '#f37254'
+      },
+      modal: {
+        ondismiss: () => {
+          console.log('dismissed');
+        }
+      }
+    };
+
+    const successCallback = (payId: string) => {
+      this.formData.doctorId = this.doctorId;
+      this.formData.payId = payId;
+      console.log(this.formData);
+
+      this.userService.bookSlot(this.formData).subscribe({
         next: (res) => {
+          this.ngOnInit();
           this.snackBar.open(res.success, 'Dismiss', {
             duration: 5000
           });
         }
       });
-    }
-    console.log(this.timeForm.value);
+    };
+
+    const failureCallback = (e: any) => {
+      console.log(e);
+    };
+    const rzp1 = new Razorpay(razorpayOptions);
+    rzp1.open();
   }
 }
