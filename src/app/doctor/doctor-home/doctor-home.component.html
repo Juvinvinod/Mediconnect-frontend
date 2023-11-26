@@ -22,7 +22,7 @@
 
     </mat-toolbar>
     <mat-drawer-container class="example-container" autosize>
-        <mat-drawer #drawer class="example-sidenav" mode="side">
+        <mat-drawer #drawer class="example-sidenav" mode="side" opened>
             <mat-list class="w-100">
                 <mat-list-item><button mat-button [routerLink]="['/doctor']">
                         <mat-icon>dashboard</mat-icon>
@@ -42,6 +42,11 @@
                 <mat-list-item><button mat-button [routerLink]="['slot']">
                         <mat-icon>engineering</mat-icon>
                         Slots
+                    </button>
+                </mat-list-item>
+                <mat-list-item><button mat-button [routerLink]="['mySlots']">
+                        <mat-icon>engineering</mat-icon>
+                        My Slots
                     </button>
                 </mat-list-item>
             </mat-list>

@@ -46,7 +46,6 @@ export class DoctorBookingComponent implements OnInit {
     this.userService.getSlots(this.doctorId).subscribe((res) => {
       this.slotDetails = res;
       this.unfilteredData = res;
-      console.log(this.slotDetails);
     });
     this.timeForm = new FormGroup({
       time: new FormControl('', Validators.required),
@@ -132,7 +131,7 @@ export class DoctorBookingComponent implements OnInit {
         if (response.error) {
           failureCallback(response);
         } else {
-          console.log(rzp1);
+          console.log(response);
           successCallback(response.razorpay_payment_id);
         }
       },
@@ -149,7 +148,6 @@ export class DoctorBookingComponent implements OnInit {
     const successCallback = (payId: string) => {
       this.formData.doctorId = this.doctorId;
       this.formData.payId = payId;
-      console.log(this.formData);
 
       this.userService.bookSlot(this.formData).subscribe({
         next: (res) => {

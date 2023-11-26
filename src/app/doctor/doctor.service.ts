@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Doctor } from '../shared/interfaces/doctor';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { Slot } from '../shared/interfaces/slot';
 
 @Injectable({
@@ -45,6 +45,44 @@ export class DoctorService {
     return this.http.post<{ success: string }>(
       this.apiURL + '/' + 'createSlot',
       data
+    );
+  }
+
+  //get all doctor booking docs
+  getDoctorBookingDocs(): Observable<Slot[]> {
+    return this.http.get<Slot[]>(this.apiURL + '/' + 'getSlots').pipe(
+      map((data: Slot[]) => {
+        return data.map((user, index) => ({ ...user, index: index + 1 }));
+      }),
+      map((data: Slot[]) =>
+        data.filter((user: Slot) => user.status === 'booked')
+      )
+    );
+  }
+
+  //update slot status
+  updateSlots(data: {
+    user_id: string | undefined;
+    status: string;
+  }): Observable<{ success: string }> {
+    return this.http.patch<{ success: string }>(
+      this.apiURL + '/' + 'updateSlot',
+      data
+    );
+  }
+
+  //get doctor created empty slots
+  getDocSlots(): Observable<Slot[]> {
+    return this.http.get<Slot[]>(this.apiURL + '/' + 'mySlots').pipe(
+      map((data: Slot[]) => {
+        return data.map((doc, index) => ({ ...doc, index: index + 1 }));
+      })
+    );
+  }
+
+  deleteSlot(time: string): Observable<{ success: string }> {
+    return this.http.delete<{ success: string }>(
+      this.apiURL + '/' + 'deleteSlot' + '/' + time
     );
   }
 }

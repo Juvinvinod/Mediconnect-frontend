@@ -9,6 +9,7 @@ import { DoctorAppointmentsComponent } from './doctor-appointments/doctor-appoin
 import { DoctorPasswordComponent } from './doctor-password/doctor-password.component';
 import { DoctorPatientsComponent } from './doctor-patients/doctor-patients.component';
 import { DoctorSlotComponent } from './doctor-slot/doctor-slot.component';
+import { DoctorCreatedSlotsComponent } from './doctor-created-slots/doctor-created-slots.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,7 @@ const routes: Routes = [
       { path: 'password', component: DoctorPasswordComponent },
       { path: 'patients', component: DoctorPatientsComponent },
       { path: 'slot', component: DoctorSlotComponent },
+      { path: 'mySlots', component: DoctorCreatedSlotsComponent },
       { path: '', component: DoctorAppointmentsComponent }
     ]
   }

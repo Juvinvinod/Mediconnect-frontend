@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { DoctorService } from '../doctor.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-doctor-slot',
@@ -15,9 +16,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class DoctorSlotComponent implements OnInit {
   slotForm!: FormGroup;
+  todayDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
   constructor(
     private doctorService: DoctorService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private datePipe: DatePipe
   ) {}
   ngOnInit(): void {
     this.slotForm = new FormGroup({
