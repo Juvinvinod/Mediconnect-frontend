@@ -13,6 +13,7 @@ import { DoctorListingComponent } from './doctor-listing/doctor-listing.componen
 import { DoctorBookingComponent } from './doctor-booking/doctor-booking.component';
 import { UserAppointmentsComponent } from './user-appointments/user-appointments.component';
 import { UserLoginComponent } from './user-login/login.component';
+import { UserChatComponent } from './user-chat/user-chat.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { UserLoginComponent } from './user-login/login.component';
     UserPasswordComponent,
     DoctorListingComponent,
     DoctorBookingComponent,
-    UserAppointmentsComponent
+    UserAppointmentsComponent,
+    UserChatComponent
   ],
   imports: [
     SharedModule,

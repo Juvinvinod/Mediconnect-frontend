@@ -11,13 +11,13 @@
             </mat-form-field>
 
             <mat-form-field class="fullWidth">
-                <input matInput placeholder="Start Time" formControlName="start_time" class="fullWidth">
+                <input matInput placeholder="Start Time" type="time" formControlName="start_time" class="fullWidth">
                 <mat-error *ngIf="slotForm.get('start_time')?.hasError('required')">
                     Start time is <strong>required</strong>
                 </mat-error>
             </mat-form-field>
             <mat-form-field class="fullWidth">
-                <input matInput placeholder="End Time" formControlName="end_time" class="fullWidth">
+                <input matInput placeholder="End Time" type="time" formControlName="end_time" class="fullWidth">
                 <mat-error *ngIf="slotForm.get('end_time')?.hasError('required')">
                     Start time is <strong>required</strong>
                 </mat-error>

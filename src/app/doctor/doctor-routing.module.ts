@@ -10,6 +10,7 @@ import { DoctorPasswordComponent } from './doctor-password/doctor-password.compo
 import { DoctorPatientsComponent } from './doctor-patients/doctor-patients.component';
 import { DoctorSlotComponent } from './doctor-slot/doctor-slot.component';
 import { DoctorCreatedSlotsComponent } from './doctor-created-slots/doctor-created-slots.component';
+import { DoctorChatComponent } from './doctor-chat/doctor-chat.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,7 @@ const routes: Routes = [
       { path: 'patients', component: DoctorPatientsComponent },
       { path: 'slot', component: DoctorSlotComponent },
       { path: 'mySlots', component: DoctorCreatedSlotsComponent },
+      { path: 'chats', component: DoctorChatComponent },
       { path: '', component: DoctorAppointmentsComponent }
     ]
   }

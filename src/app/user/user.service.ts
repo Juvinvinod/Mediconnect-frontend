@@ -4,6 +4,8 @@ import { User } from './interfaces/user';
 import { Observable, map } from 'rxjs';
 import { Slot } from '../shared/interfaces/slot';
 import { Doctor } from '../shared/interfaces/doctor';
+import { Chat } from '../shared/interfaces/chat';
+import { Message } from '../shared/interfaces/message';
 
 @Injectable({
   providedIn: 'root'
@@ -84,5 +86,28 @@ export class UserService {
         return data.map((user, index) => ({ ...user, index: index + 1 }));
       })
     );
+  }
+
+  //get chat with the doctor
+  startChat(id: string): Observable<Chat[]> {
+    return this.http.post<Chat[]>(this.apiURL + '/chat', { docId: id });
+  }
+
+  //get messages of chat
+  getMessages(id: string): Observable<Message[]> {
+    return this.http.get<Message[]>(this.apiURL + '/chat/messages/' + id);
+  }
+
+  //send messages
+  sendMessages(chat_id: string, content: string): Observable<Message[]> {
+    return this.http.post<Message[]>(this.apiURL + '/chat/messages', {
+      chat_id: chat_id,
+      text: content
+    });
+  }
+
+  //get chats belonging to doctor
+  getDocChats(): Observable<Chat[]> {
+    return this.http.get<Chat[]>(this.apiURL + '/chat/allDoctorChats');
   }
 }

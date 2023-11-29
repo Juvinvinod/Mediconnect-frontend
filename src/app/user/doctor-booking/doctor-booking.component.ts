@@ -27,6 +27,7 @@ export class DoctorBookingComponent implements OnInit {
   timeForm!: FormGroup;
   formData: any;
   userDetails: User | null = null;
+  todayDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
 
   constructor(
     private route: ActivatedRoute,

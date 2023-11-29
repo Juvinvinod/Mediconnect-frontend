@@ -1,0 +1,53 @@
+<div class="container d-flex">
+    <div class="chat-list  col-3 mat-elevation-z5 ">
+        <mat-form-field class="search-bar" appearance="outline">
+            <mat-label>Search</mat-label>
+            <input matInput placeholder="Ex. Pizza" value="">
+        </mat-form-field>
+        <mat-selection-list #shoes [multiple]="false" [hideSingleSelectionIndicator]="true" *ngIf="chatData.length > 0"
+            (selectionChange)="onChatSelectionChange($event)">
+            <mat-divider></mat-divider>
+            <mat-list-option [value]="chat._id" *ngFor="let chat of chatData">
+                <img matListItemAvatar src="https://material.angular.io/assets/img/examples/shiba1.jpg" alt="">
+                <p mat-line class="chat-title">
+                    <span class="chat-name ">
+                        {{chat.doctor_id?.first_name}}
+                    </span>
+                    <span class="chat-date ">
+                        {{chat.createdAt |date:('short')}}
+                    </span>
+                </p>
+                <p mat-line class="chat-min-message">
+                    asdasdsdf
+                </p>
+                <mat-divider></mat-divider>
+            </mat-list-option>
+        </mat-selection-list>
+    </div>
+
+
+    <div class="messages col-8 mat-elevation-z5 card">
+        <div class="message-header" *ngIf="chatData.length > 0">
+            <img src="https://material.angular.io/assets/img/examples/shiba1.jpg" alt="">
+            <h2>{{chatData[0].doctor_id?.first_name}}</h2>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="chat-area">
+            <div class="chat-bubble-container" *ngFor="let message of messages"
+                [ngClass]="{'sender':message.sender_id === doctorId}">
+                <div class="chat-bubble">
+                    {{message.text}}
+                </div>
+            </div>
+        </div>
+        <div class="input-area">
+            <mat-form-field appearance="outline">
+                <input matInput [formControl]="messageControl" placeholder="Enter your message" value=""
+                    (keydown.enter)="sendMessage()">
+                <button mat-icon-button matSuffix (click)="sendMessage()"><mat-icon> send </mat-icon></button>
+            </mat-form-field>
+        </div>
+
+    </div>
+
+</div>

@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+
 import { SharedModule } from '../shared/shared.module';
 import { RouterModule, Routes } from '@angular/router';
 import { userCheckGuard } from '../guards/user-check.guard';
@@ -10,7 +11,7 @@ import { DoctorBookingComponent } from './doctor-booking/doctor-booking.componen
 import { DoctorListingComponent } from './doctor-listing/doctor-listing.component';
 import { UserAppointmentsComponent } from './user-appointments/user-appointments.component';
 import { UserLoginComponent } from './user-login/login.component';
-import { statusCheckerGuard } from '../guards/status-checker.guard';
+import { UserChatComponent } from './user-chat/user-chat.component';
 
 const routes: Routes = [
   {
@@ -45,6 +46,11 @@ const routes: Routes = [
         path: 'appointments',
         canActivate: [userCheckGuard],
         component: UserAppointmentsComponent
+      },
+      {
+        path: 'chats/:id',
+        canActivate: [userCheckGuard],
+        component: UserChatComponent
       },
       { path: '', pathMatch: 'full', component: HomeComponent }
     ]

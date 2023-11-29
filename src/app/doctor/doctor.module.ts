@@ -10,6 +10,7 @@ import { DoctorProfileComponent } from './doctor-profile/doctor-profile.componen
 import { DoctorPasswordComponent } from './doctor-password/doctor-password.component';
 import { DoctorSlotComponent } from './doctor-slot/doctor-slot.component';
 import { DoctorCreatedSlotsComponent } from './doctor-created-slots/doctor-created-slots.component';
+import { DoctorChatComponent } from './doctor-chat/doctor-chat.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { DoctorCreatedSlotsComponent } from './doctor-created-slots/doctor-creat
     DoctorProfileComponent,
     DoctorPasswordComponent,
     DoctorSlotComponent,
-    DoctorCreatedSlotsComponent
+    DoctorCreatedSlotsComponent,
+    DoctorChatComponent
   ],
   imports: [SharedModule, RouterModule, FormsModule, ReactiveFormsModule]
 })
