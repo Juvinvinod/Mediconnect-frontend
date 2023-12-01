@@ -1,12 +1,15 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
+import { AdminDoctorService } from 'src/app/admin/admin-doctor.service';
+import { Doctor } from 'src/app/shared/interfaces/doctor';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
+  doctorList: Doctor[] = [];
   images = [
     '../../../assets/image1.jpg',
     '../../../assets/image2.jpg',
@@ -21,6 +24,16 @@ export class HomeComponent {
   pauseOnFocus = true;
 
   @ViewChild('carousel', { static: true }) carousel!: NgbCarousel;
+
+  constructor(private adminService: AdminDoctorService) {}
+
+  ngOnInit(): void {
+    this.adminService.getDoctors().subscribe({
+      next: (res) => {
+        this.doctorList = res;
+      }
+    });
+  }
 
   togglePaused() {
     if (this.paused) {

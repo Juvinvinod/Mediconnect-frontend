@@ -1,3 +1,40 @@
-<p>
-    dashboard
-</p>
+<div class="container">
+    <div class="card-list d-flex flex-column flex-sm-row justify-content-between px-5">
+        <div class="card doctor-card">
+            <img src='../../../assets/dashboard-doctor.png' alt="" class="doctor-image">
+            <div class="d-flex">
+                <h2 class="doctor-text">Total Doctors:</h2>
+                <h2 class="doc-count">{{docCount}}</h2>
+            </div>
+        </div>
+        <div class="card doctor-card">
+            <img src='../../../assets/dashboard-patient.png' alt="" class="patient-image">
+            <div class="d-flex">
+                <h2 class="patient-text">Total Patients:</h2>
+                <h2 class="patient-count">{{userCount}}</h2>
+            </div>
+        </div>
+        <div class="card doctor-card">
+            <img src='../../../assets/dashboard-staff.png' alt="" class="staff-image">
+            <div class="d-flex">
+                <h2 class="staff-text">Total Staffs:</h2>
+                <h2 class="staff-count">{{staffCount}}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="container d-flex gap-3">
+
+        <div class="col-lg-6">
+            <h2>Appointments per Doctor</h2>
+            <canvas id="piechart1"></canvas>
+        </div>
+
+
+        <div class="col-lg-6">
+            <h2>Appointments per Department</h2>
+            <canvas id="piechart2"></canvas>
+        </div>
+
+    </div>
+</div>

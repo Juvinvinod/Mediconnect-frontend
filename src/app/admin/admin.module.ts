@@ -17,6 +17,7 @@ import { AddStaffPopupComponent } from './add-staff-popup/add-staff-popup.compon
 import { EditStaffPopupComponent } from './edit-staff-popup/edit-staff-popup.component';
 import { DepartmentsComponent } from './departments/departments.component';
 import { AddDeptPopupComponent } from './add-dept-popup/add-dept-popup.component';
+import { EditDeptPopupComponent } from './edit-dept-popup/edit-dept-popup.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { AddDeptPopupComponent } from './add-dept-popup/add-dept-popup.component
     AddStaffPopupComponent,
     EditStaffPopupComponent,
     DepartmentsComponent,
-    AddDeptPopupComponent
+    AddDeptPopupComponent,
+    EditDeptPopupComponent
   ],
   imports: [
     SharedModule,

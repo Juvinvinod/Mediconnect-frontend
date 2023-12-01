@@ -7,6 +7,7 @@ import { Dept } from 'src/app/shared/interfaces/department';
 import { AddDeptPopupComponent } from '../add-dept-popup/add-dept-popup.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
+import { EditDeptPopupComponent } from '../edit-dept-popup/edit-dept-popup.component';
 
 @Component({
   selector: 'app-departments',
@@ -14,8 +15,9 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./departments.component.css']
 })
 export class DepartmentsComponent implements AfterViewInit {
+  deptData: Dept = { dept_name: '', _id: '' };
   deptList: Dept[] = [];
-  displayedColumns: string[] = ['index', 'dept_name'];
+  displayedColumns: string[] = ['index', 'dept_name', 'actions'];
   dataSource!: any;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -65,6 +67,28 @@ export class DepartmentsComponent implements AfterViewInit {
     });
     // Subscribe to the userUpdated event from EditUserPopupComponent
     dialogRef.componentInstance.deptAdded.subscribe(() => {
+      // Refresh your table data here
+      this.loadData();
+    });
+  }
+
+  editDept(row: Dept) {
+    this.deptData._id = row._id;
+    this.deptData.dept_name = row.dept_name;
+    this.openEditDept();
+  }
+
+  openEditDept() {
+    const dialogRef = this.dialog.open(EditDeptPopupComponent, {
+      width: '50%',
+      height: '250px',
+      data: {
+        _id: this.deptData._id,
+        dept_name: this.deptData.dept_name
+      }
+    });
+    // Subscribe to the userUpdated event from EditUserPopupComponent
+    dialogRef.componentInstance.deptUpdated.subscribe(() => {
       // Refresh your table data here
       this.loadData();
     });

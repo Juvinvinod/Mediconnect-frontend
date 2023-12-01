@@ -39,7 +39,6 @@ const routes: Routes = [
       },
       {
         path: 'allDoctors',
-        canActivate: [userCheckGuard],
         component: DoctorListingComponent
       },
       {

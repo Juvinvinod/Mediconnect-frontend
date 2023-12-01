@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Chat } from 'src/app/shared/interfaces/chat';
 import { Message } from 'src/app/shared/interfaces/message';
 import { UserService } from 'src/app/user/user.service';
+import { WebSocketService } from 'src/app/web-socket.service';
 
 @Component({
   selector: 'app-doctor-chat',
@@ -20,19 +21,34 @@ export class DoctorChatComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private route: ActivatedRoute
+    private webSocketService: WebSocketService
   ) {}
 
   ngOnInit(): void {
     this.userService.getDocChats().subscribe({
       next: (res) => {
         this.chatData = res;
-        console.log(this.chatData);
-        this.doctorId = this.chatData[0]?.doctor_id;
-
-        // this.getChatData();
+        this.doctorId = this.chatData[0]?.doctor_id?._id;
+        console.log(this.doctorId);
       }
     });
+  }
+
+  setChatRoom() {
+    if (this.chatId) {
+      this.webSocketService.setChatId(this.chatId);
+    }
+  }
+
+  listenSocket() {
+    if (this.chatData[0]._id) {
+      this.webSocketService.listen().subscribe((data) => this.updateChat(data));
+    }
+  }
+
+  updateChat(data: any): void {
+    if (!data) return;
+    this.messages.push(data);
   }
 
   onChatSelectionChange(event: MatSelectionListChange) {
@@ -45,6 +61,8 @@ export class DoctorChatComponent implements OnInit {
       this.userService.getMessages(this.chatId).subscribe({
         next: (res) => {
           this.messages = res;
+          this.listenSocket();
+          this.setChatRoom();
         }
       });
     }
@@ -55,9 +73,14 @@ export class DoctorChatComponent implements OnInit {
     const chatId = this.chatData[0]._id;
     if (message && chatId) {
       this.userService.sendMessages(chatId, message).subscribe({
-        next: (res) => {
-          console.log(res);
+        next: () => {
+          console.log('message send');
         }
+      });
+      this.webSocketService.emit({
+        chatId: this.chatData[0]._id,
+        text: message,
+        sender_id: this.doctorId
       });
       this.messageControl.setValue('');
     }

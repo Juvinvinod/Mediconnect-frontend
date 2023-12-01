@@ -10,6 +10,7 @@ import { Doctor } from 'src/app/shared/interfaces/doctor';
   styleUrls: ['./doctor-listing.component.css']
 })
 export class DoctorListingComponent implements OnInit {
+  searchValue = '';
   doctorList: Doctor[] = [];
   constructor(
     private userService: UserService,
@@ -21,5 +22,6 @@ export class DoctorListingComponent implements OnInit {
         this.doctorList = res;
       }
     });
+    window.scrollTo(0, 0);
   }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../user.service';
 import { Doctor } from 'src/app/shared/interfaces/doctor';
 import { Slot } from 'src/app/shared/interfaces/slot';
@@ -33,7 +33,8 @@ export class DoctorBookingComponent implements OnInit {
     private route: ActivatedRoute,
     private userService: UserService,
     private datePipe: DatePipe,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -55,6 +56,7 @@ export class DoctorBookingComponent implements OnInit {
     this.userService.getUserProfile().subscribe((res) => {
       this.userDetails = res;
     });
+    window.scrollTo(0, 0);
   }
 
   onDateChange(event: MatDatepickerInputEvent<Date>): void {
@@ -152,7 +154,7 @@ export class DoctorBookingComponent implements OnInit {
 
       this.userService.bookSlot(this.formData).subscribe({
         next: (res) => {
-          this.ngOnInit();
+          this.router.navigate(['/appointments']);
           this.snackBar.open(res.success, 'Dismiss', {
             duration: 5000
           });

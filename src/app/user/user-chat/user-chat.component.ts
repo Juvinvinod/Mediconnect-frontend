@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Chat } from 'src/app/shared/interfaces/chat';
 import { Message } from 'src/app/shared/interfaces/message';
 import { FormControl } from '@angular/forms';
+import { WebSocketService } from 'src/app/web-socket.service';
 
 @Component({
   selector: 'app-user-chat',
@@ -18,7 +19,8 @@ export class UserChatComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private webSocketService: WebSocketService
   ) {}
 
   ngOnInit(): void {
@@ -29,8 +31,28 @@ export class UserChatComponent implements OnInit {
       next: (res) => {
         this.chatData = res;
         this.getChatData();
+        this.setChatRoom();
+        this.listenSocket();
       }
     });
+  }
+
+  setChatRoom() {
+    if (this.chatData[0]._id) {
+      this.webSocketService.setChatId(this.chatData[0]._id);
+      console.log(this.webSocketService.chatId);
+    }
+  }
+
+  listenSocket() {
+    if (this.chatData[0]._id) {
+      this.webSocketService.listen().subscribe((data) => this.updateChat(data));
+    }
+  }
+
+  updateChat(data: any): void {
+    if (!data) return;
+    this.messages.push(data);
   }
 
   getChatData() {
@@ -51,6 +73,11 @@ export class UserChatComponent implements OnInit {
         next: (res) => {
           console.log(res);
         }
+      });
+      this.webSocketService.emit({
+        chatId: this.chatData[0]._id,
+        text: message,
+        sender_id: this.chatData[0].user_id
       });
       this.messageControl.setValue('');
     }

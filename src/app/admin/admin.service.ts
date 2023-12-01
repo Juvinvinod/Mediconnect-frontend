@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { User } from '../user/interfaces/user';
 import { Dept } from '../shared/interfaces/department';
+import { Slot } from '../shared/interfaces/slot';
 
 @Injectable({
   providedIn: 'root'
@@ -77,5 +78,34 @@ export class AdminService {
       this.apiURL + '/' + 'addDept',
       data
     );
+  }
+
+  //get count of user
+  getCount(model: string): Observable<{ count: string }> {
+    return this.http.get<{ count: string }>(
+      this.apiURL + '/' + 'totalCount' + '/' + model
+    );
+  }
+
+  //get all booking documents
+  getBookedSlotDocs(): Observable<
+    { _id: string; doctorName: string; totalBookings: number }[]
+  > {
+    return this.http.get<
+      { _id: string; doctorName: string; totalBookings: number }[]
+    >(this.apiURL + '/' + 'getBookings');
+  }
+
+  //get number of patients per department
+  PatientsPerDept(): Observable<
+    { _id: string; dept: string; totalBookings: number }[]
+  > {
+    return this.http.get<
+      { _id: string; dept: string; totalBookings: number }[]
+    >(this.apiURL + '/' + 'departmentSlots');
+  }
+
+  editDepartment(id: string, dept: string) {
+    return this.http.put(this.apiURL + '/' + 'editDepartment' + '/' + id, dept);
   }
 }
