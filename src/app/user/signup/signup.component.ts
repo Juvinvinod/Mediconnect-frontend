@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent implements OnInit, OnDestroy {
+  doctorSubscription: Subscription | undefined = undefined;
   hide = true;
   signUpForm!: FormGroup;
 
@@ -41,23 +43,31 @@ export class SignupComponent implements OnInit {
   //check for errors and save the user in the database
   onSubmit() {
     if (this.signUpForm.valid) {
-      this.userService.proceedRegister(this.signUpForm.value).subscribe({
-        next: () => {
-          this._router.navigate(['login']);
-          this.snackBar.open('Successfully registered', 'Dismiss', {
-            duration: 5000
-          });
-        },
-        error: (error) => {
-          this.snackBar.open(error.error.errors[0].message, 'Dismiss', {
-            duration: 2000
-          });
-        }
-      });
+      this.doctorSubscription = this.userService
+        .proceedRegister(this.signUpForm.value)
+        .subscribe({
+          next: () => {
+            this._router.navigate(['login']);
+            this.snackBar.open('Successfully registered', 'Dismiss', {
+              duration: 5000
+            });
+          },
+          error: (error) => {
+            this.snackBar.open(error.error.errors[0].message, 'Dismiss', {
+              duration: 2000
+            });
+          }
+        });
     } else {
       console.log(this.signUpForm);
 
       this.snackBar.open('Invalid Data', 'Dismiss', { duration: 2000 });
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.doctorSubscription) {
+      this.doctorSubscription.unsubscribe();
     }
   }
 }

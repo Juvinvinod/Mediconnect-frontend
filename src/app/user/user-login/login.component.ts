@@ -1,16 +1,18 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoginComponent } from 'src/app/shared/login/login.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class UserLoginComponent implements OnInit {
+export class UserLoginComponent implements OnInit, OnDestroy {
+  loginSubscription: Subscription | undefined = undefined;
   hide = true;
   loginForm!: FormGroup;
   @ViewChild(LoginComponent) loginComponent: LoginComponent | null = null;
@@ -31,7 +33,7 @@ export class UserLoginComponent implements OnInit {
   onSubmit() {
     if (this.loginComponent) {
       const formData = this.loginComponent.loginForm.value;
-      this.userService.userLogin(formData).subscribe({
+      this.loginSubscription = this.userService.userLogin(formData).subscribe({
         next: (res) => {
           console.log('loggedIn');
           localStorage.setItem('user', JSON.stringify(res));
@@ -45,6 +47,12 @@ export class UserLoginComponent implements OnInit {
       });
     } else {
       this.snackBar.open('Invalid credentials', 'Dismiss', { duration: 2000 });
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.loginSubscription) {
+      this.loginSubscription.unsubscribe();
     }
   }
 }

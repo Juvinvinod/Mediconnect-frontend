@@ -1,17 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserService } from '../user.service';
 import { ActivatedRoute } from '@angular/router';
 import { Chat } from 'src/app/shared/interfaces/chat';
 import { Message } from 'src/app/shared/interfaces/message';
 import { FormControl } from '@angular/forms';
 import { WebSocketService } from 'src/app/web-socket.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user-chat',
   templateUrl: './user-chat.component.html',
   styleUrls: ['./user-chat.component.css']
 })
-export class UserChatComponent implements OnInit {
+export class UserChatComponent implements OnInit, OnDestroy {
+  chatSubscription: Subscription | undefined = undefined;
+  paramsSubscription: Subscription | undefined = undefined;
+  startChatSubscription: Subscription | undefined = undefined;
+  messageSubscription: Subscription | undefined = undefined;
+  socketSubscription: Subscription | undefined = undefined;
   doctorId = '';
   chatData: Chat[] = [];
   messages: Message[] = [];
@@ -24,25 +30,29 @@ export class UserChatComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
+    this.paramsSubscription = this.route.params.subscribe((params) => {
       this.doctorId = params['id'];
     });
-    this.userService.startChat(this.doctorId).subscribe({
-      next: (res) => {
-        this.chatData = res;
-        this.getChatData();
-        this.setChatRoom();
-        this.listenSocket();
-      }
-    });
+    this.chatSubscription = this.userService
+      .startChat(this.doctorId)
+      .subscribe({
+        next: (res) => {
+          this.chatData = res;
+          this.getChatData();
+          this.setChatRoom();
+          this.listenSocket();
+        }
+      });
   }
 
   updateChatInfo() {
-    this.userService.startChat(this.doctorId).subscribe({
-      next: (res) => {
-        this.chatData = res;
-      }
-    });
+    this.startChatSubscription = this.userService
+      .startChat(this.doctorId)
+      .subscribe({
+        next: (res) => {
+          this.chatData = res;
+        }
+      });
   }
 
   setChatRoom() {
@@ -54,7 +64,9 @@ export class UserChatComponent implements OnInit {
 
   listenSocket() {
     if (this.chatData[0]._id) {
-      this.webSocketService.listen().subscribe((data) => this.updateChat(data));
+      this.socketSubscription = this.webSocketService
+        .listen()
+        .subscribe((data) => this.updateChat(data));
     }
   }
 
@@ -66,11 +78,13 @@ export class UserChatComponent implements OnInit {
 
   getChatData() {
     if (this.chatData[0]._id) {
-      this.userService.getMessages(this.chatData[0]._id).subscribe({
-        next: (res) => {
-          this.messages = res;
-        }
-      });
+      this.messageSubscription = this.userService
+        .getMessages(this.chatData[0]._id)
+        .subscribe({
+          next: (res) => {
+            this.messages = res;
+          }
+        });
     }
   }
 
@@ -78,11 +92,13 @@ export class UserChatComponent implements OnInit {
     const message = this.messageControl.value;
     const chatId = this.chatData[0]._id;
     if (message && chatId) {
-      this.userService.sendMessages(chatId, message).subscribe({
-        next: (res) => {
-          console.log(res);
-        }
-      });
+      this.messageSubscription = this.userService
+        .sendMessages(chatId, message)
+        .subscribe({
+          next: (res) => {
+            console.log(res);
+          }
+        });
       this.webSocketService.emit({
         chatId: this.chatData[0]._id,
         text: message,
@@ -94,5 +110,23 @@ export class UserChatComponent implements OnInit {
 
   trackById(index: number, message: Message) {
     return message._id;
+  }
+
+  ngOnDestroy(): void {
+    if (this.chatSubscription) {
+      this.chatSubscription.unsubscribe();
+    }
+    if (this.paramsSubscription) {
+      this.paramsSubscription.unsubscribe();
+    }
+    if (this.socketSubscription) {
+      this.paramsSubscription?.unsubscribe();
+    }
+    if (this.messageSubscription) {
+      this.messageSubscription.unsubscribe();
+    }
+    if (this.startChatSubscription) {
+      this.startChatSubscription.unsubscribe();
+    }
   }
 }

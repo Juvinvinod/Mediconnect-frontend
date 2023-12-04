@@ -1,17 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from '../interfaces/user';
 import { UserService } from '../user.service';
 import { AdminService } from 'src/app/admin/admin.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.css']
 })
-export class UserProfileComponent implements OnInit {
+export class UserProfileComponent implements OnInit, OnDestroy {
+  profileSubscription: Subscription | undefined = undefined;
   userForm!: FormGroup;
   doctorData: User | undefined = undefined;
 
@@ -60,19 +62,21 @@ export class UserProfileComponent implements OnInit {
   onSubmit() {
     const id = this.doctorData?._id;
     if (id && this.userForm.valid) {
-      this.adminUserService.updateUser(id, this.userForm.value).subscribe({
-        next: () => {
-          this._router.navigate(['']);
-          this.snackBar.open('Successfully updated', 'Dismiss', {
-            duration: 5000
-          });
-        },
-        error: (error) => {
-          this.snackBar.open(error.error.errors[0].message, 'Dismiss', {
-            duration: 2000
-          });
-        }
-      });
+      this.profileSubscription = this.adminUserService
+        .updateUser(id, this.userForm.value)
+        .subscribe({
+          next: () => {
+            this._router.navigate(['']);
+            this.snackBar.open('Successfully updated', 'Dismiss', {
+              duration: 5000
+            });
+          },
+          error: (error) => {
+            this.snackBar.open(error.error.errors[0].message, 'Dismiss', {
+              duration: 2000
+            });
+          }
+        });
     } else {
       console.log(this.userForm);
       this.snackBar.open('Invalid Data', 'Dismiss', { duration: 2000 });
@@ -81,5 +85,10 @@ export class UserProfileComponent implements OnInit {
 
   changePass() {
     this._router.navigate(['/password']);
+  }
+  ngOnDestroy(): void {
+    if (this.profileSubscription) {
+      this.profileSubscription.unsubscribe();
+    }
   }
 }

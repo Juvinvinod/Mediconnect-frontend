@@ -1,14 +1,16 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
 import { AdminDoctorService } from 'src/app/admin/admin-doctor.service';
 import { Doctor } from 'src/app/shared/interfaces/doctor';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
+  doctorSubscription: Subscription | undefined = undefined;
   doctorList: Doctor[] = [];
   images = [
     '../../../assets/image1.jpg',
@@ -28,7 +30,7 @@ export class HomeComponent implements OnInit {
   constructor(private adminService: AdminDoctorService) {}
 
   ngOnInit(): void {
-    this.adminService.getDoctors().subscribe({
+    this.doctorSubscription = this.adminService.getDoctors().subscribe({
       next: (res) => {
         this.doctorList = res;
       }
@@ -46,5 +48,10 @@ export class HomeComponent implements OnInit {
 
   trackById(index: number, doctor: Doctor) {
     return doctor._id;
+  }
+  ngOnDestroy(): void {
+    if (this.doctorSubscription) {
+      this.doctorSubscription.unsubscribe();
+    }
   }
 }

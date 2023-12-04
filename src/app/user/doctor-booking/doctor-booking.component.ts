@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../user.service';
 import { Doctor } from 'src/app/shared/interfaces/doctor';
@@ -8,6 +8,7 @@ import { DatePipe } from '@angular/common';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from '../interfaces/user';
+import { Subscription } from 'rxjs';
 
 declare let Razorpay: any;
 
@@ -16,7 +17,12 @@ declare let Razorpay: any;
   templateUrl: './doctor-booking.component.html',
   styleUrls: ['./doctor-booking.component.css']
 })
-export class DoctorBookingComponent implements OnInit {
+export class DoctorBookingComponent implements OnInit, OnDestroy {
+  paramsSubscription: Subscription | undefined = undefined;
+  doctorSubscription: Subscription | undefined = undefined;
+  slotSubscription: Subscription | undefined = undefined;
+  bookingSubscription: Subscription | undefined = undefined;
+  profileSubscription: Subscription | undefined = undefined;
   selectedDate: Date | null = null;
   doctorId = '';
   doctorDetails: Doctor | null = null;
@@ -39,23 +45,29 @@ export class DoctorBookingComponent implements OnInit {
 
   ngOnInit() {
     // Get the 'id' parameter from the route
-    this.route.params.subscribe((params) => {
+    this.paramsSubscription = this.route.params.subscribe((params) => {
       this.doctorId = params['id'];
     });
-    this.userService.getDoctor(this.doctorId).subscribe((res) => {
-      this.doctorDetails = res;
-    });
-    this.userService.getSlots(this.doctorId).subscribe((res) => {
-      this.slotDetails = res;
-      this.unfilteredData = res;
-    });
+    this.doctorSubscription = this.userService
+      .getDoctor(this.doctorId)
+      .subscribe((res) => {
+        this.doctorDetails = res;
+      });
+    this.slotSubscription = this.userService
+      .getSlots(this.doctorId)
+      .subscribe((res) => {
+        this.slotDetails = res;
+        this.unfilteredData = res;
+      });
     this.timeForm = new FormGroup({
       time: new FormControl('', Validators.required),
       date: new FormControl('')
     });
-    this.userService.getUserProfile().subscribe((res) => {
-      this.userDetails = res;
-    });
+    this.profileSubscription = this.userService
+      .getUserProfile()
+      .subscribe((res) => {
+        this.userDetails = res;
+      });
     window.scrollTo(0, 0);
   }
 
@@ -152,14 +164,16 @@ export class DoctorBookingComponent implements OnInit {
       this.formData.doctorId = this.doctorId;
       this.formData.payId = payId;
 
-      this.userService.bookSlot(this.formData).subscribe({
-        next: (res) => {
-          this._router.navigate(['/appointments']);
-          this.snackBar.open(res.success, 'Dismiss', {
-            duration: 5000
-          });
-        }
-      });
+      this.bookingSubscription = this.userService
+        .bookSlot(this.formData)
+        .subscribe({
+          next: (res) => {
+            this._router.navigate(['/appointments']);
+            this.snackBar.open(res.success, 'Dismiss', {
+              duration: 5000
+            });
+          }
+        });
     };
 
     const failureCallback = (e: any) => {
@@ -171,5 +185,23 @@ export class DoctorBookingComponent implements OnInit {
 
   trackById(index: number, slot: Slot) {
     return slot._id;
+  }
+
+  ngOnDestroy(): void {
+    if (this.bookingSubscription) {
+      this.bookingSubscription.unsubscribe();
+    }
+    if (this.doctorSubscription) {
+      this.doctorSubscription.unsubscribe();
+    }
+    if (this.profileSubscription) {
+      this.profileSubscription.unsubscribe();
+    }
+    if (this.paramsSubscription) {
+      this.paramsSubscription.unsubscribe();
+    }
+    if (this.slotSubscription) {
+      this.slotSubscription.unsubscribe();
+    }
   }
 }
