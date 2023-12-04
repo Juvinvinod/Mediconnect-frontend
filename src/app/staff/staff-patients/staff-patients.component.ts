@@ -1,16 +1,18 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { AdminService } from 'src/app/admin/admin.service';
 import { User } from 'src/app/user/interfaces/user';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-staff-patients',
   templateUrl: './staff-patients.component.html',
   styleUrls: ['./staff-patients.component.css']
 })
-export class StaffPatientsComponent implements AfterViewInit {
+export class StaffPatientsComponent implements AfterViewInit, OnDestroy {
+  userSubscription: Subscription | undefined = undefined;
   displayedColumns: string[] = [
     'index',
     'first_name',
@@ -33,7 +35,7 @@ export class StaffPatientsComponent implements AfterViewInit {
   }
 
   loadData() {
-    this.adminService.getUsers().subscribe({
+    this.userSubscription = this.adminService.getUsers().subscribe({
       next: (res: User[]) => {
         this.userList = res;
         this.dataSource = new MatTableDataSource<User>(this.userList);
@@ -50,6 +52,12 @@ export class StaffPatientsComponent implements AfterViewInit {
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.userSubscription) {
+      this.userSubscription.unsubscribe();
     }
   }
 }

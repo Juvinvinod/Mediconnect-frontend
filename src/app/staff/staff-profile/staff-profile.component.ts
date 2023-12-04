@@ -1,17 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Staff } from 'src/app/shared/interfaces/staff';
 import { StaffService } from '../staff.service';
 import { AdminStaffService } from 'src/app/admin/admin-staff.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-staff-profile',
   templateUrl: './staff-profile.component.html',
   styleUrls: ['./staff-profile.component.css']
 })
-export class StaffProfileComponent implements OnInit {
+export class StaffProfileComponent implements OnInit, OnDestroy {
+  getStaffSubscription: Subscription | undefined = undefined;
+  updateStaffSubscription: Subscription | undefined = undefined;
   signUpForm!: FormGroup;
   staffData: Staff | undefined = undefined;
 
@@ -25,7 +28,7 @@ export class StaffProfileComponent implements OnInit {
   // initializing reactive form when the component loads
   ngOnInit(): void {
     this.initializeForm();
-    this.staffService.getStaffProfile().subscribe({
+    this.getStaffSubscription = this.staffService.getStaffProfile().subscribe({
       next: (res) => {
         this.staffData = res;
         this.initializeForm();
@@ -59,19 +62,21 @@ export class StaffProfileComponent implements OnInit {
   onSubmit() {
     const id = this.staffData?._id;
     if (id && this.signUpForm.valid) {
-      this.adminStaffService.updateStaff(id, this.signUpForm.value).subscribe({
-        next: () => {
-          this._router.navigate(['staff']);
-          this.snackBar.open('Successfully updated', 'Dismiss', {
-            duration: 5000
-          });
-        },
-        error: (error) => {
-          this.snackBar.open(error.error.errors[0].message, 'Dismiss', {
-            duration: 2000
-          });
-        }
-      });
+      this.updateStaffSubscription = this.adminStaffService
+        .updateStaff(id, this.signUpForm.value)
+        .subscribe({
+          next: () => {
+            this._router.navigate(['staff']);
+            this.snackBar.open('Successfully updated', 'Dismiss', {
+              duration: 5000
+            });
+          },
+          error: (error) => {
+            this.snackBar.open(error.error.errors[0].message, 'Dismiss', {
+              duration: 2000
+            });
+          }
+        });
     } else {
       console.log(this.signUpForm);
       this.snackBar.open('Invalid Data', 'Dismiss', { duration: 2000 });
@@ -80,5 +85,14 @@ export class StaffProfileComponent implements OnInit {
 
   changePass() {
     this._router.navigate(['/staff/password']);
+  }
+
+  ngOnDestroy(): void {
+    if (this.getStaffSubscription) {
+      this.getStaffSubscription.unsubscribe();
+    }
+    if (this.updateStaffSubscription) {
+      this.updateStaffSubscription.unsubscribe();
+    }
   }
 }

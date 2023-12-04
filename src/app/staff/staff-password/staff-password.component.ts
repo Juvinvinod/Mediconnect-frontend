@@ -1,16 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Staff } from 'src/app/shared/interfaces/staff';
 import { StaffService } from '../staff.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-staff-password',
   templateUrl: './staff-password.component.html',
   styleUrls: ['./staff-password.component.css']
 })
-export class StaffPasswordComponent implements OnInit {
+export class StaffPasswordComponent implements OnInit, OnDestroy {
+  passwordSubscription: Subscription | undefined = undefined;
   hide = true;
   hideConfirm = true;
   passwordForm!: FormGroup;
@@ -45,22 +47,30 @@ export class StaffPasswordComponent implements OnInit {
   //check for errors and update doctor password in the database
   onSubmit() {
     if (this.passwordForm.valid) {
-      this.staffService.updatePassword(this.passwordForm.value).subscribe({
-        next: () => {
-          this._router.navigate(['staff']);
-          this.snackBar.open('Successfully updated', 'Dismiss', {
-            duration: 5000
-          });
-        },
-        error: (error) => {
-          this.snackBar.open(error.error.errors[0].message, 'Dismiss', {
-            duration: 2000
-          });
-        }
-      });
+      this.passwordSubscription = this.staffService
+        .updatePassword(this.passwordForm.value)
+        .subscribe({
+          next: () => {
+            this._router.navigate(['staff']);
+            this.snackBar.open('Successfully updated', 'Dismiss', {
+              duration: 5000
+            });
+          },
+          error: (error) => {
+            this.snackBar.open(error.error.errors[0].message, 'Dismiss', {
+              duration: 2000
+            });
+          }
+        });
     } else {
       console.log(this.passwordForm);
       this.snackBar.open('Invalid Data', 'Dismiss', { duration: 2000 });
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.passwordSubscription) {
+      this.passwordSubscription.unsubscribe();
     }
   }
 }
