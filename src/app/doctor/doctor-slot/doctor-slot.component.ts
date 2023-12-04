@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -8,13 +8,15 @@ import {
 import { DoctorService } from '../doctor.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DatePipe } from '@angular/common';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-doctor-slot',
   templateUrl: './doctor-slot.component.html',
   styleUrls: ['./doctor-slot.component.css']
 })
-export class DoctorSlotComponent implements OnInit {
+export class DoctorSlotComponent implements OnInit, OnDestroy {
+  slotSubscription: Subscription | undefined = undefined;
   slotForm!: FormGroup;
   todayDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
   constructor(
@@ -32,22 +34,30 @@ export class DoctorSlotComponent implements OnInit {
 
   onSubmit(formDirective: FormGroupDirective) {
     if (this.slotForm.valid) {
-      this.doctorService.createSlot(this.slotForm.value).subscribe({
-        next: (res) => {
-          this.slotForm.reset();
-          formDirective.resetForm();
-          this.snackBar.open(res.success, 'Dismiss', {
-            duration: 5000
-          });
-        },
-        error: (error) => {
-          this.snackBar.open(error.error.errors[0].message, 'Dismiss', {
-            duration: 2000
-          });
-        }
-      });
+      this.slotSubscription = this.doctorService
+        .createSlot(this.slotForm.value)
+        .subscribe({
+          next: (res) => {
+            this.slotForm.reset();
+            formDirective.resetForm();
+            this.snackBar.open(res.success, 'Dismiss', {
+              duration: 5000
+            });
+          },
+          error: (error) => {
+            this.snackBar.open(error.error.errors[0].message, 'Dismiss', {
+              duration: 2000
+            });
+          }
+        });
     } else {
       this.snackBar.open('Invalid Data', 'Dismiss', { duration: 2000 });
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.slotSubscription) {
+      this.slotSubscription.unsubscribe();
     }
   }
 }

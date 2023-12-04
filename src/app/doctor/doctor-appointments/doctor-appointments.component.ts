@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Slot } from 'src/app/shared/interfaces/slot';
 import { DoctorService } from '../doctor.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-doctor-appointments',
   templateUrl: './doctor-appointments.component.html',
   styleUrls: ['./doctor-appointments.component.css']
 })
-export class DoctorAppointmentsComponent implements OnInit {
+export class DoctorAppointmentsComponent implements OnInit, OnDestroy {
+  doctorSubscription: Subscription | undefined = undefined;
   dataSource: any;
   form: { user_id: string | undefined; status: string } = {
     user_id: '',
@@ -29,11 +31,13 @@ export class DoctorAppointmentsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.doctorService.getDoctorBookingDocs().subscribe({
-      next: (res) => {
-        this.dataSource = new MatTableDataSource<Slot>(res);
-      }
-    });
+    this.doctorSubscription = this.doctorService
+      .getDoctorBookingDocs()
+      .subscribe({
+        next: (res) => {
+          this.dataSource = new MatTableDataSource<Slot>(res);
+        }
+      });
   }
 
   completed(data: Slot) {
@@ -58,5 +62,11 @@ export class DoctorAppointmentsComponent implements OnInit {
         });
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.doctorSubscription) {
+      this.doctorSubscription.unsubscribe();
+    }
   }
 }
