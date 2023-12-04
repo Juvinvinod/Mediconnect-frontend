@@ -18,7 +18,7 @@ export class UserProfileComponent implements OnInit {
   constructor(
     private userService: UserService,
     private adminUserService: AdminService,
-    private router: Router,
+    private _router: Router,
     private snackBar: MatSnackBar
   ) {}
 
@@ -62,7 +62,7 @@ export class UserProfileComponent implements OnInit {
     if (id && this.userForm.valid) {
       this.adminUserService.updateUser(id, this.userForm.value).subscribe({
         next: () => {
-          this.router.navigate(['']);
+          this._router.navigate(['']);
           this.snackBar.open('Successfully updated', 'Dismiss', {
             duration: 5000
           });
@@ -80,6 +80,6 @@ export class UserProfileComponent implements OnInit {
   }
 
   changePass() {
-    this.router.navigate(['/password']);
+    this._router.navigate(['/password']);
   }
 }

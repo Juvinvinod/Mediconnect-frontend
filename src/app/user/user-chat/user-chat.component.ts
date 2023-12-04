@@ -37,6 +37,14 @@ export class UserChatComponent implements OnInit {
     });
   }
 
+  updateChatInfo() {
+    this.userService.startChat(this.doctorId).subscribe({
+      next: (res) => {
+        this.chatData = res;
+      }
+    });
+  }
+
   setChatRoom() {
     if (this.chatData[0]._id) {
       this.webSocketService.setChatId(this.chatData[0]._id);
@@ -53,6 +61,7 @@ export class UserChatComponent implements OnInit {
   updateChat(data: any): void {
     if (!data) return;
     this.messages.push(data);
+    this.updateChatInfo();
   }
 
   getChatData() {
@@ -81,5 +90,9 @@ export class UserChatComponent implements OnInit {
       });
       this.messageControl.setValue('');
     }
+  }
+
+  trackById(index: number, message: Message) {
+    return message._id;
   }
 }

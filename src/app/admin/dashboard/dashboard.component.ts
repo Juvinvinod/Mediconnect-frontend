@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AdminService } from '../admin.service';
 import { Chart, registerables } from 'node_modules/chart.js';
+import { Subscription } from 'rxjs';
 Chart.register(...registerables);
 
 @Component({
@@ -8,7 +9,13 @@ Chart.register(...registerables);
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
+  userSubscription: Subscription | undefined = undefined;
+  staffSubscription: Subscription | undefined = undefined;
+  doctorSubscription: Subscription | undefined = undefined;
+  chart1Subscription: Subscription | undefined = undefined;
+  chart2Subscription: Subscription | undefined = undefined;
+
   apiData1: { _id: string; doctorName: string; totalBookings: number }[] = [];
   apiData2: { _id: string; dept: string; totalBookings: number }[] = [];
   labels1: string[] = [];
@@ -22,17 +29,17 @@ export class DashboardComponent implements OnInit {
   constructor(private adminService: AdminService) {}
 
   ngOnInit(): void {
-    this.adminService.getCount('user').subscribe({
+    this.userSubscription = this.adminService.getCount('user').subscribe({
       next: (res) => {
         this.userCount = res;
       }
     });
-    this.adminService.getCount('staff').subscribe({
+    this.staffSubscription = this.adminService.getCount('staff').subscribe({
       next: (res) => {
         this.staffCount = res;
       }
     });
-    this.adminService.getCount('doctor').subscribe({
+    this.doctorSubscription = this.adminService.getCount('doctor').subscribe({
       next: (res) => {
         this.docCount = res;
       }
@@ -42,7 +49,7 @@ export class DashboardComponent implements OnInit {
   }
 
   fetchChart1Data() {
-    this.adminService.getBookedSlotDocs().subscribe({
+    this.chart1Subscription = this.adminService.getBookedSlotDocs().subscribe({
       next: (res) => {
         this.apiData1 = res;
         for (let i = 0; i < this.apiData1.length; i++) {
@@ -55,7 +62,7 @@ export class DashboardComponent implements OnInit {
   }
 
   fetchChart2Data() {
-    this.adminService.PatientsPerDept().subscribe({
+    this.chart2Subscription = this.adminService.PatientsPerDept().subscribe({
       next: (res) => {
         this.apiData2 = res;
         for (let i = 0; i < this.apiData2.length; i++) {
@@ -111,5 +118,27 @@ export class DashboardComponent implements OnInit {
         }
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.userSubscription) {
+      this.userSubscription.unsubscribe();
+    }
+
+    if (this.doctorSubscription) {
+      this.doctorSubscription.unsubscribe();
+    }
+
+    if (this.staffSubscription) {
+      this.staffSubscription.unsubscribe();
+    }
+
+    if (this.chart1Subscription) {
+      this.chart1Subscription.unsubscribe();
+    }
+
+    if (this.chart2Subscription) {
+      this.chart2Subscription.unsubscribe();
+    }
   }
 }

@@ -15,7 +15,7 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private router: Router,
+    private _router: Router,
     private snackBar: MatSnackBar
   ) {}
 
@@ -43,7 +43,7 @@ export class SignupComponent implements OnInit {
     if (this.signUpForm.valid) {
       this.userService.proceedRegister(this.signUpForm.value).subscribe({
         next: () => {
-          this.router.navigate(['login']);
+          this._router.navigate(['login']);
           this.snackBar.open('Successfully registered', 'Dismiss', {
             duration: 5000
           });

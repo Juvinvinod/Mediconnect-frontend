@@ -1,8 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { Slot } from 'src/app/shared/interfaces/slot';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-user-appointments',
@@ -20,5 +18,9 @@ export class UserAppointmentsComponent implements OnInit {
         console.log(this.data);
       }
     });
+  }
+
+  trackById(index: number, document: Slot) {
+    return document._id;
   }
 }

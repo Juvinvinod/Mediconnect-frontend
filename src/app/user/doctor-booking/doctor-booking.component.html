@@ -31,7 +31,7 @@
                 <mat-form-field appearance="fill">
                     <mat-label>Select Time Slot</mat-label>
                     <mat-select formControlName="time">
-                        <mat-option *ngFor="let slot of slotDetails" [value]="slot.start_time ">
+                        <mat-option *ngFor="let slot of slotDetails; trackBy:trackById" [value]="slot.start_time ">
                             {{ slot.start_time }} - {{ slot.end_time }}
                         </mat-option>
                     </mat-select>

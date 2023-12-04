@@ -41,7 +41,7 @@ export class DoctorCreatedSlotsComponent implements OnInit {
     const time = data.start_time;
     this.doctorService.deleteSlot(time).subscribe({
       next: (res) => {
-        this.refresh();
+        // this.refresh();
         this.snackBar.open(res.success, 'Dismiss', {
           duration: 5000
         });

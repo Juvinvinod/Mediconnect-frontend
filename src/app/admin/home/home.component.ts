@@ -7,9 +7,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  constructor(private router: Router) {}
+  constructor(private _router: Router) {}
   logOut() {
     localStorage.removeItem('user');
-    this.router.navigate(['admin', 'login']);
+    this._router.navigate(['admin', 'login']);
   }
 }

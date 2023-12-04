@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { AdminService } from '../admin.service';
@@ -8,13 +8,15 @@ import { AddDeptPopupComponent } from '../add-dept-popup/add-dept-popup.componen
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { EditDeptPopupComponent } from '../edit-dept-popup/edit-dept-popup.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-departments',
   templateUrl: './departments.component.html',
   styleUrls: ['./departments.component.css']
 })
-export class DepartmentsComponent implements AfterViewInit {
+export class DepartmentsComponent implements AfterViewInit, OnDestroy {
+  deptSubscription: Subscription | undefined = undefined;
   deptData: Dept = { dept_name: '', _id: '' };
   deptList: Dept[] = [];
   displayedColumns: string[] = ['index', 'dept_name', 'actions'];
@@ -36,7 +38,7 @@ export class DepartmentsComponent implements AfterViewInit {
   }
 
   loadData() {
-    this.adminService.getDepartments().subscribe({
+    this.deptSubscription = this.adminService.getDepartments().subscribe({
       next: (res: Dept[]) => {
         this.deptList = res;
         this.dataSource = new MatTableDataSource<Dept>(this.deptList);
@@ -92,5 +94,11 @@ export class DepartmentsComponent implements AfterViewInit {
       // Refresh your table data here
       this.loadData();
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.deptSubscription) {
+      this.deptSubscription.unsubscribe();
+    }
   }
 }

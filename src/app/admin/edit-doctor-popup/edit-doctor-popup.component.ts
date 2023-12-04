@@ -1,16 +1,25 @@
-import { Component, Output, Inject, EventEmitter, OnInit } from '@angular/core';
+import {
+  Component,
+  Output,
+  Inject,
+  EventEmitter,
+  OnInit,
+  OnDestroy
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AdminDoctorService } from '../admin-doctor.service';
 import { Doctor } from 'src/app/shared/interfaces/doctor';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-edit-doctor-popup',
   templateUrl: './edit-doctor-popup.component.html',
   styleUrls: ['./edit-doctor-popup.component.css']
 })
-export class EditDoctorPopupComponent implements OnInit {
+export class EditDoctorPopupComponent implements OnInit, OnDestroy {
+  editDoctorSubscription: Subscription | undefined = undefined;
   editForm!: FormGroup;
   inputData: Doctor | null = null;
   @Output() userUpdated: EventEmitter<void> = new EventEmitter<void>();
@@ -46,7 +55,7 @@ export class EditDoctorPopupComponent implements OnInit {
 
   onSubmit() {
     if (this.editForm.valid && this.inputData && this.inputData._id) {
-      this.adminService
+      this.editDoctorSubscription = this.adminService
         .updateDoctor(this.inputData._id, this.editForm.value)
         .subscribe({
           next: () => {
@@ -70,5 +79,11 @@ export class EditDoctorPopupComponent implements OnInit {
 
   closePopup() {
     this.ref.close();
+  }
+
+  ngOnDestroy(): void {
+    if (this.editDoctorSubscription) {
+      this.editDoctorSubscription.unsubscribe();
+    }
   }
 }

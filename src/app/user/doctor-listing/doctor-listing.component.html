@@ -6,7 +6,7 @@
         aria-describedby="basic-addon2" [(ngModel)]="searchValue">
 </div>
 <div class="container d-flex flex-wrap my-3">
-    <ng-container *ngFor="let doctor of doctorList">
+    <ng-container *ngFor="let doctor of doctorList; trackBy:trackById">
         <mat-card class="doctor-card mx-3"
             *ngIf="searchValue === '' || doctor.first_name.toLowerCase().includes(searchValue)">
             <img class="doctor-image" src="../../../assets/doctor.jpg" alt="Photo of doctor">

@@ -13,7 +13,7 @@ export class DoctorLoginComponent {
   @ViewChild(LoginComponent) loginComponent: LoginComponent | null = null;
   constructor(
     private doctorService: DoctorService,
-    private router: Router,
+    private _router: Router,
     private snackBar: MatSnackBar
   ) {}
 
@@ -24,7 +24,7 @@ export class DoctorLoginComponent {
         next: (res) => {
           console.log('loggedIn');
           localStorage.setItem('user', JSON.stringify(res));
-          this.router.navigate(['/doctor']);
+          this._router.navigate(['/doctor']);
         },
         error: (error) => {
           console.log(error);

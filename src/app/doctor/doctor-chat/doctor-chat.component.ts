@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TrackByFunction } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatSelectionListChange } from '@angular/material/list';
 import { ActivatedRoute } from '@angular/router';
@@ -25,6 +25,10 @@ export class DoctorChatComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.updateChatInfo();
+  }
+
+  updateChatInfo() {
     this.userService.getDocChats().subscribe({
       next: (res) => {
         this.chatData = res;
@@ -49,6 +53,7 @@ export class DoctorChatComponent implements OnInit {
   updateChat(data: any): void {
     if (!data) return;
     this.messages.push(data);
+    this.updateChatInfo();
   }
 
   onChatSelectionChange(event: MatSelectionListChange) {
@@ -84,5 +89,9 @@ export class DoctorChatComponent implements OnInit {
       });
       this.messageControl.setValue('');
     }
+  }
+
+  trackById(index: number, chat: Chat) {
+    return chat._id;
   }
 }

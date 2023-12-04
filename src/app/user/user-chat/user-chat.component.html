@@ -16,9 +16,15 @@
                         {{chatData[0].createdAt |date:('short')}}
                     </span>
                 </p>
-                <p mat-line class="chat-min-message">
-                    asdasdsdf
-                </p>
+                <ng-template mat-line class="chat-min-message"
+                    *ngIf="chatData[0].latest_message === '' ; else chatMessage">
+                    <p>Start a conversation</p>
+                </ng-template>
+                <ng-template #chatMessage>
+                    <p mat-line class="chat-min-message">
+                        {{chatData[0].latest_message}}
+                    </p>
+                </ng-template>
                 <mat-divider></mat-divider>
             </mat-list-option>
         </mat-selection-list>
@@ -32,7 +38,7 @@
         </div>
         <mat-divider></mat-divider>
         <div class="chat-area">
-            <div class="chat-bubble-container" *ngFor="let message of messages"
+            <div class="chat-bubble-container" *ngFor="let message of messages;trackBy:trackById"
                 [ngClass]="{'sender':message.sender_id !== doctorId}">
                 <div class="chat-bubble">
                     {{message.text}}

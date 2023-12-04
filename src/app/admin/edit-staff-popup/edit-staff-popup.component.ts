@@ -1,16 +1,25 @@
-import { Component, OnInit, Output, EventEmitter, Inject } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Output,
+  EventEmitter,
+  Inject,
+  OnDestroy
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Staff } from 'src/app/shared/interfaces/staff';
 import { AdminStaffService } from '../admin-staff.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-edit-staff-popup',
   templateUrl: './edit-staff-popup.component.html',
   styleUrls: ['./edit-staff-popup.component.css']
 })
-export class EditStaffPopupComponent implements OnInit {
+export class EditStaffPopupComponent implements OnInit, OnDestroy {
+  editStaffSubscription: Subscription | undefined = undefined;
   editForm!: FormGroup;
   inputData: Staff | null = null;
   @Output() userUpdated: EventEmitter<void> = new EventEmitter<void>();
@@ -46,7 +55,7 @@ export class EditStaffPopupComponent implements OnInit {
 
   onSubmit() {
     if (this.editForm.valid && this.inputData && this.inputData._id) {
-      this.staffService
+      this.editStaffSubscription = this.staffService
         .updateStaff(this.inputData._id, this.editForm.value)
         .subscribe({
           next: () => {
@@ -70,5 +79,11 @@ export class EditStaffPopupComponent implements OnInit {
 
   closePopup() {
     this.ref.close();
+  }
+
+  ngOnDestroy(): void {
+    if (this.editStaffSubscription) {
+      this.editStaffSubscription.unsubscribe();
+    }
   }
 }

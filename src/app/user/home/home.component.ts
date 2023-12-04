@@ -43,4 +43,8 @@ export class HomeComponent implements OnInit {
     }
     this.paused = !this.paused;
   }
+
+  trackById(index: number, doctor: Doctor) {
+    return doctor._id;
+  }
 }

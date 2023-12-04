@@ -1,16 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AdminService } from '../admin.service';
 import { User } from 'src/app/user/interfaces/user';
 import { MatDialog } from '@angular/material/dialog';
 import { EditUserPopupComponent } from '../edit-user-popup/edit-user-popup.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent implements OnInit, OnDestroy {
+  userSubscription: Subscription | undefined = undefined;
   userData!: User;
   tableData: User[] = [];
   tableColumns: { name: string; header: string }[] = [
@@ -33,7 +35,7 @@ export class UsersComponent implements OnInit {
   }
 
   loadData() {
-    this.adminService.getUsers().subscribe({
+    this.userSubscription = this.adminService.getUsers().subscribe({
       next: (res: User[]) => {
         this.tableData = res;
       },
@@ -92,5 +94,11 @@ export class UsersComponent implements OnInit {
       // Refresh your table data here
       this.loadData();
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.userSubscription) {
+      this.userSubscription.unsubscribe();
+    }
   }
 }

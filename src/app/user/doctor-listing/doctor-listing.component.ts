@@ -12,10 +12,7 @@ import { Doctor } from 'src/app/shared/interfaces/doctor';
 export class DoctorListingComponent implements OnInit {
   searchValue = '';
   doctorList: Doctor[] = [];
-  constructor(
-    private userService: UserService,
-    private adminService: AdminDoctorService
-  ) {}
+  constructor(private adminService: AdminDoctorService) {}
   ngOnInit(): void {
     this.adminService.getDoctors().subscribe({
       next: (res) => {
@@ -23,5 +20,9 @@ export class DoctorListingComponent implements OnInit {
       }
     });
     window.scrollTo(0, 0);
+  }
+
+  trackById(index: number, doctor: Doctor) {
+    return doctor._id;
   }
 }

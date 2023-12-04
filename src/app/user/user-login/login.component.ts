@@ -17,7 +17,7 @@ export class UserLoginComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private router: Router,
+    private _router: Router,
     private snackBar: MatSnackBar
   ) {}
 
@@ -35,7 +35,7 @@ export class UserLoginComponent implements OnInit {
         next: (res) => {
           console.log('loggedIn');
           localStorage.setItem('user', JSON.stringify(res));
-          this.router.navigate(['']);
+          this._router.navigate(['']);
         },
         error: (error) => {
           this.snackBar.open(error.error.errors[0].message, 'Dismiss', {

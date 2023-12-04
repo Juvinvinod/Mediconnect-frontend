@@ -13,11 +13,6 @@ export class LoginComponent implements OnInit {
   hide = true;
   loginForm!: FormGroup;
 
-  constructor(
-    private userService: UserService,
-    private router: Router
-  ) {}
-
   ngOnInit(): void {
     this.loginForm = new FormGroup({
       email: new FormControl('', Validators.required),

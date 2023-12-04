@@ -1,16 +1,25 @@
-import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Inject,
+  OnInit,
+  Output,
+  OnDestroy
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { AdminService } from '../admin.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from 'src/app/user/interfaces/user';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-edit-user-popup',
   templateUrl: './edit-user-popup.component.html',
   styleUrls: ['./edit-user-popup.component.css']
 })
-export class EditUserPopupComponent implements OnInit {
+export class EditUserPopupComponent implements OnInit, OnDestroy {
+  editUserSubscription: Subscription | undefined = undefined;
   editForm!: FormGroup;
   inputData: User | null = null;
   @Output() userUpdated: EventEmitter<void> = new EventEmitter<void>();
@@ -46,7 +55,7 @@ export class EditUserPopupComponent implements OnInit {
 
   onSubmit() {
     if (this.editForm.valid && this.inputData && this.inputData._id) {
-      this.adminService
+      this.editUserSubscription = this.adminService
         .updateUser(this.inputData._id, this.editForm.value)
         .subscribe({
           next: () => {
@@ -70,5 +79,11 @@ export class EditUserPopupComponent implements OnInit {
 
   closePopup() {
     this.ref.close();
+  }
+
+  ngOnDestroy(): void {
+    if (this.editUserSubscription) {
+      this.editUserSubscription.unsubscribe();
+    }
   }
 }

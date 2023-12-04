@@ -1,9 +1,10 @@
 <h1>Upcoming appointments</h1>
-<div class="d-flex flex-wrap " *ngFor="let document of data">
+<div class="d-flex flex-wrap " *ngFor="let document of data; trackBy:trackById">
     <div class="card appointment-card col-12 m-1 d-flex">
         <div class="d-flex card-body justify-content-between">
             <div class="appointment-data">
                 <div class="card-title">DATE:{{document.date | date}}</div>
+                <div class="card-title">DOCTOR NAME:Dr. {{document.doctor_id.first_name}}</div>
                 <div class="card-text">Start-time:{{document.start_time | date:'shortTime'}}</div>
                 <div class="card-text">End-time:{{document.end_time| date:'shortTime'}}</div>
             </div>
@@ -12,7 +13,7 @@
             </div>
             <div>
                 <button class="btn btn-success mt-3 ms-3">View Details</button>
-                <button class="btn btn-success mt-3 ms-3" [routerLink]="['/chats',document.doctor_id]">Chat</button>
+                <button class="btn btn-success mt-3 ms-3" [routerLink]="['/chats',document.doctor_id._id]">Chat</button>
             </div>
         </div>
     </div>

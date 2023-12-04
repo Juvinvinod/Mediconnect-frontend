@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit, OnChanges {
   constructor(
     private sharedService: SharedService,
     private userService: UserService,
-    private router: Router
+    private _router: Router
   ) {}
 
   ngOnInit(): void {
@@ -37,6 +37,6 @@ export class HeaderComponent implements OnInit, OnChanges {
   logOut() {
     localStorage.removeItem('user');
     this.isUserLoggedIn = false;
-    this.router.navigate(['/']);
+    this._router.navigate(['/']);
   }
 }

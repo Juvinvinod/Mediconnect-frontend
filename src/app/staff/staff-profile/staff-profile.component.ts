@@ -18,7 +18,7 @@ export class StaffProfileComponent implements OnInit {
   constructor(
     private staffService: StaffService,
     private adminStaffService: AdminStaffService,
-    private router: Router,
+    private _router: Router,
     private snackBar: MatSnackBar
   ) {}
 
@@ -61,7 +61,7 @@ export class StaffProfileComponent implements OnInit {
     if (id && this.signUpForm.valid) {
       this.adminStaffService.updateStaff(id, this.signUpForm.value).subscribe({
         next: () => {
-          this.router.navigate(['staff']);
+          this._router.navigate(['staff']);
           this.snackBar.open('Successfully updated', 'Dismiss', {
             duration: 5000
           });
@@ -79,6 +79,6 @@ export class StaffProfileComponent implements OnInit {
   }
 
   changePass() {
-    this.router.navigate(['/staff/password']);
+    this._router.navigate(['/staff/password']);
   }
 }

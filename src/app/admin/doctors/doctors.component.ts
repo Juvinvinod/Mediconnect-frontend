@@ -1,17 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Doctor } from 'src/app/shared/interfaces/doctor';
 import { AdminDoctorService } from '../admin-doctor.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { EditDoctorPopupComponent } from '../edit-doctor-popup/edit-doctor-popup.component';
 import { AddDoctorPopupComponent } from '../add-doctor-popup/add-doctor-popup.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-doctors',
   templateUrl: './doctors.component.html',
   styleUrls: ['./doctors.component.css']
 })
-export class DoctorsComponent implements OnInit {
+export class DoctorsComponent implements OnInit, OnDestroy {
+  doctorSubscription: Subscription | undefined = undefined;
   doctorData!: Doctor;
   tableData: Doctor[] = [];
   tableColumns: { name: string; header: string }[] = [
@@ -36,7 +38,7 @@ export class DoctorsComponent implements OnInit {
   }
 
   loadData() {
-    this.doctorService.getDoctors().subscribe({
+    this.doctorSubscription = this.doctorService.getDoctors().subscribe({
       next: (res: Doctor[]) => {
         this.tableData = res;
       },
@@ -112,5 +114,11 @@ export class DoctorsComponent implements OnInit {
       // Refresh your table data here
       this.loadData();
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.doctorSubscription) {
+      this.doctorSubscription.unsubscribe();
+    }
   }
 }

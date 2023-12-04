@@ -34,7 +34,7 @@ export class DoctorBookingComponent implements OnInit {
     private userService: UserService,
     private datePipe: DatePipe,
     private snackBar: MatSnackBar,
-    private router: Router
+    private _router: Router
   ) {}
 
   ngOnInit() {
@@ -154,7 +154,7 @@ export class DoctorBookingComponent implements OnInit {
 
       this.userService.bookSlot(this.formData).subscribe({
         next: (res) => {
-          this.router.navigate(['/appointments']);
+          this._router.navigate(['/appointments']);
           this.snackBar.open(res.success, 'Dismiss', {
             duration: 5000
           });
@@ -167,5 +167,9 @@ export class DoctorBookingComponent implements OnInit {
     };
     const rzp1 = new Razorpay(razorpayOptions);
     rzp1.open();
+  }
+
+  trackById(index: number, slot: Slot) {
+    return slot._id;
   }
 }

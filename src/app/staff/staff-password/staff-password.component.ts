@@ -18,7 +18,7 @@ export class StaffPasswordComponent implements OnInit {
 
   constructor(
     private staffService: StaffService,
-    private router: Router,
+    private _router: Router,
     private snackBar: MatSnackBar
   ) {}
 
@@ -47,7 +47,7 @@ export class StaffPasswordComponent implements OnInit {
     if (this.passwordForm.valid) {
       this.staffService.updatePassword(this.passwordForm.value).subscribe({
         next: () => {
-          this.router.navigate(['staff']);
+          this._router.navigate(['staff']);
           this.snackBar.open('Successfully updated', 'Dismiss', {
             duration: 5000
           });

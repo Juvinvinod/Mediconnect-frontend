@@ -7,19 +7,24 @@
         <mat-selection-list #shoes [multiple]="false" [hideSingleSelectionIndicator]="true" *ngIf="chatData.length > 0"
             (selectionChange)="onChatSelectionChange($event)">
             <mat-divider></mat-divider>
-            <mat-list-option [value]="chat._id" *ngFor="let chat of chatData">
+            <mat-list-option [value]="chat._id" *ngFor="let chat of chatData;trackBy:trackById ">
                 <img matListItemAvatar src="https://material.angular.io/assets/img/examples/shiba1.jpg" alt="">
                 <p mat-line class="chat-title">
                     <span class="chat-name ">
-                        {{chat.doctor_id?.first_name}}
+                        {{chat.user_id?.first_name}}
                     </span>
                     <span class="chat-date ">
                         {{chat.createdAt |date:('short')}}
                     </span>
                 </p>
-                <p mat-line class="chat-min-message">
-                    asdasdsdf
-                </p>
+                <ng-template mat-line class="chat-min-message" *ngIf="chat.latest_message === '' ; else chatMessage">
+                    <p>Start a conversation</p>
+                </ng-template>
+                <ng-template #chatMessage>
+                    <p mat-line class="chat-min-message">
+                        {{chat.latest_message}}
+                    </p>
+                </ng-template>
                 <mat-divider></mat-divider>
             </mat-list-option>
         </mat-selection-list>

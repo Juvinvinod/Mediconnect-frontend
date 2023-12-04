@@ -1,17 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Staff } from 'src/app/shared/interfaces/staff';
 import { AdminStaffService } from '../admin-staff.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { EditStaffPopupComponent } from '../edit-staff-popup/edit-staff-popup.component';
 import { AddStaffPopupComponent } from '../add-staff-popup/add-staff-popup.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-staffs',
   templateUrl: './staffs.component.html',
   styleUrls: ['./staffs.component.css']
 })
-export class StaffsComponent implements OnInit {
+export class StaffsComponent implements OnInit, OnDestroy {
+  staffSubscription: Subscription | undefined = undefined;
+  blockStaffSubscription: Subscription | undefined = undefined;
+  unblockStaffSubscription: Subscription | undefined = undefined;
   staffData!: Staff;
   tableData: Staff[] = [];
   tableColumns: { name: string; header: string }[] = [
@@ -34,7 +38,7 @@ export class StaffsComponent implements OnInit {
   }
 
   loadData() {
-    this.staffService.getStaffs().subscribe({
+    this.staffSubscription = this.staffService.getStaffs().subscribe({
       next: (res: Staff[]) => {
         this.tableData = res;
       },
@@ -51,28 +55,32 @@ export class StaffsComponent implements OnInit {
 
   blockUser(event: Staff) {
     if (event._id) {
-      this.staffService.blockStaff(event._id).subscribe({
-        next: (res: { success: string }) => {
-          this.loadData();
+      this.blockStaffSubscription = this.staffService
+        .blockStaff(event._id)
+        .subscribe({
+          next: (res: { success: string }) => {
+            this.loadData();
 
-          this.snackBar.open(res.success, 'Dismiss', {
-            duration: 5000
-          });
-        }
-      });
+            this.snackBar.open(res.success, 'Dismiss', {
+              duration: 5000
+            });
+          }
+        });
     }
   }
 
   unBlockUser(event: Staff) {
     if (event._id) {
-      this.staffService.unBlockStaff(event._id).subscribe({
-        next: (res) => {
-          this.loadData();
-          this.snackBar.open(res.success, 'Dismiss', {
-            duration: 5000
-          });
-        }
-      });
+      this.unblockStaffSubscription = this.staffService
+        .unBlockStaff(event._id)
+        .subscribe({
+          next: (res) => {
+            this.loadData();
+            this.snackBar.open(res.success, 'Dismiss', {
+              duration: 5000
+            });
+          }
+        });
     }
   }
 
@@ -110,5 +118,19 @@ export class StaffsComponent implements OnInit {
       // Refresh your table data here
       this.loadData();
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.staffSubscription) {
+      this.staffSubscription.unsubscribe();
+    }
+
+    if (this.blockStaffSubscription) {
+      this.blockStaffSubscription.unsubscribe();
+    }
+
+    if (this.unblockStaffSubscription) {
+      this.unblockStaffSubscription.unsubscribe();
+    }
   }
 }

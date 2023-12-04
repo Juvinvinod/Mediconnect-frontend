@@ -1,4 +1,4 @@
 export interface Dept {
-  _id?: string;
+  _id: string;
   dept_name: string;
 }
