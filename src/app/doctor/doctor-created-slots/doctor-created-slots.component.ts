@@ -46,7 +46,24 @@ export class DoctorCreatedSlotsComponent implements OnInit, OnDestroy {
       .deleteSlot(time)
       .subscribe({
         next: (res) => {
-          // this.refresh();
+          // Find the index of the slot to be deleted
+          const index = this.dataSource.data.findIndex(
+            (slot: Slot) => slot.start_time === time
+          );
+
+          // Remove the slot from the dataSource.data
+          if (index !== -1) {
+            this.dataSource.data.splice(index, 1);
+
+            // Update the MatTableDataSource to reflect the changes
+            this.dataSource = new MatTableDataSource<Slot>(
+              this.dataSource.data
+            );
+
+            // Inform Angular about the changes
+            this.changeDetectorRefs.detectChanges();
+          }
+
           this.snackBar.open(res.success, 'Dismiss', {
             duration: 5000
           });

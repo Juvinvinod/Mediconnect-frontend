@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserService } from '../user.service';
 import { Slot } from 'src/app/shared/interfaces/slot';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-appointments',
@@ -11,7 +12,10 @@ import { Subscription } from 'rxjs';
 export class UserAppointmentsComponent implements OnInit, OnDestroy {
   bookingSubscription: Subscription | undefined = undefined;
   data: Slot[] = [];
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private _router: Router
+  ) {}
 
   ngOnInit(): void {
     this.bookingSubscription = this.userService.getBookingDocs().subscribe({
@@ -24,6 +28,10 @@ export class UserAppointmentsComponent implements OnInit, OnDestroy {
 
   trackById(index: number, document: Slot) {
     return document._id;
+  }
+
+  viewDetails(event: Slot) {
+    this._router.navigate(['/appointment', event._id]);
   }
 
   ngOnDestroy(): void {

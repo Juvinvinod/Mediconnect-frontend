@@ -12,6 +12,7 @@ import { DoctorListingComponent } from './doctor-listing/doctor-listing.componen
 import { UserAppointmentsComponent } from './user-appointments/user-appointments.component';
 import { UserLoginComponent } from './user-login/login.component';
 import { UserChatComponent } from './user-chat/user-chat.component';
+import { AppointmentDetailsComponent } from './appointment-details/appointment-details.component';
 
 const routes: Routes = [
   {
@@ -50,6 +51,11 @@ const routes: Routes = [
         path: 'chats/:id',
         canActivate: [userCheckGuard],
         component: UserChatComponent
+      },
+      {
+        path: 'appointment/:id',
+        canActivate: [userCheckGuard],
+        component: AppointmentDetailsComponent
       },
       { path: '', pathMatch: 'full', component: HomeComponent }
     ]

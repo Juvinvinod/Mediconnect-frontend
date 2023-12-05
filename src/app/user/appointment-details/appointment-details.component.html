@@ -1,0 +1,34 @@
+<div class="detail-card-div  mx-auto" *ngIf="slotDetails">
+    <div class="card detail-card">
+        <div class="card-content d-flex gap-5">
+            <div>
+                <img src="../../../assets/doctor.jpg" class="doctor-img" alt="">
+            </div>
+            <div class="pt-5">
+                <div>
+                    <span>DOCTOR NAME:</span> <span>{{slotDetails[0].doctor_id.first_name}}</span>
+                </div>
+                <div>
+                    <span>START TIME:</span> <span>{{slotDetails[0].start_time| date:('shortTime')}}</span>
+                </div>
+                <div>
+                    <span>END TIME:</span> <span>{{slotDetails[0].end_time | date:('shortTime')}}</span>
+                </div>
+                <div>
+                    <span>BOOKING STATUS:</span> <span>{{slotDetails[0].status}}</span>
+                </div>
+                <div>
+                    <span>PAYMENT STATUS:</span> <span style="color: green;">PAID</span>
+                </div>
+                <div class="d-flex gap-3 mx-auto pt-3 ps-1">
+                    <button mat-raised-button color="warn">
+                        Cancel
+                    </button>
+                    <button mat-raised-button class="back-button" [routerLink]="['../../appointments']">
+                        Back
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>

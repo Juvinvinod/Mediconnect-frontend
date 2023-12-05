@@ -13,10 +13,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   doctorSubscription: Subscription | undefined = undefined;
   doctorList: Doctor[] = [];
   images = [
-    '../../../assets/image1.jpg',
-    '../../../assets/image2.jpg',
-    '../../../assets/image3.jpg',
-    '../../../assets/image4.jpg'
+    '../../../assets/image1.webp',
+    '../../../assets/image-2.webp',
+    '../../../assets/image-3.webp'
   ];
 
   paused = false;

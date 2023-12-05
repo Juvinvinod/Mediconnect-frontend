@@ -110,4 +110,9 @@ export class UserService {
   getDocChats(): Observable<Chat[]> {
     return this.http.get<Chat[]>(this.apiURL + '/chat/allDoctorChats');
   }
+
+  //get slot data
+  getSlotData(_id: string): Observable<Slot[]> {
+    return this.http.get<Slot[]>(this.apiURL + '/getSlot/' + _id);
+  }
 }

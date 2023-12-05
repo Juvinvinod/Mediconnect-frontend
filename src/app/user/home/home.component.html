@@ -7,35 +7,72 @@
         </a>
     </ng-template>
 </ngb-carousel>
-<div class="text-center pt-5 heading">OUR DEPARTMENTS</div>
-<div class="container d-flex flex-wrap mt-3 ">
-    <mat-card class="doctor-card mx-3">
-        <img class="department-image" mat-card-image src="../../../assets/cardiology.jpg" alt="Photo of department">
-        <mat-card-content class="text-center pt-3 department-text">
-            CARDIOLOGY
-        </mat-card-content>
-    </mat-card>
-    <mat-card class="doctor-card mx-3">
-        <img class="department-image" mat-card-image src="../../../assets/general-surgery.jpg"
-            alt="Photo of department">
-        <mat-card-content class="text-center pt-3 department-text">
-            GENERAL SURGERY
-        </mat-card-content>
-    </mat-card>
-    <mat-card class="doctor-card mx-3">
-        <img class="department-image" mat-card-image src="../../../assets/internal-medicine.jpg"
-            alt="Photo of department">
-        <mat-card-content class="text-center pt-3 department-text">
-            INTERNAL MEDICINE
-        </mat-card-content>
-    </mat-card>
+
+<div class="hospital-promo">
+    <div class="promo-card-outer mx-auto d-flex gap-5">
+        <div class="promo-card card">
+            <span class="trust-span">Why Trust Us</span>
+            <div>
+                <h1 style="font-size:2.25rem;line-height: 40px;" class="pt-5">Expertise & Innovation For The Best
+                    Treatments
+                </h1>
+                <p class="py-1">We, as a team of doctors together, have developed a healthcare facility with advanced
+                    care
+                    and technology
+                    that leads to correct diagnosis, treatment with apt machines and lifelong recovery.</p>
+
+            </div>
+            <div class="d-flex color-cards mx-auto gap-5">
+                <div class="pink-card card">
+                    <span class="pink-card-span">790+</span>
+                    <h2 style="color: white;">Statisfied Patients</h2>
+                </div>
+                <div class="blue-card card">
+                    <div class="blue-card card">
+                        <span class="blue-card-span">1500+</span>
+                        <h2 style="color: white;">Patient/year</h2>
+                    </div>
+                </div>
+            </div>
+            <p class="pt-3">Experienced Medical Staff & Specialists who treat you as a priority</p>
+            <p>Compliant with Global Healthcare Norms & Best Practices</p>
+            <p>Effective Diagnosis through Advanced Machinery & Modular OTs</p>
+        </div>
+        <div class="promo-img-div">
+            <img src="../../../assets/hospital-promo.webp" alt="" class="promo-img">
+        </div>
+    </div>
 </div>
-<div class="award-banner">
+
+<div class="text-center py-3 heading gradient">OUR DEPARTMENTS</div>
+<div class="container d-flex flex-wrap  gap-3 py-5 justify-content-between">
+    <div class="department-card mx-1 card">
+        <img class="department-image" src="../../../assets/cardiology.jpg" alt="Photo of department">
+
+        CARDIOLOGY
+
+    </div>
+    <div class="department-card mx-1 card">
+        <img class="department-image" src="../../../assets/general-surgery.jpg" alt="Photo of department">
+
+        GENERAL SURGERY
+
+    </div>
+    <div class="department-card mx-1 card">
+        <img class="department-image" src="../../../assets/internal-medicine.jpg" alt="Photo of department">
+
+        INTERNAL MEDICINE
+
+    </div>
+</div>
+<div class="award-banner pb-5">
     <img src="../../../assets/award-winner-banner.jpg" class="award-banner-img" alt="award-banner">
 </div>
-<div class="d-flex justify-content-between pt-5 px-3">
+<div class="d-flex justify-content-between py-3 px-3 gradient">
     <div class="text-center heading doctor-heading">OUR DOCTORS</div>
-    <button mat-raised-button [routerLink]="['allDoctors']" class="me-3">VIEW ALL</button>
+    <div class="pt-1">
+        <button mat-raised-button [routerLink]="['allDoctors']" class="me-3 ">VIEW ALL</button>
+    </div>
 </div>
 <div class="container d-flex flex-nowrap overflow-auto my-3">
     <mat-card class="doctor-card mx-3" *ngFor="let doctor of doctorList.slice(0, 4);trackBy:trackById">

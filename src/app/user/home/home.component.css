@@ -5,7 +5,7 @@
 }
 
 .image{
-    max-height:525px;
+    height:525px;
     width: 100%;
     @media (max-width: 576px) {
         height: 250px;
@@ -16,7 +16,12 @@
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-weight: 1500px;
     font-size: 35px;
-    color: rgb(87, 153, 131);
+    color: white;
+    
+}
+
+.gradient{
+  background: linear-gradient(270deg,white,rgb(22, 78, 181));
 }
 
 .doctor-card {
@@ -30,9 +35,17 @@
     box-shadow: 0 0 16px rgba(0, 0, 0, 0.2);
 }
 
+  .department-card{
+    width: 350px;
+    box-shadow: none;
+    align-items: center;
+    border: none;
+    justify-content: space-between;
+  }
+
   .department-image{
-    max-width: 500px;
-    height: 350px;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     @media (max-width: 576px) {
         max-width: 360px;
@@ -69,11 +82,79 @@
   
 .award-banner-img{
   width: 100%;
- 
   height:200px
 }
 
 .award-banner{
   padding-left: 300px;
   padding-right: 300px;
+}
+
+.hospital-promo{
+  height:725px;
+  margin-top: 25px;
+  padding: 25px;
+  padding-left: 200px;
+}
+
+.promo-card{
+  width:40%;
+  /* height:100%; */
+  border: none;
+  @media (max-width: 576px) {
+    display: none;
+   }
+}
+
+.promo-card-outer{
+  height: 650px;
+}
+
+.promo-img{
+  width:100%;
+  height:100%;
+
+}
+
+.pink-card{
+  padding-top: 20px;
+  background-color: #a92783;
+  width:200px;
+  height: 150px;
+  align-content: center;
+  align-items: center;
+  border: none;
+  @media (max-width: 576px) {
+    display: none;
+  }
+}
+
+.blue-card{
+  padding-top: 10px;
+  background-color: rgb(26, 155, 155);
+  width:200px;
+  height: 150px;
+  align-content: center;
+  align-items: center;
+  border: none;
+  @media (max-width: 576px) {
+    display: none;
+  }
+}
+
+.pink-card-span{
+  font-size:2.5rem;
+  color: white;
+  font-weight: 1500px;
+}
+
+.blue-card-span{
+  font-size:2.5rem;
+  color: white;
+  font-weight: 1500px;
+}
+
+.trust-span{
+  color: rgb(0, 123, 255);
+  font-size: larger;
 }
