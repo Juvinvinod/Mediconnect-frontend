@@ -16,7 +16,7 @@ export class DoctorChatComponent implements OnInit, OnDestroy {
   doctorChatSubscription: Subscription | undefined = undefined;
   socketSubscription: Subscription | undefined = undefined;
   messageSubscription: Subscription | undefined = undefined;
-  doctorId: any;
+  doctorId: string | undefined = undefined;
   chatData: Chat[] = [];
   messages: Message[] = [];
   chatId = '';

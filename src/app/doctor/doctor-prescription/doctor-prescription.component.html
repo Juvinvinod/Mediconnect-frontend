@@ -1,0 +1,20 @@
+<div class="card prescription-card mx-auto" *ngIf="slotDetails[0]">
+    <p> <span class="font">Patient Name :</span> {{slotDetails[0].patient_id.first_name}}</p>
+    <p>Patient Number : {{slotDetails[0].patient_id.mobile}}</p>
+    <p>Patient Email : {{slotDetails[0].patient_id.email}}</p>
+    <form [formGroup]=" slotForm" (ngSubmit)="onSubmit()">
+        <mat-form-field class="col-sm-6 col-lg-6 pe-sm-3 pe-md-0 fullWidth inputHeight">
+            <textarea matInput placeholder="Prescription" formControlName="prescription" class="fullWidth"></textarea>
+            <mat-error *ngIf="slotForm.get('first_name')?.hasError('required')">
+                Prescription is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+        <mat-radio-group aria-label="Select an option" formControlName="status">
+            <mat-radio-button value="completed">Completed</mat-radio-button>
+            <mat-radio-button value="incomplete">Incomplete</mat-radio-button>
+        </mat-radio-group>
+        <div class="py-1">
+            <button class mat-raised-button color="primary">UPDATE</button>
+        </div>
+    </form>
+</div>

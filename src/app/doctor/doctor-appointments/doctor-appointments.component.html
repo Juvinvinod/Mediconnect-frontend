@@ -35,9 +35,10 @@
             <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
                 <td mat-cell *matCellDef="let row">
-                    <button mat-raised-button class="editButton ms-1" (click)="completed(row)">Completed</button>
+                    <!-- <button mat-raised-button class="editButton ms-1" (click)="completed(row)">Completed</button>
                     <button mat-raised-button class="editButton ms-1" (click)="incomplete(row)"
-                        color="warn">Incomplete</button>
+                        color="warn">Incomplete</button> -->
+                    <button mat-raised-button class="viewButton ms-1" (click)="details(row)">View</button>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -115,4 +115,11 @@ export class UserService {
   getSlotData(_id: string): Observable<Slot[]> {
     return this.http.get<Slot[]>(this.apiURL + '/getSlot/' + _id);
   }
+
+  //cancelBooking
+  cancelSlot(id: string): Observable<{ success: string }> {
+    return this.http.put<{ success: string }>(this.apiURL + '/cancelSlot', {
+      id: id
+    });
+  }
 }

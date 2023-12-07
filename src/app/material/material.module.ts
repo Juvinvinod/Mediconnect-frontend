@@ -14,6 +14,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatTabsModule } from '@angular/material/tabs';
 
 //All the angular material modules required are written here
 const Material = [
@@ -31,7 +33,9 @@ const Material = [
   MatPaginatorModule,
   MatSortModule,
   MatSelectModule,
-  MatDatepickerModule
+  MatDatepickerModule,
+  MatRadioModule,
+  MatTabsModule
 ];
 
 @NgModule({

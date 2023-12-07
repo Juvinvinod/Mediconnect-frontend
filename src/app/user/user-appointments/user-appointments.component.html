@@ -1,20 +1,52 @@
-<h1>Upcoming appointments</h1>
-<div class="d-flex flex-wrap " *ngFor="let document of data; trackBy:trackById">
-    <div class="card appointment-card col-12 m-1 d-flex">
-        <div class="d-flex card-body justify-content-between">
-            <div class="appointment-data">
-                <div class="card-title">DATE:{{document.date | date}}</div>
-                <div class="card-title">DOCTOR NAME:Dr. {{document.doctor_id.first_name}}</div>
-                <div class="card-text">Start-time:{{document.start_time | date:'shortTime'}}</div>
-                <div class="card-text">End-time:{{document.end_time| date:'shortTime'}}</div>
+<mat-tab-group>
+    <mat-tab label="UPCOMING APPOINTMENTS">
+        <ng-container *ngFor="let document of data; trackBy:trackById">
+            <div class="d-flex flex-wrap card-list mx-auto p-5" *ngIf="document.status === 'booked'">
+                <div class="card appointment-card">
+                    <img class="doctor-image card-img-top" src="../../../assets/doctor.jpg" alt="Photo of doctor">
+                    <div class=" card-body justify-content-between">
+
+                        <div class="card-title">DOCTOR NAME:Dr. {{document.doctor_id.first_name}}</div>
+                        <div class="card-text">DATE:{{document.date | date}}</div>
+                        <div class="card-text">Start-time:{{document.start_time | date:'shortTime'}}</div>
+                        <div class="card-text">End-time:{{document.end_time| date:'shortTime'}}</div>
+                        <div class="card-text">STATUS: <span style="color: green;">{{document.status }} </span></div>
+
+
+                        <button class="btn view-button" (click)="viewDetails(document)">View Details</button>
+                        <button class="btn chat-button ms-3"
+                            [routerLink]="['/chats',document.doctor_id._id]">Chat</button>
+
+                    </div>
+                </div>
             </div>
-            <div class="">
-                <button class="btn btn-primary mt-3 disabled">{{document.status}}</button>
-            </div>
-            <div>
-                <button class="btn btn-success mt-3 ms-3" (click)="viewDetails(document)">View Details</button>
-                <button class="btn btn-success mt-3 ms-3" [routerLink]="['/chats',document.doctor_id._id]">Chat</button>
-            </div>
+        </ng-container>
+    </mat-tab>
+    <mat-tab label="PREVIOUS APPOINTMENTS">
+        <div class="d-flex flex-wrap card-list gap-5 p-5">
+            <ng-container *ngFor="let document of data; trackBy:trackById">
+                <div class="card appointment-card" *ngIf="document.status !== 'booked'">
+
+                    <img class="doctor-image" src="../../../assets/doctor.jpg" alt="Photo of doctor">
+
+                    <div class=" card-body justify-content-between">
+
+                        <div class="card-title">DOCTOR NAME:Dr. {{document.doctor_id.first_name}}</div>
+                        <div class="card-text">DATE:{{document.date | date}}</div>
+                        <div class="card-text">Start-time:{{document.start_time | date:'shortTime'}}</div>
+                        <div class="card-text">End-time:{{document.end_time| date:'shortTime'}}</div>
+                        <div class="card-text">STATUS: <span style="color: green;">{{document.status }} </span></div>
+
+
+                        <button class="btn view-button" (click)="viewDetails(document)">View
+                            Details</button>
+                        <button class="btn chat-button ms-3"
+                            [routerLink]="['/chats',document.doctor_id._id]">Chat</button>
+
+                    </div>
+
+                </div>
+            </ng-container>
         </div>
-    </div>
-</div>
+    </mat-tab>
+</mat-tab-group>

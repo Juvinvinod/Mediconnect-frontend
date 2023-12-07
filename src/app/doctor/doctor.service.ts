@@ -51,12 +51,12 @@ export class DoctorService {
   //get all doctor booking docs
   getDoctorBookingDocs(): Observable<Slot[]> {
     return this.http.get<Slot[]>(this.apiURL + '/' + 'getSlots').pipe(
-      map((data: Slot[]) => {
-        return data.map((user, index) => ({ ...user, index: index + 1 }));
-      }),
       map((data: Slot[]) =>
         data.filter((user: Slot) => user.status === 'booked')
-      )
+      ),
+      map((data: Slot[]) => {
+        return data.map((user, index) => ({ ...user, index: index + 1 }));
+      })
     );
   }
 
@@ -65,7 +65,7 @@ export class DoctorService {
     user_id: string | undefined;
     status: string;
   }): Observable<{ success: string }> {
-    return this.http.patch<{ success: string }>(
+    return this.http.put<{ success: string }>(
       this.apiURL + '/' + 'updateSlot',
       data
     );

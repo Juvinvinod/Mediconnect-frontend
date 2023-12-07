@@ -20,13 +20,23 @@
                 <div>
                     <span>PAYMENT STATUS:</span> <span style="color: green;">PAID</span>
                 </div>
+                <div *ngIf="slotDetails[0].status === 'completed'">
+                    <span>PRESCRIPTIONS:</span> <span
+                        style="background-color: white;">{{slotDetails[0].prescription}}</span>
+                </div>
                 <div class="d-flex gap-3 mx-auto pt-3 ps-1">
-                    <button mat-raised-button color="warn">
-                        Cancel
-                    </button>
-                    <button mat-raised-button class="back-button" [routerLink]="['../../appointments']">
-                        Back
-                    </button>
+                    <div>
+                        <button mat-raised-button color="warn" (click)=cancelBooking()
+                            *ngIf="slotDetails[0].status !== 'completed'">
+                            Cancel
+                        </button>
+                    </div>
+                    <div
+                        [ngClass]="{'ps-5': slotDetails[0].status === 'completed', 'ps-0': slotDetails[0].status !== 'completed'}">
+                        <button mat-raised-button class="back-button" [routerLink]="['../../appointments']">
+                            Back
+                        </button>
+                    </div>
                 </div>
             </div>
 
