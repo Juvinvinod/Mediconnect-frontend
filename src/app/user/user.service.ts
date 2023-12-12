@@ -11,7 +11,8 @@ import { Message } from '../shared/interfaces/message';
   providedIn: 'root'
 })
 export class UserService {
-  apiURL = 'http://localhost:3000';
+  // apiURL = 'http://localhost:3000';
+  apiURL = 'https://mediconnect.juvin.in/';
 
   constructor(private http: HttpClient) {}
 
