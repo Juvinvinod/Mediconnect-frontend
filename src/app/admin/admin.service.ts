@@ -73,7 +73,7 @@ export class AdminService {
   }
 
   //add department
-  addDepartment(data: Dept): Observable<{ success: string }> {
+  addDepartment(data: FormData): Observable<{ success: string }> {
     return this.http.post<{ success: string }>(
       this.apiURL + '/' + 'addDept',
       data

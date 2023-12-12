@@ -8,9 +8,10 @@ import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { TableComponent } from './table/table.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { ErrorComponent } from './error/error.component';
 
 @NgModule({
-  declarations: [HeaderComponent, LoginComponent, TableComponent],
+  declarations: [HeaderComponent, LoginComponent, TableComponent, ErrorComponent],
   imports: [
     CommonModule,
     MaterialModule,

@@ -1,3 +1,7 @@
 .viewButton{
     background-color: rgb(206, 206, 126) !important;
 }
+
+.appointment-card{
+    border: none;
+}

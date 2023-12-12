@@ -20,7 +20,7 @@ export class DoctorPatientsComponent implements AfterViewInit, OnDestroy {
     'email',
     'mobile'
   ];
-  dataSource!: any;
+  dataSource!: MatTableDataSource<User>;
   userList: User[] = [];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;

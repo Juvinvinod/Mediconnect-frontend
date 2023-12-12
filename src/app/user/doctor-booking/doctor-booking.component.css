@@ -56,3 +56,15 @@ button {
     margin-left: 75px;
     }
 }
+
+button.example-custom-date-class {
+  background: rgb(255, 0, 89) !important;
+  background-color: red!important;
+  color: green!important;
+
+  border-radius: 100%;
+}
+
+.example-custom-date-class {
+  background-color: yellow; /* Add your desired background color */
+}

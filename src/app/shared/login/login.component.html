@@ -8,13 +8,18 @@
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                 <mat-card-content>
                     <mat-form-field class="fullWidth">
+                        <mat-label>Email</mat-label>
                         <input matInput placeholder="Email" formControlName="email" class="fullWidth">
                         <mat-error *ngIf="loginForm.get('email')?.hasError('required')">
                             Email is <strong>required</strong>
                         </mat-error>
+                        <mat-error *ngIf="loginForm.get('email')?.hasError('email')">
+                            Email is <strong>invalid</strong>
+                        </mat-error>
                     </mat-form-field>
 
                     <mat-form-field class="fullWidth">
+                        <mat-label>Password</mat-label>
                         <input matInput placeholder="Password" formControlName="password" class="fullWidth"
                             [type]="hide ? 'password' : 'text'">
                         <button mat-icon-button matSuffix type="button" (click)="hide = !hide"

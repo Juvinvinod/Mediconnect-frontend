@@ -3,6 +3,8 @@ import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
 import { AdminDoctorService } from 'src/app/admin/admin-doctor.service';
 import { Doctor } from 'src/app/shared/interfaces/doctor';
 import { Subscription } from 'rxjs';
+import { Dept } from 'src/app/shared/interfaces/department';
+import { AdminService } from 'src/app/admin/admin.service';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +13,9 @@ import { Subscription } from 'rxjs';
 })
 export class HomeComponent implements OnInit, OnDestroy {
   doctorSubscription: Subscription | undefined = undefined;
+  deptSubscription: Subscription | undefined = undefined;
   doctorList: Doctor[] = [];
+  departments: Dept[] = [];
   images = [
     '../../../assets/image1.webp',
     '../../../assets/image-2.webp',
@@ -26,10 +30,19 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   @ViewChild('carousel', { static: true }) carousel!: NgbCarousel;
 
-  constructor(private adminService: AdminDoctorService) {}
+  constructor(
+    private adminDoctorService: AdminDoctorService,
+    private adminService: AdminService
+  ) {}
 
   ngOnInit(): void {
-    this.doctorSubscription = this.adminService.getDoctors().subscribe({
+    this.doctorSubscription = this.adminService.getDepartments().subscribe({
+      next: (res) => {
+        this.departments = res;
+        console.log(this.departments);
+      }
+    });
+    this.doctorSubscription = this.adminDoctorService.getDoctors().subscribe({
       next: (res) => {
         this.doctorList = res;
       }

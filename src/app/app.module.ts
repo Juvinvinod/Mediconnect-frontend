@@ -25,7 +25,6 @@ import { DatePipe } from '@angular/common';
   declarations: [AppComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
     SharedModule,
@@ -40,7 +39,8 @@ import { DatePipe } from '@angular/common';
     DoctorRoutingModule,
     StaffModule,
     StaffRoutingModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    AppRoutingModule
   ],
   providers: [
     {

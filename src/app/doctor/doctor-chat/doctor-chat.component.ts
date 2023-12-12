@@ -55,7 +55,7 @@ export class DoctorChatComponent implements OnInit, OnDestroy {
     }
   }
 
-  updateChat(data: any): void {
+  updateChat(data: Message): void {
     if (!data) return;
     this.messages.push(data);
     this.updateChatInfo();

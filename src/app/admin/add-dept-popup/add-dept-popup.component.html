@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Add new doctor</h1>
+<h1 mat-dialog-title>Add new department</h1>
 <div mat-dialog-content>
 
 
@@ -11,8 +11,20 @@
             </mat-error>
         </mat-form-field>
 
+        <div>
+            <input class="file-input" type="file" hidden formControlName="image" (change)="onImageChange($event)"
+                #fileInput>
+        </div>
+        <div class="d-flex gap-3">
+            <div>
+                <button mat-raised-button (click)="fileInput.click()" type="button">Upload Department image</button>
+            </div>
+            <div *ngIf="selectedFileName">
+                Selected File: {{ selectedFileName }}
+            </div>
+        </div>
         <div mat-dialog-actions>
-            <div class="py-1">
+            <div class="pt-3">
                 <button mat-raised-button color="primary">Submit</button>
                 <button mat-raised-button mat-dialog-close color="accent">Cancel</button>
             </div>

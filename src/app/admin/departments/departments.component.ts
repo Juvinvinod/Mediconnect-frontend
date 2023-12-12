@@ -20,7 +20,7 @@ export class DepartmentsComponent implements AfterViewInit, OnDestroy {
   deptData: Dept = { dept_name: '', _id: '' };
   deptList: Dept[] = [];
   displayedColumns: string[] = ['index', 'dept_name', 'actions'];
-  dataSource!: any;
+  dataSource!: MatTableDataSource<Dept>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -64,8 +64,8 @@ export class DepartmentsComponent implements AfterViewInit, OnDestroy {
 
   openAddDept() {
     const dialogRef = this.dialog.open(AddDeptPopupComponent, {
-      width: '60%',
-      height: '600px'
+      width: '50%',
+      height: '280px'
     });
     // Subscribe to the userUpdated event from EditUserPopupComponent
     dialogRef.componentInstance.deptAdded.subscribe(() => {

@@ -99,7 +99,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   renderChart2() {
     new Chart('piechart2', {
-      type: 'bar',
+      type: 'pie',
       data: {
         labels: [...this.labels2],
         datasets: [

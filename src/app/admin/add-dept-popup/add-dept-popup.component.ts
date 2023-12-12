@@ -17,8 +17,10 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./add-dept-popup.component.css']
 })
 export class AddDeptPopupComponent implements OnInit, OnDestroy {
+  selectedFileName: string | null = null;
   addDepartmentSubscription: Subscription | undefined = undefined;
   hide = true;
+  file!: File;
   deptForm!: FormGroup;
   @Output() deptAdded: EventEmitter<void> = new EventEmitter<void>();
   constructor(
@@ -29,14 +31,27 @@ export class AddDeptPopupComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.deptForm = new FormGroup({
-      dept_name: new FormControl('', Validators.required)
+      dept_name: new FormControl('', Validators.required),
+      image: new FormControl(null, Validators.required)
     });
+  }
+
+  onImageChange(event: any) {
+    console.log(event);
+
+    this.file = <File>event.target.files[0];
+    this.selectedFileName = this.file ? this.file.name : null;
+    console.log(this.selectedFileName);
   }
 
   onSubmit() {
     if (this.deptForm.valid) {
+      console.log(this.deptForm.value);
+      const formData = new FormData();
+      formData.append('dept_name', this.deptForm.get('dept_name')?.value);
+      formData.append('file', this.file);
       this.addDepartmentSubscription = this.adminService
-        .addDepartment(this.deptForm.value)
+        .addDepartment(formData)
         .subscribe({
           next: () => {
             this.ref.close();
@@ -44,11 +59,6 @@ export class AddDeptPopupComponent implements OnInit, OnDestroy {
               duration: 5000
             });
             this.deptAdded.emit();
-          },
-          error: (error) => {
-            this.snackBar.open(error.error.errors[0].message, 'Dismiss', {
-              duration: 2000
-            });
           }
         });
     } else {

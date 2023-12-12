@@ -1,16 +1,17 @@
 <mat-tab-group>
     <mat-tab label="UPCOMING APPOINTMENTS">
-        <ng-container *ngFor="let document of data; trackBy:trackById">
-            <div class="d-flex flex-wrap card-list mx-auto p-5" *ngIf="document.status === 'booked'">
-                <div class="card appointment-card">
+        <div class="d-flex flex-wrap card-list mx-auto gap-5 p-5">
+            <ng-container *ngFor="let document of data; trackBy:trackById">
+                <div class="card appointment-card" *ngIf="document.status === 'booked'">
                     <img class="doctor-image card-img-top" src="../../../assets/doctor.jpg" alt="Photo of doctor">
                     <div class=" card-body justify-content-between">
 
-                        <div class="card-title">DOCTOR NAME:Dr. {{document.doctor_id.first_name}}</div>
+                        <div class="card-title">Dr. {{document.doctor_id.first_name}}</div>
                         <div class="card-text">DATE:{{document.date | date}}</div>
                         <div class="card-text">Start-time:{{document.start_time | date:'shortTime'}}</div>
                         <div class="card-text">End-time:{{document.end_time| date:'shortTime'}}</div>
-                        <div class="card-text">STATUS: <span style="color: green;">{{document.status }} </span></div>
+                        <div class="card-text">Status: <span style="color: green;">{{document.status|uppercase }}
+                            </span></div>
 
 
                         <button class="btn view-button" (click)="viewDetails(document)">View Details</button>
@@ -19,8 +20,8 @@
 
                     </div>
                 </div>
-            </div>
-        </ng-container>
+            </ng-container>
+        </div>
     </mat-tab>
     <mat-tab label="PREVIOUS APPOINTMENTS">
         <div class="d-flex flex-wrap card-list gap-5 p-5">
@@ -29,20 +30,18 @@
 
                     <img class="doctor-image" src="../../../assets/doctor.jpg" alt="Photo of doctor">
 
-                    <div class=" card-body justify-content-between">
+                    <div class=" card-body justify-content-between ">
 
-                        <div class="card-title">DOCTOR NAME:Dr. {{document.doctor_id.first_name}}</div>
+                        <div class="card-title">Dr. {{document.doctor_id.first_name}}</div>
                         <div class="card-text">DATE:{{document.date | date}}</div>
                         <div class="card-text">Start-time:{{document.start_time | date:'shortTime'}}</div>
                         <div class="card-text">End-time:{{document.end_time| date:'shortTime'}}</div>
-                        <div class="card-text">STATUS: <span style="color: green;">{{document.status }} </span></div>
+                        <div class="card-text">Status: <span style="color: green;">{{document.status|uppercase }}
+                            </span></div>
 
 
-                        <button class="btn view-button" (click)="viewDetails(document)">View
+                        <button class="btn view-button ms-3" (click)="viewDetails(document)">View
                             Details</button>
-                        <button class="btn chat-button ms-3"
-                            [routerLink]="['/chats',document.doctor_id._id]">Chat</button>
-
                     </div>
 
                 </div>

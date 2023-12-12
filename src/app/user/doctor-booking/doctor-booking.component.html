@@ -43,21 +43,3 @@
 
 
 </div>
-
-<!-- <div *ngIf="selectedDate">
-    <h3>Available Time Slots for {{ selectedDate | date:'yyyy-MM-dd' }}</h3>
-
-    <mat-form-field>
-        <mat-label>Department</mat-label>
-        <mat-select placeholder="Select time" formControlName="time" class="fullWidth">
-            <mat-option *ngFor="let slot of getSlotsForSelectedDate()" [value]="slot.startTime">
-                {{ slot.startTime }} - {{ slot.endTime }}
-            </mat-option>
-        </mat-select>
-        <mat-error *ngIf="timeForm.get('time')?.hasError('required')">
-            time is <strong>required</strong>
-        </mat-error>
-    </mat-form-field>
-
-    <button mat-raised-button color="primary" (click)="bookAppointment()">Book Appointment</button>
-</div> -->

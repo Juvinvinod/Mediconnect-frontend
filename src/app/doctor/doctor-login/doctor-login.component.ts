@@ -29,14 +29,12 @@ export class DoctorLoginComponent implements OnDestroy {
             console.log('loggedIn');
             localStorage.setItem('user', JSON.stringify(res));
             this._router.navigate(['/doctor']);
-          },
-          error: (error) => {
-            console.log(error);
-
-            this.snackBar.open(error.error.errors[0].message, 'Dismiss', {
-              duration: 2000
-            });
           }
+          // error: (errors) => {
+          //   this.snackBar.open(errors.message, 'Dismiss', {
+          //     duration: 2000
+          //   });
+          // }
         });
     }
   }

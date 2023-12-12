@@ -6,7 +6,7 @@
         </mat-form-field>
         <mat-selection-list #shoes [multiple]="false" [hideSingleSelectionIndicator]="true">
             <mat-divider></mat-divider>
-            <mat-list-option *ngIf="chatData.length > 0" [value]="chatData[0]._id">
+            <mat-list-option *ngIf="chatData.length > 0" [value]="chatData[0]._id" selected="true">
                 <img matListItemAvatar src="https://material.angular.io/assets/img/examples/shiba1.jpg" alt="">
                 <p mat-line class="chat-title">
                     <span class="chat-name ">

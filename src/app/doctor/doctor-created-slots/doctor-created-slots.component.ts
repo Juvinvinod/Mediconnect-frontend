@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
 export class DoctorCreatedSlotsComponent implements OnInit, OnDestroy {
   getSlotSubscription: Subscription | undefined = undefined;
   deleteSlotSubscription: Subscription | undefined = undefined;
-  dataSource: any;
+  dataSource!: MatTableDataSource<Slot>;
   displayedColumns: string[] = [
     'index',
     'date',

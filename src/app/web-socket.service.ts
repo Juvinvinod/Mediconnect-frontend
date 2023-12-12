@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
+import { Message } from './shared/interfaces/message';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,7 @@ export class WebSocketService {
     this.joinRoom();
   }
 
-  listen(): Observable<any> {
+  listen(): Observable<Message> {
     return new Observable((subscribe) => {
       this.socket.on('chat', (data) => {
         subscribe.next(data);

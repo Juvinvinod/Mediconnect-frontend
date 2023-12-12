@@ -29,7 +29,7 @@ export class DoctorBookingComponent implements OnInit, OnDestroy {
   slotDetails: Slot[] | null = null;
   unfilteredData: Slot[] | null = null;
   selectedTime: string | null = '';
-  timeSlots: any;
+  timeSlots!: string;
   timeForm!: FormGroup;
   formData: any;
   userDetails: User | null = null;

@@ -1,10 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { EditUserPopupComponent } from 'src/app/admin/edit-user-popup/edit-user-popup.component';
-import { User } from 'src/app/user/interfaces/user';
-import { Doctor } from '../interfaces/doctor';
-import { Staff } from '../interfaces/staff';
-import { Chat } from '../interfaces/chat';
 
 @Component({
   selector: 'app-table',

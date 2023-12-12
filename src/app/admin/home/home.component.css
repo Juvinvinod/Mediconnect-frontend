@@ -19,3 +19,9 @@
 .fullPage{
   position: fixed;
 }
+
+.logo{
+  width: 50px;
+  height: 35px;
+  margin-left: 10px;
+}

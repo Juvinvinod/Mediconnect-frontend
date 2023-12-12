@@ -46,24 +46,14 @@
 
 <div class="text-center py-3 heading gradient">OUR DEPARTMENTS</div>
 <div class="container d-flex flex-wrap  gap-3 py-5 justify-content-between">
-    <div class="department-card mx-1 card">
-        <img class="department-image" src="../../../assets/cardiology.jpg" alt="Photo of department">
+    <ng-container *ngFor="let department of departments">
+        <div class="department-card mx-1 card">
+            <img class="department-image" src="{{department.image?.url}}" alt="Photo of department">
 
-        CARDIOLOGY
+            {{department.dept_name | uppercase}}
 
-    </div>
-    <div class="department-card mx-1 card">
-        <img class="department-image" src="../../../assets/general-surgery.jpg" alt="Photo of department">
-
-        GENERAL SURGERY
-
-    </div>
-    <div class="department-card mx-1 card">
-        <img class="department-image" src="../../../assets/internal-medicine.jpg" alt="Photo of department">
-
-        INTERNAL MEDICINE
-
-    </div>
+        </div>
+    </ng-container>
 </div>
 <div class="award-banner pb-5">
     <img src="../../../assets/award-winner-banner.jpg" class="award-banner-img" alt="award-banner">
@@ -74,7 +64,7 @@
         <button mat-raised-button [routerLink]="['allDoctors']" class="me-3 ">VIEW ALL</button>
     </div>
 </div>
-<div class="container d-flex flex-nowrap overflow-auto my-3">
+<div class="container d-flex flex-nowrap overflow-auto my-3 justify-content-between">
     <mat-card class="doctor-card mx-3" *ngFor="let doctor of doctorList.slice(0, 4);trackBy:trackById">
         <img class="doctor-image" src="../../../assets/doctor.jpg" alt="Photo of doctor">
         <mat-card-content>

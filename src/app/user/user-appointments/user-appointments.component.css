@@ -3,12 +3,14 @@
 }
 
 .appointment-card{
-    height:390px;
-    width:225px;
-    background-color: rgb(209, 222, 216);
+    align-items: center;
+    height:275px;
+    width:250px;
+    background-color: rgb(233, 239, 239);
     object-fit: contain;
     border-radius: 15px;
-    
+    padding: 10px;
+    border: none;
 }
 
 .status-button{
@@ -17,10 +19,10 @@
 }
 
 .doctor-image{
-    height:50%;
-    width: 100%;
-    border-radius: 15px 15px 0px 0px;
-    /* object-fit: contain; */
+    height:22%;
+    width: 25%;
+    /* border-radius: 15px 15px 0px 0px; */
+   border-radius: 50%;
 }
 
 .view-button{
@@ -31,4 +33,10 @@
 .chat-button{
     background-color: rgb(83, 169, 83) !important;  
     color: white;
+}
+
+.card-title{
+    text-align: center;
+    font-size: 1.5rem;
+
 }

@@ -37,13 +37,41 @@ export class TokenInterceptor implements HttpInterceptor {
     );
   }
 
+  // setError(error: HttpErrorResponse): string {
+  //   let errorMessage = 'Unknown error occurred';
+  //   if (error.error instanceof ErrorEvent) {
+  //     //client side error
+  //     console.log(error);
+
+  //     errorMessage = error.message;
+  //   } else {
+  //     //server side error
+  //     if (error.status !== 0) {
+  //       errorMessage = error.error.errorMessage;
+  //     }
+  //   }
+  //   return errorMessage;
+  // }
+
   setError(error: HttpErrorResponse): string {
     let errorMessage = 'Unknown error occurred';
-    if (error.error instanceof ErrorEvent) {
-      //client side error
-      errorMessage = error.error.message;
+    if (error.error && error.error.errors && error.error.errors.message) {
+      // If the error response has an 'errors' property, use it
+      errorMessage = error.error.errors.message;
+    } else if (
+      error.error &&
+      error.error.errors[0] &&
+      error.error.errors[0].message
+    ) {
+      // Client-side error
+      console.log(error.error);
+      errorMessage = error.error.errors[0].message;
+    } else if (error.error instanceof ErrorEvent) {
+      // Client-side error
+      console.log(error);
+      errorMessage = error.message;
     } else {
-      //server side error
+      // Server-side error
       if (error.status !== 0) {
         errorMessage = error.error.errorMessage;
       }
