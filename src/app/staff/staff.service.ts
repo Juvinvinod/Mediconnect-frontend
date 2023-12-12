@@ -7,7 +7,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class StaffService {
-  apiURL = 'http://localhost:3000/staff';
+  // apiURL = 'http://localhost:3000/staff';
+  apiURL = 'https://mediconnect.juvin.in/staff';
+
   constructor(private http: HttpClient) {}
 
   //staff verification on login

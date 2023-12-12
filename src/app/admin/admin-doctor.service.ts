@@ -7,7 +7,8 @@ import { Doctor } from '../shared/interfaces/doctor';
   providedIn: 'root'
 })
 export class AdminDoctorService {
-  apiURL = 'http://localhost:3000/doctor';
+  // apiURL = 'http://localhost:3000/doctor';
+  apiURL = 'https://mediconnect.juvin.in/doctor';
   constructor(private http: HttpClient) {}
 
   //add new doctor

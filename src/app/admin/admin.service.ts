@@ -9,7 +9,8 @@ import { Slot } from '../shared/interfaces/slot';
   providedIn: 'root'
 })
 export class AdminService {
-  apiURL = 'http://localhost:3000/admin';
+  // apiURL = 'http://localhost:3000/admin';
+  apiURL = 'https://mediconnect.juvin.in/admin';
   constructor(private http: HttpClient) {}
 
   //admin verification on login

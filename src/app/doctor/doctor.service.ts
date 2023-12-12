@@ -8,7 +8,8 @@ import { Slot } from '../shared/interfaces/slot';
   providedIn: 'root'
 })
 export class DoctorService {
-  apiURL = 'http://localhost:3000/doctor';
+  // apiURL = 'http://localhost:3000/doctor';
+  apiURL = 'https://mediconnect.juvin.in/doctor';
   constructor(private http: HttpClient) {}
 
   //doctor verification on login

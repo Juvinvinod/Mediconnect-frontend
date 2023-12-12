@@ -7,7 +7,8 @@ import { Staff } from '../shared/interfaces/staff';
   providedIn: 'root'
 })
 export class AdminStaffService {
-  apiURL = 'http://localhost:3000/staff';
+  // apiURL = 'http://localhost:3000/staff';
+  apiURL = 'https://mediconnect.juvin.in/staff';
   constructor(private http: HttpClient) {}
 
   //add new staff
