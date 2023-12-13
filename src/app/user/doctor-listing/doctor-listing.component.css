@@ -22,11 +22,10 @@
 }
 
 .input-group{
-    width:350px;
     align-items: center;
     margin-left: 10%;
 }
 
 .form-control{
-    width: 10px;
+    width: 150px;
 }

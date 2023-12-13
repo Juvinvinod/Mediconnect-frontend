@@ -1,14 +1,25 @@
 <img src="assets/meet-our-doctors.png" class="banner-image" alt="meet-doctors">
 <h1 class="text-center my-3">OUR DOCTORS</h1>
-<div class="input-group gap-1 ps-5">
-    <span class="mt-1 pb-1">Search:</span>
-    <input type="text" class="form-control" placeholder="Doctor name" aria-label="Doctor's username"
-        aria-describedby="basic-addon2" [(ngModel)]="searchValue">
+<div class="input-group gap-1 ps-5 d-flex col-6 mx-auto">
+    <div class="d-flex">
+        <span class="mt-1 pb-1">Search:</span>
+        <input type="text" class="form-control" placeholder="Doctor name" aria-label="Doctor's username"
+            aria-describedby="basic-addon2" [(ngModel)]="searchValue" (ngModelChange)="updateDoctors()">
+    </div>
+
+    <div class="d-flex">
+        <span class="mt-1 pb-1">Department:</span>
+        <select id="departmentFilter" class="form-select" [(ngModel)]="selectedDept" (ngModelChange)="updateDoctors()">
+            <option value="">All Departments</option>
+            <option *ngFor="let department of deptList" value="department.dept_name">
+                {{department.dept_name}}
+            </option>
+        </select>
+    </div>
 </div>
 <div class="container d-flex flex-wrap my-3">
-    <ng-container *ngFor="let doctor of doctorList; trackBy:trackById">
-        <mat-card class="doctor-card mx-3"
-            *ngIf="searchValue === '' || doctor.first_name.toLowerCase().includes(searchValue)">
+    <ng-container *ngFor="let doctor of filteredDoctorList; trackBy:trackById">
+        <mat-card class="doctor-card mx-3">
             <img class="doctor-image" src="../../../assets/doctor.jpg" alt="Photo of doctor">
             <mat-card-content>
                 <div class="text-center pt-3 doctor-name-text">{{doctor.first_name}}</div>

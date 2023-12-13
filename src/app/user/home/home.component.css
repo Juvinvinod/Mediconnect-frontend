@@ -1,5 +1,4 @@
-.carousal{
-    
+.carousal{  
     max-height:525px;
     object-fit: cover;
 }
@@ -17,7 +16,6 @@
     font-weight: 1500px;
     font-size: 35px;
     color: white;
-    
 }
 
 .gradient{
@@ -214,4 +212,12 @@
   @media (max-width: 576px) {
   font-size:0.5rem;
   }
+}
+
+.doctor-name-text{
+  font-size: 1.4rem;
+}
+
+.doctor-dept-text{
+  font-size: 1rem;
 }
