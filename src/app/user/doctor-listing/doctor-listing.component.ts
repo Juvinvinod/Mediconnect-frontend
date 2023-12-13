@@ -58,5 +58,8 @@ export class DoctorListingComponent implements OnInit, OnDestroy {
     if (this.doctorSubscription) {
       this.doctorSubscription.unsubscribe();
     }
+    if (this.deptSubscription) {
+      this.deptSubscription.unsubscribe();
+    }
   }
 }

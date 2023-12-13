@@ -22,10 +22,36 @@
 }
 
 .input-group{
-    align-items: center;
-    margin-left: 10%;
+    align-content: center;
+    padding-left: 30%;
+    @media (max-width: 576px) {
+        align-content: center;
+        align-items: center;
+        padding-left: 15%;
+        text-align: center;
+        }
 }
 
 .form-control{
     width: 150px;
 }
+
+.doctor-name-text{
+    font-size: 1.2rem;
+  }
+
+  .doctor-dept-text{
+    color: rgb(86, 86, 86);
+  }
+
+  .doctor-fees-text{
+    color: green;
+  }
+
+  .rupee-img{
+    height: 40px;
+  }
+
+  .doctor-fees{
+    padding-top: 8px;
+  }

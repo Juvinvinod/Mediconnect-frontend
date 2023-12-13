@@ -79,7 +79,8 @@
     </div>
 </div>
 <div class="container d-flex flex-nowrap overflow-auto my-3 justify-content-between">
-    <mat-card class="doctor-card mx-3" *ngFor="let doctor of doctorList.slice(0, 4);trackBy:trackById">
+    <mat-card class="doctor-card mx-3" *ngFor="let doctor of doctorList.slice(0, 4);trackBy:trackById"
+        [routerLink]="['/booking', doctor._id]">
         <img class="doctor-image" src="../../../assets/doctor.jpg" alt="Photo of doctor">
         <mat-card-content>
             <div class="text-center pt-3 doctor-name-text">Dr. {{doctor.first_name}} {{doctor.last_name}}</div>
