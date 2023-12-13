@@ -11,7 +11,7 @@ export class WebSocketService {
   chatId = '';
   constructor() {
     // Connect to the Socket.IO server at http://localhost:3000
-    this.socket = io('http://localhost:3000');
+    this.socket = io('https://mediconnect.juvin.in');
     this.socket.connect();
   }
 
