@@ -38,6 +38,8 @@ export class DoctorListingComponent implements OnInit, OnDestroy {
   }
 
   updateDoctors() {
+    console.log(this.selectedDept);
+
     this.filteredDoctorList = this.doctorList.filter(
       (doctor) =>
         (this.searchValue === '' ||

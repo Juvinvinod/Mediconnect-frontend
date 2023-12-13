@@ -11,7 +11,7 @@
         <span class="mt-1 pb-1">Department:</span>
         <select id="departmentFilter" class="form-select" [(ngModel)]="selectedDept" (ngModelChange)="updateDoctors()">
             <option value="">All Departments</option>
-            <option *ngFor="let department of deptList" value="department.dept_name">
+            <option *ngFor="let department of deptList" value={{department.dept_name}}>
                 {{department.dept_name}}
             </option>
         </select>
