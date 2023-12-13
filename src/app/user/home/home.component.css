@@ -211,5 +211,7 @@
 }
 
 .small-screen-promo-text{
+  @media (max-width: 576px) {
   font-size:0.5rem;
+  }
 }
