@@ -1,16 +1,29 @@
-import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectorRef,
+  OnDestroy,
+  AfterViewInit,
+  ViewChild
+} from '@angular/core';
 import { DoctorService } from '../doctor.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { Slot } from 'src/app/shared/interfaces/slot';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-doctor-created-slots',
   templateUrl: './doctor-created-slots.component.html',
   styleUrls: ['./doctor-created-slots.component.css']
 })
-export class DoctorCreatedSlotsComponent implements OnInit, OnDestroy {
+export class DoctorCreatedSlotsComponent
+  implements OnInit, AfterViewInit, OnDestroy
+{
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   getSlotSubscription: Subscription | undefined = undefined;
   deleteSlotSubscription: Subscription | undefined = undefined;
   dataSource!: MatTableDataSource<Slot>;
@@ -31,10 +44,16 @@ export class DoctorCreatedSlotsComponent implements OnInit, OnDestroy {
     this.refresh();
   }
 
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
+
   refresh() {
     this.getSlotSubscription = this.doctorService.getDocSlots().subscribe({
       next: (res) => {
         this.dataSource = new MatTableDataSource<Slot>(res);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
         this.changeDetectorRefs.detectChanges();
       }
     });
@@ -69,6 +88,11 @@ export class DoctorCreatedSlotsComponent implements OnInit, OnDestroy {
           });
         }
       });
+  }
+
+  filterChange(data: Event) {
+    const value = (data.target as HTMLInputElement).value;
+    this.dataSource.filter = value;
   }
 
   ngOnDestroy(): void {

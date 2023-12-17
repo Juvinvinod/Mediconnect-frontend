@@ -9,9 +9,18 @@ import { TableComponent } from './table/table.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ErrorComponent } from './error/error.component';
+import { ForgotpassEmailComponent } from './forgotpass-email/forgotpass-email.component';
+import { NewPasswordComponent } from './new-password/new-password.component';
 
 @NgModule({
-  declarations: [HeaderComponent, LoginComponent, TableComponent, ErrorComponent],
+  declarations: [
+    HeaderComponent,
+    LoginComponent,
+    TableComponent,
+    ErrorComponent,
+    ForgotpassEmailComponent,
+    NewPasswordComponent
+  ],
   imports: [
     CommonModule,
     MaterialModule,
@@ -28,7 +37,9 @@ import { ErrorComponent } from './error/error.component';
     NgbCollapseModule,
     NgbDropdownModule,
     LoginComponent,
-    TableComponent
+    TableComponent,
+    ForgotpassEmailComponent,
+    NewPasswordComponent
   ]
 })
 export class SharedModule {}

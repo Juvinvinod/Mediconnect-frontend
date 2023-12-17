@@ -42,6 +42,8 @@ export class DepartmentsComponent implements AfterViewInit, OnDestroy {
       next: (res: Dept[]) => {
         this.deptList = res;
         this.dataSource = new MatTableDataSource<Dept>(this.deptList);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       },
       error: (error) => {
         console.log(error);

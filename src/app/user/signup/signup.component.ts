@@ -47,7 +47,7 @@ export class SignupComponent implements OnInit, OnDestroy {
         .proceedRegister(this.signUpForm.value)
         .subscribe({
           next: () => {
-            this._router.navigate(['login']);
+            this._router.navigate(['../emailsend']);
             this.snackBar.open('Successfully registered', 'Dismiss', {
               duration: 5000
             });

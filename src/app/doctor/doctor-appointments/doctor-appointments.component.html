@@ -2,7 +2,7 @@
     <div class="table-container w-100">
         <mat-form-field>
             <mat-label>Filter</mat-label>
-            <input matInput placeholder="Ex. Mia" #input>
+            <input matInput placeholder="Ex. Mia" #input (keyup)="filterChange($event)">
         </mat-form-field>
 
         <div class="mat-elevation-z8">

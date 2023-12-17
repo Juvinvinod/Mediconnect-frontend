@@ -7,12 +7,6 @@
             </button>
         </div>
 
-        <div class="input-group w-50">
-            <input type="text" class="form-control" placeholder="Patient name" aria-label="Recipient's username"
-                aria-describedby="basic-addon2">
-            <span class="input-group-text" id="basic-addon2">Search</span>
-        </div>
-
         <div>
             <button mat-icon-button (click)="logOut()">
                 <mat-icon>logout</mat-icon>
@@ -24,7 +18,7 @@
     <mat-drawer-container class="example-container" autosize>
         <mat-drawer #drawer class="example-sidenav" mode="side" opened>
             <mat-list class="w-100">
-                <mat-list-item><button mat-button [routerLink]="['/staff ']">
+                <mat-list-item><button mat-button [routerLink]="['./appointments']">
                         <mat-icon>dashboard</mat-icon>
                         Appointments
                     </button>
@@ -37,11 +31,6 @@
                 <mat-list-item><button mat-button [routerLink]="['profile']">
                         <mat-icon>person</mat-icon>
                         My Profile
-                    </button>
-                </mat-list-item>
-                <mat-list-item><button mat-button [routerLink]="['calendar']">
-                        <mat-icon>engineering</mat-icon>
-                        Calender
                     </button>
                 </mat-list-item>
             </mat-list>

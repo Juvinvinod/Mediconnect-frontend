@@ -7,6 +7,7 @@ import { StaffHomeComponent } from './staff-home/staff-home.component';
 import { StaffPatientsComponent } from './staff-patients/staff-patients.component';
 import { StaffProfileComponent } from './staff-profile/staff-profile.component';
 import { StaffPasswordComponent } from './staff-password/staff-password.component';
+import { StaffAppointmentsComponent } from './staff-appointments/staff-appointments.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { StaffPasswordComponent } from './staff-password/staff-password.componen
     StaffHomeComponent,
     StaffPatientsComponent,
     StaffProfileComponent,
-    StaffPasswordComponent
+    StaffPasswordComponent,
+    StaffAppointmentsComponent
   ],
   imports: [SharedModule, RouterModule, FormsModule, ReactiveFormsModule]
 })

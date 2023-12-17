@@ -7,6 +7,7 @@ import { staffCheckGuard } from '../guards/staff-check.guard';
 import { StaffPatientsComponent } from './staff-patients/staff-patients.component';
 import { StaffProfileComponent } from './staff-profile/staff-profile.component';
 import { StaffPasswordComponent } from './staff-password/staff-password.component';
+import { StaffAppointmentsComponent } from './staff-appointments/staff-appointments.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,7 @@ const routes: Routes = [
     canActivate: [staffCheckGuard],
     canActivateChild: [staffCheckGuard],
     children: [
+      { path: 'appointments', component: StaffAppointmentsComponent },
       { path: 'password', component: StaffPasswordComponent },
       { path: 'profile', component: StaffProfileComponent },
       { path: '', component: StaffPatientsComponent }

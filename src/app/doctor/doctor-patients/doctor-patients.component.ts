@@ -39,6 +39,8 @@ export class DoctorPatientsComponent implements AfterViewInit, OnDestroy {
       next: (res: User[]) => {
         this.userList = res;
         this.dataSource = new MatTableDataSource<User>(this.userList);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       },
       error: (error) => {
         console.log(error);

@@ -1,0 +1,21 @@
+<div class="container d-flex justify-content-center align-items-center viewHeight col-lg-6">
+    <mat-card class="matCard col-sm-6">
+
+        <mat-card-header class="email-text mx-auto">ENTER EMAIL ADDRESS</mat-card-header>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <mat-card-content>
+                <mat-form-field class="fullWidth">
+                    <mat-label>Email</mat-label>
+                    <input matInput placeholder="Email" formControlName="email" class="fullWidth">
+                    <mat-error *ngIf="loginForm.get('email')?.hasError('required')">
+                        Email is <strong>required</strong>
+                    </mat-error>
+                    <mat-error *ngIf="loginForm.get('email')?.hasError('email')">
+                        Email is <strong>invalid</strong>
+                    </mat-error>
+                </mat-form-field>
+                <button mat-raised-button color="primary">Submit</button>
+            </mat-card-content>
+        </form>
+    </mat-card>
+</div>

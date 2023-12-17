@@ -13,6 +13,10 @@ import { UserAppointmentsComponent } from './user-appointments/user-appointments
 import { UserLoginComponent } from './user-login/login.component';
 import { UserChatComponent } from './user-chat/user-chat.component';
 import { AppointmentDetailsComponent } from './appointment-details/appointment-details.component';
+import { statusCheckerGuard } from '../guards/status-checker.guard';
+import { UserForgotPassEmailComponent } from './user-forgot-pass-email/user-forgot-pass-email.component';
+import { UserNewPasswordComponent } from './user-new-password/user-new-password.component';
+import { UserEmailSendComponent } from './user-email-send/user-email-send.component';
 
 const routes: Routes = [
   {
@@ -24,9 +28,22 @@ const routes: Routes = [
     component: UserOutletComponent,
     children: [
       {
+        path: 'emailsend',
+        component: UserEmailSendComponent
+      },
+      {
         path: 'profile',
         canActivate: [userCheckGuard],
         component: UserProfileComponent
+      },
+      {
+        path: 'newpassword/:token',
+        component: UserNewPasswordComponent
+      },
+      {
+        path: 'forgotPassword',
+        canActivate: [statusCheckerGuard],
+        component: UserForgotPassEmailComponent
       },
       {
         path: 'password',
