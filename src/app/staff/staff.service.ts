@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Staff } from '../shared/interfaces/staff';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
+import { Slot } from '../shared/interfaces/slot';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,14 @@ export class StaffService {
     return this.http.put<{ success: string }>(
       this.apiURL + '/' + 'password',
       data
+    );
+  }
+
+  getAllBookings(): Observable<Slot[]> {
+    return this.http.get<Slot[]>(this.apiURL + '/' + 'bookings').pipe(
+      map((data: Slot[]) => {
+        return data.map((user, index) => ({ ...user, index: index + 1 }));
+      })
     );
   }
 }

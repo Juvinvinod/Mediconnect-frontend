@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { User } from '../user/interfaces/user';
 import { Dept } from '../shared/interfaces/department';
-import { Slot } from '../shared/interfaces/slot';
 
 @Injectable({
   providedIn: 'root'
