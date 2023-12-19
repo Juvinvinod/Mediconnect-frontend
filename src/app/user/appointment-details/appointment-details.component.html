@@ -4,31 +4,37 @@
             <div>
                 <img src="../../../assets/doctor.jpg" class="doctor-img" alt="">
             </div>
-            <div class="pt-5">
-                <div>
-                    <span>DOCTOR NAME:</span> <span>{{slotDetails[0].doctor_id.first_name}}</span>
+            <div class="">
+                <div class="doctor-name">
+                    <span>Dr.{{slotDetails[0].doctor_id.first_name}}</span>
                 </div>
-                <div>
-                    <span>START TIME:</span> <span>{{slotDetails[0].start_time| date:('shortTime')}}</span>
+                <div class="doctor-department">
+                    <span>{{slotDetails[0].doctor_id.department}}</span>
                 </div>
-                <div>
-                    <span>END TIME:</span> <span>{{slotDetails[0].end_time | date:('shortTime')}}</span>
+                <div class="d-flex pt-5 ps-3">
+                    <mat-icon>alarm</mat-icon>
+                    <span class="ps-1">{{slotDetails[0].start_time| date:('shortTime') }} -
+                        {{slotDetails[0].end_time | date:('shortTime')}}</span>
                 </div>
-                <div>
-                    <span>BOOKING STATUS:</span> <span>{{slotDetails[0].status}}</span>
+                <div class="d-flex gap-3 pt-3 ps-3">
+                    <div class="status d-flex">
+                        <mat-icon>check_circle_outline</mat-icon>
+                        <span style="color: green;">{{slotDetails[0].status | uppercase}}</span>
+                    </div>
+                    <div class="d-flex ">
+                        <mat-icon>check_circle_outline</mat-icon>
+                        <span style="color: green;">PAID</span>
+                    </div>
                 </div>
-                <div>
-                    <span>PAYMENT STATUS:</span> <span style="color: green;">PAID</span>
-                </div>
-                <div *ngIf="slotDetails[0].status === 'completed'">
+                <div *ngIf="slotDetails[0].status === 'completed'" class="pt-1">
                     <span>PRESCRIPTIONS:</span> <span
                         style="background-color: white;">{{slotDetails[0].prescription}}</span>
                 </div>
-                <div class="d-flex gap-3 mx-auto pt-3 ps-1">
+                <div class="d-flex gap-3 mx-auto pt-3 ps-1 pt-5">
                     <div>
                         <button mat-raised-button color="warn" (click)=cancelBooking()
-                            *ngIf="slotDetails[0].status !== 'completed'">
-                            Cancel
+                            *ngIf="slotDetails[0].status !== 'completed'" class="cancel-button">
+                            Cancel Booking
                         </button>
                     </div>
                     <div
