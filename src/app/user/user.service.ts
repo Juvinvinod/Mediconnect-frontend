@@ -11,8 +11,8 @@ import { Message } from '../shared/interfaces/message';
   providedIn: 'root'
 })
 export class UserService {
-  // apiURL = 'http://localhost:3000';
-  apiURL = 'https://mediconnect.juvin.in';
+  apiURL = 'http://localhost:3000';
+  // apiURL = 'https://mediconnect.juvin.in';
 
   constructor(private http: HttpClient) {}
 
@@ -140,6 +140,13 @@ export class UserService {
     return this.http.post<{ success: string }>(
       this.apiURL + '/forgetPassword' + '/' + token,
       form
+    );
+  }
+
+  //verify user mail
+  verifyMail(id: string): Observable<{ success: string }> {
+    return this.http.get<{ success: string }>(
+      this.apiURL + '/email' + '/' + id
     );
   }
 }

@@ -17,6 +17,7 @@ import { statusCheckerGuard } from '../guards/status-checker.guard';
 import { UserForgotPassEmailComponent } from './user-forgot-pass-email/user-forgot-pass-email.component';
 import { UserNewPasswordComponent } from './user-new-password/user-new-password.component';
 import { UserEmailSendComponent } from './user-email-send/user-email-send.component';
+import { UserMailVerifiedComponent } from './user-mail-verified/user-mail-verified.component';
 
 const routes: Routes = [
   {
@@ -39,6 +40,10 @@ const routes: Routes = [
       {
         path: 'newpassword/:token',
         component: UserNewPasswordComponent
+      },
+      {
+        path: 'email/:token',
+        component: UserMailVerifiedComponent
       },
       {
         path: 'forgotPassword',

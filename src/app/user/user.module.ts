@@ -18,6 +18,7 @@ import { AppointmentDetailsComponent } from './appointment-details/appointment-d
 import { UserForgotPassEmailComponent } from './user-forgot-pass-email/user-forgot-pass-email.component';
 import { UserNewPasswordComponent } from './user-new-password/user-new-password.component';
 import { UserEmailSendComponent } from './user-email-send/user-email-send.component';
+import { UserMailVerifiedComponent } from './user-mail-verified/user-mail-verified.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { UserEmailSendComponent } from './user-email-send/user-email-send.compon
     AppointmentDetailsComponent,
     UserForgotPassEmailComponent,
     UserNewPasswordComponent,
-    UserEmailSendComponent
+    UserEmailSendComponent,
+    UserMailVerifiedComponent
   ],
   imports: [
     SharedModule,
